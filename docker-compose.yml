@@ -1,0 +1,20 @@
+version: "3.0"
+services:
+  node:
+    build: 
+      context: .
+      dockerfile: docker/Dockerfile
+    image: node:phink
+    user: "node"
+    working_dir: /Sites/CodePhoenixOrg/SDK/javascript/PhinkJS
+    environment:
+      - NODE_ENV=production
+    ports:
+     - '3000:3000'
+     - '1234:1234'
+    volumes:
+      - .:/Sites/CodePhoenixOrg/SDK/javascript/PhinkJS
+      - node_modules:/Sites/CodePhoenixOrg/SDK/javascript/PhinkJS/node_modules
+    command: "node src/web/start.js"
+volumes: 
+  node_modules:
