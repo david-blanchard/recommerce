@@ -5,11 +5,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-  <meta name="generator" content="Jekyll v4.0.1">
-  <title>Pricing example · Bootstrap</title>
 
-  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/pricing/">
+  <title>Cpascher - Accueil</title>
+
+  <link rel="canonical" href="http://localhost:3000">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
   <!-- Bootstrap core CSS -->
   <link href="assets/dist/css/bootstrap.css" rel="stylesheet">
@@ -38,52 +38,61 @@
 </head>
 
 <body>
-
-  <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-white shadow-sm">
-    <a class="navbar-brand mr-auto mr-lg-0" href="#">
-    <img src="assets/images/logos/Cpascher_logo_small.png" alt="Cpascher" />
-    </a>
-
-    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="navbar-collapse offcanvas-collapse " id="navbarsExampleDefault">
-      <ul class="navbar-nav navbar-dark mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link text-dark" href="#">Tous nos rayons <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark" href="#">Promos de l'été</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link text-dark dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">Mon compte</a>
-          <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" href="#">Pas encore inscrit ?</a>
-            <a class="dropdown-item" href="#">F.A.Q</a>
-            <a class="dropdown-item" href="#">Mentions légales</a>
-          </div>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0" action="search" >
-        <input id="search" name="q" class="form-control mr-sm-2" type="text" placeholder="Lancez-vous, choisissez ce qui vous plait" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
-      </form>
-    </div>
-  </nav>
-
-  <div class="nav-scroller bg-light shadow-sm">
-    <nav class="nav nav-underline">
-      <a class="nav-link disabled" href="#">
-        <span class="badge badge-pill bg-light align-text-bottom">Nos partenaires</span>
+  <header>
+    <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-white shadow-sm">
+      <a class="navbar-brand mr-auto mr-lg-0" href="{{ home }}">
+        <img src="assets/images/logos/Cpascher_logo_small.png" alt="Cpascher" />
       </a>
-      <a class="nav-link" href="#">Voyages.pascher </a>
-      <a class="nav-link" href="#">Immo.pascher</a>
-      <a class="nav-link" href="#">Locations.pascher</a>
-      <a class="nav-link" href="#">Voitures.pascher</a>
+
+      <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse offcanvas-collapse " id="navbarsExampleDefault">
+        <ul class="navbar-nav navbar-dark mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link text-dark" href="#">Tous nos rayons <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="#">Promos de l'été</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link text-dark dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">Mon compte</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Pas encore inscrit ?</a>
+              <a class="dropdown-item" href="#">F.A.Q</a>
+              <a class="dropdown-item" href="#">Mentions légales</a>
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="search">
+          <input id="search" name="q" class="form-control mr-sm-2" type="text"
+            placeholder="Lancez-vous, choisissez ce qui vous plait" aria-label="Search">
+          
+            <button id="submitSearchCta" class="btn btn-outline-success my-2 my-sm-0">
+              <i class="fa fa-search"></i>
+            </button>
+            <a id="cartCta" class="btn btn-success my-2 my-sm-0 ml-3" href="cart">
+              <i class="fa fa-shopping-cart"></i>
+              <span id="cartSum" class="badge badge-light ml-3">0</span>
+            </a>
+  
+        </form>
+      </div>
     </nav>
-  </div>
+
+    <div class="nav-scroller bg-light shadow-sm">
+      <nav class="nav nav-underline">
+        <a class="nav-link disabled" href="#">
+          <span class="badge badge-pill bg-light align-text-bottom">Nos partenaires</span>
+        </a>
+        <a class="nav-link" href="#">Voyages.pascher </a>
+        <a class="nav-link" href="#">Immo.pascher</a>
+        <a class="nav-link" href="#">Locations.pascher</a>
+        <a class="nav-link" href="#">Voitures.pascher</a>
+      </nav>
+    </div>
 
   </header>
 
@@ -304,52 +313,56 @@
     </div><!-- /.container -->
 
 
+  </main>
 
-    <div class="container bg-dark bigfooter">
-      <div class="container bg-dark ">
+  <footer class="pt-4 pt-md-5 border-top mt-auto bg-dark">
 
-        <footer class="pt-4 pt-md-5 border-top ">
-          <div class=" row">
-            <div class="col-12 col-md">
-              <img class="mb-2" src="../assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
-              <small class="d-block mb-3 text-muted">&copy; 2017-2020</small>
-            </div>
-            <div class="col-6 col-md">
-              <h5>Features</h5>
-              <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">Cool stuff</a></li>
-                <li><a class="text-muted" href="#">Random feature</a></li>
-                <li><a class="text-muted" href="#">Team feature</a></li>
-                <li><a class="text-muted" href="#">Stuff for developers</a></li>
-                <li><a class="text-muted" href="#">Another one</a></li>
-                <li><a class="text-muted" href="#">Last time</a></li>
-              </ul>
-            </div>
-            <div class="col-6 col-md">
-              <h5>Resources</h5>
-              <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">Resource</a></li>
-                <li><a class="text-muted" href="#">Resource name</a></li>
-                <li><a class="text-muted" href="#">Another resource</a></li>
-                <li><a class="text-muted" href="#">Final resource</a></li>
-              </ul>
-            </div>
-            <div class="col-6 col-md">
-              <h5>About</h5>
-              <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">Team</a></li>
-                <li><a class="text-muted" href="#">Locations</a></li>
-                <li><a class="text-muted" href="#">Privacy</a></li>
-                <li><a class="text-muted" href="#">Terms</a></li>
-              </ul>
-            </div>
+    <div class="container bigfooter">
+      <div class="container">
+        <div class=" row">
+
+          <div class="col-12 col-md">
+            <img class="mb-2" src="../assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+            <small class="d-block mb-3 text-muted">&copy; 2020</small>
           </div>
-        </footer>
+          <div class="col-6 col-md">
+            <h5>Features</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="#">Cool stuff</a></li>
+              <li><a class="text-muted" href="#">Random feature</a></li>
+              <li><a class="text-muted" href="#">Team feature</a></li>
+              <li><a class="text-muted" href="#">Stuff for developers</a></li>
+              <li><a class="text-muted" href="#">Another one</a></li>
+              <li><a class="text-muted" href="#">Last time</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Resources</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="#">Resource</a></li>
+              <li><a class="text-muted" href="#">Resource name</a></li>
+              <li><a class="text-muted" href="#">Another resource</a></li>
+              <li><a class="text-muted" href="#">Final resource</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>About</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="#">Team</a></li>
+              <li><a class="text-muted" href="#">Locations</a></li>
+              <li><a class="text-muted" href="#">Privacy</a></li>
+              <li><a class="text-muted" href="#">Terms</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </main>
+  </footer>
+
+
   <script src="/phink.js" data-init="showCookiesPopin"
-    data-depends="assets/js/vendor/jquery.slim.min.js;assets/dist/js/bootstrap.bundle.js;js/cookies.js;js/promo.js" data-sources="js/main.js">
+    data-depends="assets/js/vendor/jquery.slim.min.js;assets/dist/js/bootstrap.bundle.js;js/cookies.js;js/promo.js;js/cart.js"
+    data-sources="js/main.js">
   </script>
 </body>
 

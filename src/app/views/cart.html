@@ -5,17 +5,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-  <meta name="generator" content="Jekyll v4.0.1">
-  <title>Cpascher · Recherche</title>
 
-  <link rel="canonical" href="http://localhost:3000/search">
+  <title>Cpascher - Panier</title>
+
+  <link rel="canonical" href="http://localhost:3000">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
   <!-- Bootstrap core CSS -->
   <link href="assets/dist/css/bootstrap.css" rel="stylesheet">
-  <!-- <link href="assets/css/font-awesome.min.css" rel="stylesheet"> -->
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
   <style>
     .bd-placeholder-img {
@@ -41,7 +39,6 @@
 </head>
 
 <body>
-
   <header>
     <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-white shadow-sm">
       <a class="navbar-brand mr-auto mr-lg-0" href="{{ home }}">
@@ -70,9 +67,10 @@
             </div>
           </li>
         </ul>
-        <div class="form-inline my-2 my-lg-0">
-          <input id="searchInput" name="q" class="form-control mr-sm-2" type="text"
-            placeholder="Lancez-vous, choisissez ce qui vous plait" aria-label="Recherche">
+        <form class="form-inline my-2 my-lg-0" action="search">
+          <input id="search" name="q" class="form-control mr-sm-2" type="text"
+            placeholder="Lancez-vous, choisissez ce qui vous plait" aria-label="Search">
+
           <button id="submitSearchCta" class="btn btn-outline-success my-2 my-sm-0">
             <i class="fa fa-search"></i>
           </button>
@@ -81,7 +79,7 @@
             <span id="cartSum" class="badge badge-light ml-3">0</span>
           </a>
 
-        </div>
+        </form>
       </div>
     </nav>
 
@@ -99,26 +97,46 @@
 
   </header>
 
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">VOTRE PANIER</h1>
+    </div>
+  </section>
 
   <main role="main" class="flex-shrink-0">
+    <div class="container mb-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col"> </th>
+                  <th scope="col">Product</th>
+                  <th scope="col">Available</th>
+                  <th scope="col" class="text-center">Quantity</th>
+                  <th scope="col" class="text-right">Price</th>
+                  <th> </th>
+                </tr>
+              </thead>
+              <tbody id="table-lines">
 
+  
 
-    <section class="jumbotron text-center">
-      <div class="container">
-        <h1>Résultats de votre recherche</h1>
-        <p id="resultState" class="lead text-muted"></p>
-        <p>
-
-          <a id="resetSearch" href="#" class="btn btn-secondary my-2">Effacer ma recherche</a>
-        </p>
-      </div>
-    </section>
-
-    <div class="album py-5 bg-light">
-      <div class="container">
-        <div id="lostAndFound" class="row">
+              </tbody>
+            </table>
+          </div>
         </div>
-
+        <div class="col mb-2">
+          <div class="row">
+            <div class="col-sm-12  col-md-6">
+              <a href="{{ home }}" class="btn btn-block btn-light">Continue Shopping</a>
+            </div>
+            <div class="col-sm-12 col-md-6 text-right">
+              <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -167,62 +185,64 @@
   </footer>
 
   <!-- Footer -->
-  <!-- <footer class="text-light mt-auto bg-dark">
+  <!-- <footer class="text-light">
   <div class="container">
-      <div class="row">
-          <div class="col-md-3 col-lg-4 col-xl-3">
-              <h5>About</h5>
-              <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-              <p class="mb-0">
-                  Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
-              </p>
-          </div>
-
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
-              <h5>Informations</h5>
-              <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-              <ul class="list-unstyled">
-                  <li><a href="">Link 1</a></li>
-                  <li><a href="">Link 2</a></li>
-                  <li><a href="">Link 3</a></li>
-                  <li><a href="">Link 4</a></li>
-              </ul>
-          </div>
-
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
-              <h5>Others links</h5>
-              <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-              <ul class="list-unstyled">
-                  <li><a href="">Link 1</a></li>
-                  <li><a href="">Link 2</a></li>
-                  <li><a href="">Link 3</a></li>
-                  <li><a href="">Link 4</a></li>
-              </ul>
-          </div>
-
-          <div class="col-md-4 col-lg-3 col-xl-3">
-              <h5>Contact</h5>
-              <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-              <ul class="list-unstyled">
-                  <li><i class="fa fa-home mr-2"></i> My company</li>
-                  <li><i class="fa fa-envelope mr-2"></i> email@example.com</li>
-                  <li><i class="fa fa-phone mr-2"></i> + 33 12 14 15 16</li>
-                  <li><i class="fa fa-print mr-2"></i> + 33 12 14 15 16</li>
-              </ul>
-          </div>
-          <div class="col-12 copyright mt-3">
-              <p class="float-left">
-                  <a href="#">Back to top</a>
-              </p>
-              <p class="text-right text-muted">created with <i class="fa fa-heart"></i> by <a href="https://t-php.fr/43-theme-ecommerce-bootstrap-4.html"><i>t-php</i></a> | <span>v. 1.0</span></p>
-          </div>
+    <div class="row">
+      <div class="col-md-3 col-lg-4 col-xl-3">
+        <h5>About</h5>
+        <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+        <p class="mb-0">
+          Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
+        </p>
       </div>
+
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
+        <h5>Informations</h5>
+        <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+        <ul class="list-unstyled">
+          <li><a href="">Link 1</a></li>
+          <li><a href="">Link 2</a></li>
+          <li><a href="">Link 3</a></li>
+          <li><a href="">Link 4</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
+        <h5>Others links</h5>
+        <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+        <ul class="list-unstyled">
+          <li><a href="">Link 1</a></li>
+          <li><a href="">Link 2</a></li>
+          <li><a href="">Link 3</a></li>
+          <li><a href="">Link 4</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-4 col-lg-3 col-xl-3">
+        <h5>Contact</h5>
+        <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+        <ul class="list-unstyled">
+          <li><i class="fa fa-home mr-2"></i> My company</li>
+          <li><i class="fa fa-envelope mr-2"></i> email@example.com</li>
+          <li><i class="fa fa-phone mr-2"></i> + 33 12 14 15 16</li>
+          <li><i class="fa fa-print mr-2"></i> + 33 12 14 15 16</li>
+        </ul>
+      </div>
+      <div class="col-12 copyright mt-3">
+        <p class="float-left">
+          <a href="#">Back to top</a>
+        </p>
+        <p class="text-right text-muted">created with <i class="fa fa-heart"></i> by <a
+            href="https://t-php.fr/43-theme-ecommerce-bootstrap-4.html"><i>t-php</i></a> | <span>v. 1.0</span></p>
+      </div>
+    </div>
   </div>
 </footer> -->
-
-  <script src="/phink.js" data-init="showSearchResults"
-    data-depends="assets/js/vendor/jquery.slim.min.js;assets/dist/js/bootstrap.bundle.js;js/cookies.js;js/cart.js" data-sources="js/search.js">
+  <script src="/phink.js" data-init="checkCart"
+    data-depends="assets/js/vendor/jquery.slim.min.js;assets/dist/js/bootstrap.bundle.js;js/cookies.js;js/cart.js"
+    data-sources="js/cart_checker.js">
   </script>
+
 </body>
 
 </html>

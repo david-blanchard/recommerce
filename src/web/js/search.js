@@ -1,8 +1,9 @@
 class Search {
 
     // constants
-    static SEARCH_FAILURE = "Pas de chance, nous n'avons trouvé aucun produit avec ces critères !<br />Tentez une nouvelle recherche.";
+    static SEARCH_FAILURE = "Pas de chance, nous n'avons trouvé aucun article avec ces critères !<br />Tentez une nouvelle recherche.";
     static SEARCH_SUCCESS = "Nous avons trouvé ${num} articles correspondants à vos critères";
+    static SEARCH_SUCCESS_ONE = "Nous avons trouvé 1 article correspondant à vos critères";
     static SEARCH_STATE_ZERO = true;
 
     constructor() {
@@ -85,8 +86,15 @@ class Search {
             let title = row.title;
             let cover = row.cover;
             let price = row.price;
+            let isbn = row.isbn;
+            let synopsis = row.synopsis[0].substring(0, 128) + '...';
 
-            let synopsis = row.synopsis[0].substring(0, 128);
+            let dataset = {};
+            dataset.isbn = isbn;
+            dataset.title = title; 
+            dataset.price = price;
+
+            let json = encodeURIComponent(JSON.stringify(dataset));
 
             let widget = document.createElement("div");
             widget.setAttribute("class", this._widgetClass);
@@ -94,18 +102,22 @@ class Search {
             widget.innerHTML =
                 `
     <div class="card mb-4 shadow-sm">
-        <img src="${cover}" alt="${title}"  width="278" height="409"  preserveAspectRatio="xMidYMid slice" focusable="false" role="img" />
+        <img src="${cover}" alt="${title}"  width="288" height="424"  preserveAspectRatio="xMidYMid slice" focusable="false" role="img" />
         <div class="card-body">
             <p class="card-text">
+            <span class="title" >
             ${title}
+            </span>
             <br />
             ${synopsis}
             </p>
+            <small>ISBN: ${isbn}</small>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+                <button type="button" data-isbn="${isbn}" class="btn btn-sm btn-outline-secondary">Plus</button>
+                <button type="button" data-json="${json}" class="add-to-cart-cta btn btn-sm btn-primary btn-success">Ajouter au panier</button>
                 </div>
-                <small class="text-muted">${price} €</small>
+                <h3 class="text-muted">${price} €</h3>
             </div>
         </div>
     </div>
@@ -118,13 +130,17 @@ class Search {
     displayResultState(forceZero = false) {
         let num = this._results.length;
 
-        if(num === 0 || forceZero) {
+        if (num === 0 || forceZero) {
             document.querySelector("#resultState").innerHTML = Search.SEARCH_FAILURE;
             document.querySelector("#resetSearch").style.display = "none";
             return;
         }
 
-        document.querySelector("#resultState").innerHTML = `${Search.SEARCH_SUCCESS}`.replace('${num}', num);
+        let html = Search.SEARCH_SUCCESS_ONE;
+        if (num > 1) {
+            html = `${Search.SEARCH_SUCCESS}`.replace('${num}', num);
+        }
+        document.querySelector("#resultState").innerHTML = html;
         document.querySelector("#resetSearch").style.display = "inline-block";
     }
 
@@ -153,20 +169,25 @@ var showSearchResults = function () {
         search.parseResults(criterion);
         search.displayResultState();
         search.displayResult();
+
+        Cart.attachEvents();
     });
 
-    document.querySelector("#submitSearchCta").onclick = function() {
+    document.querySelector("#submitSearchCta").onclick = function () {
         search = new Search();
+
         // Get the criterion value from the input text box and launch the search
-        
         search.parseInput();
         search.fetchResource(function () {
             search.clearSearch();
             search.parseResults(criterion);
             search.displayResultState();
             search.displayResult();
+
+            Cart.attachEvents();
         });
     }
+
     document.querySelector("#resetSearch").onclick = function () {
         search = new Search();
         search.clearSearch();

@@ -14,7 +14,7 @@
                 "<node_internals>/**"
             ],
             "remoteRoot": "/Sites/CodePhoenixOrg/SDK/javascript/Cpascher",
-            "program": "${workspaceFolder}/src/web/index.js"
+            "program": "${workspaceFolder}/src/web/debug.js"
         }
     ]
 }

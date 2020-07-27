@@ -15,6 +15,6 @@ services:
     volumes:
       - .:/Sites/CodePhoenixOrg/SDK/javascript/Cpascher
       - node_modules:/Sites/CodePhoenixOrg/SDK/javascript/Cpascher/node_modules
-    command: "node src/web/start.js"
+    command: "node src/web/index.js"
 volumes: 
   node_modules:
