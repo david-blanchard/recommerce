@@ -3,8 +3,7 @@
 /* Padding below the footer and lighter body text */
 
 body {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: 5rem;
   color: #5a5a5a;
 }
 
@@ -110,4 +109,9 @@ body {
 .image-middle {
   margin-left: calc((100% - 1200px) / 2) !important;
   width: 1200px !important;
+}
+
+.bigfooter {
+  max-width: 100% !important;
+  max-height: 100% !important;
 }
