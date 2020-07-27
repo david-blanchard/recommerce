@@ -190,9 +190,11 @@ class CartChecker {
 
         checker.displayCart();
         
-        setTimeout(function() {}, 1000);
+        let handle = setTimeout(function() {
+            checker.attachEvents();
+            clearTimeout(handle);
+        }, 1000);
 
-        checker.attachEvents();
     }
 
 
@@ -217,9 +219,11 @@ var checkCart = function () {
 
         checker.displayCart();
         
-        setTimeout(function() {}, 1000);
+        let handle = setTimeout(function() {
+            checker.attachEvents();
+            clearTimeout(handle);
+        }, 1000);
 
-        checker.attachEvents();
 
     })
 
