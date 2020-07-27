@@ -15,9 +15,14 @@
     "web": {
         "get": {
             "/$": "/views/index.html",
+            "/search\\?([\\S+]*)?$": "/views/search.html",
+            "/index$": "/views/index.html",
             "/home$": "/views/home.html",
-            "/cart$": "/views/cart.html",
-            "/index$": "/views/index.html"
+            "/album$": "/views/album.html",
+            "/cart$": "/views/cart.html"
+        },
+        "post": {
+            "^\/search\\?([\\S+]*)?$": "/views/search.html"
         }
     }
 }
