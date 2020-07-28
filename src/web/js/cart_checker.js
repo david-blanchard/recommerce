@@ -79,6 +79,8 @@ class CartChecker {
             i++;
         });
 
+        total = parseFloat(total).toFixed(2);
+
         // Add the sub-total to the cart
         html = this.makeSubTotalLine(total);
         this.appendHTML(html);
@@ -86,11 +88,14 @@ class CartChecker {
         // Computes the discount sum
         this.computeDiscount(total, function (discountSum) {
             
+            discountSum = parseFloat(discountSum).toFixed(2);
+
             // Add the discount sum line to the cart
             html = this.makeDiscountLine(discountSum);
             this.appendHTML(html);
 
             total -= discountSum;
+            total = parseFloat(total).toFixed(2);
 
             // Add the total line to the cart
             html = this.makeTotalLine(total);
@@ -119,7 +124,7 @@ class CartChecker {
     makeArticleLine(json, index) {
 
         let cover = "https://dummyimage.com/50x50/55595c/fff";
-        let price = json.price;
+        let price = parseFloat(json.price).toFixed(2);
         let title = json.title;
         let isbn = json.isbn;
 
@@ -129,7 +134,7 @@ class CartChecker {
             <td>${title}</td>
             <td>En stock</td>
             <td><input class="form-control" type="text" value="1" /></td>
-            <td class="text-right">${price}</td>
+            <td class="text-right">${price} €</td>
             <td class="text-right">
                 <a href="#" data-index="${index}" class="remove-from-cart-cta btn btn-sm btn-danger">
                     <i data-index="${index}" class="fa fa-trash"></i> 
