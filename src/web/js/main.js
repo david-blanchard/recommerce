@@ -8,4 +8,9 @@ var showCookiesPopin = function() {
 
     // Display the cookies popin on start
     Cookies.showPopin();
+
+    
+    setTimeout(function () {
+        Cart.printCount();
+    }, 200)
 }

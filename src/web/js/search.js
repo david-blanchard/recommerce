@@ -91,7 +91,7 @@ class Search {
 
             let dataset = {};
             dataset.isbn = isbn;
-            dataset.title = title; 
+            dataset.title = title;
             dataset.price = price;
 
             let json = encodeURIComponent(JSON.stringify(dataset));
@@ -163,6 +163,7 @@ var showSearchResults = function () {
     let search = new Search();
     let criterion = "title";
 
+
     // Get the criterion value from the query string and launch the search
     search.parseQuery();
     search.fetchResource(function () {
@@ -193,5 +194,9 @@ var showSearchResults = function () {
         search.clearSearch();
         search.displayResultState(Search.SEARCH_STATE_ZERO);
     }
+
+    setTimeout(function () {
+        Cart.printCount();
+    }, 200)
 
 }

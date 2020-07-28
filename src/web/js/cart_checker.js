@@ -193,7 +193,7 @@ class CartChecker {
         let handle = setTimeout(function() {
             checker.attachEvents();
             clearTimeout(handle);
-        }, 1000);
+        }, 500);
 
     }
 
@@ -222,7 +222,7 @@ var checkCart = function () {
         let handle = setTimeout(function() {
             checker.attachEvents();
             clearTimeout(handle);
-        }, 1000);
+        }, 500);
 
 
     })
