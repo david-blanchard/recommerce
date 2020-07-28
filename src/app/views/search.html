@@ -1,21 +1,19 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="h-100">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-  <meta name="generator" content="Jekyll v4.0.1">
-  <title>Cpascher · Recherche</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
 
-  <link rel="canonical" href="http://localhost:3000/search">
+  <title>Cpascher - Recherche</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
 
   <!-- Bootstrap core CSS -->
-  <link href="assets/dist/css/bootstrap.css" rel="stylesheet">
-  <!-- <link href="assets/css/font-awesome.min.css" rel="stylesheet"> -->
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="assets/dist/css/bootstrap.css" rel="stylesheet" />
 
   <style>
     .bd-placeholder-img {
@@ -34,14 +32,13 @@
     }
   </style>
   <!-- Custom styles for this template -->
-  <link href="css/carousel.css" rel="stylesheet">
-  <link href="css/footer.css" rel="stylesheet">
-  <link href="css/index.css" rel="stylesheet">
-  <link href="css/spinner.css" rel="stylesheet">
+  <link href="css/sticky-footer.css" rel="stylesheet" />
+  <link href="css/carousel.css" rel="stylesheet" />
+  <link href="css/index.css" rel="stylesheet" />
+  <link href="css/spinner.css" rel="stylesheet" />
 </head>
 
-<body>
-
+<body class="d-flex flex-column h-100">
   <header>
     <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-white shadow-sm">
       <a class="navbar-brand mr-auto mr-lg-0" href="{{ home }}">
@@ -52,7 +49,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="navbar-collapse offcanvas-collapse " id="navbarsExampleDefault">
+      <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav navbar-dark mr-auto">
           <li class="nav-item active">
             <a class="nav-link text-dark" href="#">Tous nos rayons <span class="sr-only">(current)</span></a>
@@ -72,7 +69,7 @@
         </ul>
         <div class="form-inline my-2 my-lg-0">
           <input id="searchInput" name="q" class="form-control mr-sm-2" type="text"
-            placeholder="Lancez-vous, choisissez ce qui vous plait" aria-label="Recherche">
+            placeholder="Lancez-vous, choisissez ce qui vous plait" aria-label="Recherche" />
           <button id="submitSearchCta" class="btn btn-outline-success my-2 my-sm-0">
             <i class="fa fa-search"></i>
           </button>
@@ -80,7 +77,6 @@
             <i class="fa fa-shopping-cart"></i>
             <span id="cartSum" class="badge badge-light ml-3">0</span>
           </a>
-
         </div>
       </div>
     </nav>
@@ -96,38 +92,33 @@
         <a class="nav-link" href="#">Voitures.pascher</a>
       </nav>
     </div>
-
   </header>
 
   <main role="main" class="flex-shrink-0">
-
     <section class="jumbotron text-center">
       <div class="container">
         <h1>Résultats de votre recherche</h1>
         <p id="resultState" class="lead text-muted"></p>
         <p>
-
           <a id="resetSearch" href="#" class="btn btn-secondary my-2">Effacer ma recherche</a>
         </p>
       </div>
     </section>
 
-    <div class="album py-5 bg-light">
+    <div class="album py-5">
       <div class="container">
-        <div id="lostAndFound" class="row">
-        </div>
-
+        <div id="lostAndFound" class="row"></div>
       </div>
     </div>
 
   </main>
 
-  <footer class="pt-4 pt-md-5 border-top mt-auto bg-dark">
+  <footer class="py-5 border-top mt-auto bg-light">
     <div class="container bigfooter">
       <div class="container">
-        <div class=" row">
+        <div class="row">
           <div class="col-12 col-md">
-            <img class="mb-2" src="../assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+            <img class="mb-2" src="assets/images/logos/Cpascher_logo_smaller.png" alt="" width="124" height="24" />
             <small class="d-block mb-3 text-muted">&copy; 2020</small>
           </div>
           <div class="col-6 col-md">
@@ -165,8 +156,9 @@
   </footer>
 
   <script src="/phink.js" data-init="showSearchResults"
-    data-depends="assets/js/vendor/jquery.slim.min.js;assets/dist/js/bootstrap.bundle.js;js/cookies.js;js/cart.js" data-sources="js/search.js">
-  </script>
+  data-depends="assets/js/vendor/jquery.slim.min.js;assets/dist/js/bootstrap.bundle.js;js/cookies.js;js/cart.js"
+  data-sources="js/search.js"></script>
+</body>
 </body>
 
 </html>

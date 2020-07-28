@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
   <meta charset="utf-8">
@@ -38,7 +38,7 @@
   <link href="css/spinner.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
   <header>
     <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-white shadow-sm">
       <a class="navbar-brand mr-auto mr-lg-0" href="{{ home }}">
@@ -112,10 +112,10 @@
               <thead>
                 <tr>
                   <th scope="col"> </th>
-                  <th scope="col">Product</th>
-                  <th scope="col">Available</th>
-                  <th scope="col" class="text-center">Quantity</th>
-                  <th scope="col" class="text-right">Price</th>
+                  <th scope="col">Article</th>
+                  <th scope="col">Disponibilité</th>
+                  <th scope="col" class="text-center">Quantité</th>
+                  <th scope="col" class="text-right">Prix</th>
                   <th> </th>
                 </tr>
               </thead>
@@ -130,10 +130,10 @@
         <div class="col mb-2">
           <div class="row">
             <div class="col-sm-12  col-md-6">
-              <a href="{{ home }}" class="btn btn-block btn-light">Continue Shopping</a>
+              <a href="{{ home }}" class="btn btn-block btn-light">Continuer vos achats</a>
             </div>
             <div class="col-sm-12 col-md-6 text-right">
-              <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+              <button class="btn btn-lg btn-block btn-success text-uppercase">Valider votre panier</button>
             </div>
           </div>
         </div>
@@ -142,12 +142,12 @@
 
   </main>
 
-  <footer class="pt-4 pt-md-5 border-top mt-auto bg-dark">
+  <footer class="py-5 border-top mt-auto bg-light">
     <div class="container bigfooter">
       <div class="container">
         <div class=" row">
           <div class="col-12 col-md">
-            <img class="mb-2" src="../assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+            <img class="mb-2" src="assets/images/logos/Cpascher_logo_smaller.png" alt="" width="124" height="24">
             <small class="d-block mb-3 text-muted">&copy; 2020</small>
           </div>
           <div class="col-6 col-md">
@@ -184,60 +184,7 @@
     </div>
   </footer>
 
-  <!-- Footer -->
-  <!-- <footer class="text-light">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3 col-lg-4 col-xl-3">
-        <h5>About</h5>
-        <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-        <p class="mb-0">
-          Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
-        </p>
-      </div>
-
-      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
-        <h5>Informations</h5>
-        <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-        <ul class="list-unstyled">
-          <li><a href="">Link 1</a></li>
-          <li><a href="">Link 2</a></li>
-          <li><a href="">Link 3</a></li>
-          <li><a href="">Link 4</a></li>
-        </ul>
-      </div>
-
-      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
-        <h5>Others links</h5>
-        <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-        <ul class="list-unstyled">
-          <li><a href="">Link 1</a></li>
-          <li><a href="">Link 2</a></li>
-          <li><a href="">Link 3</a></li>
-          <li><a href="">Link 4</a></li>
-        </ul>
-      </div>
-
-      <div class="col-md-4 col-lg-3 col-xl-3">
-        <h5>Contact</h5>
-        <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-        <ul class="list-unstyled">
-          <li><i class="fa fa-home mr-2"></i> My company</li>
-          <li><i class="fa fa-envelope mr-2"></i> email@example.com</li>
-          <li><i class="fa fa-phone mr-2"></i> + 33 12 14 15 16</li>
-          <li><i class="fa fa-print mr-2"></i> + 33 12 14 15 16</li>
-        </ul>
-      </div>
-      <div class="col-12 copyright mt-3">
-        <p class="float-left">
-          <a href="#">Back to top</a>
-        </p>
-        <p class="text-right text-muted">created with <i class="fa fa-heart"></i> by <a
-            href="https://t-php.fr/43-theme-ecommerce-bootstrap-4.html"><i>t-php</i></a> | <span>v. 1.0</span></p>
-      </div>
-    </div>
-  </div>
-</footer> -->
+  
   <script src="/phink.js" data-init="checkCart"
     data-depends="assets/js/vendor/jquery.slim.min.js;assets/dist/js/bootstrap.bundle.js;js/cookies.js;js/cart.js"
     data-sources="js/cart_checker.js">
