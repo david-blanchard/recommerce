@@ -2,7 +2,7 @@
 
 let Controller = require(global.PHINK_ROOT + 'mvc/controller');
 
-class Index extends Controller {
+class Home extends Controller {
     constructor(parent, viewName) {
         super(parent, viewName);
 
@@ -15,10 +15,10 @@ class Index extends Controller {
 
     load(callback) {
 
-        this._home = 'localhost:' + this.port;
+        this._home = 'http://localhost:' + this.port;
         callback(true);
  
     }
 }
 
-module.exports = Index;
+module.exports = Home;

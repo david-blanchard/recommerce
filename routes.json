@@ -2,7 +2,6 @@
     "rest": {
         "get": {
             "/api/cart/([0-9]+)$": "/rest/cart?article=$1"
-
         },
         "put": {
             "/api/cart/([0-9]+)$": "/rest/cart?article=$1"
@@ -13,11 +12,10 @@
     },
     "web": {
         "get": {
-            "/$": "/views/index.html",
+            "/$": "/views/home.html",
             "/search\\?([\\S+]*)?$": "/views/search.html",
-            "/index$": "/views/index.html",
             "/home$": "/views/home.html",
-            "/album$": "/views/album.html",
+            "/sticky-footer$": "/views/sticky_footer.html",
             "/cart$": "/views/cart.html"
         },
         "post": {
