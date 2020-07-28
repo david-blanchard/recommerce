@@ -9,6 +9,12 @@ class CartChecker {
         return this._resourceURL;
     }
 
+    /**
+     * Computes the best discount price based on the total sum of a bunch of articles
+     * 
+     * @param {float} total 
+     * @param {function} callback 
+     */
     computeDiscount(total, callback) {
         let isbnArray = [];
         let cart = Cart.readCart();
@@ -45,7 +51,7 @@ class CartChecker {
 
                 let minTotal = Math.min(totalPct, totalMinus, totalSlice);
 
-                discountSum = Math.round(total - minTotal, 2);
+                discountSum = (total - minTotal).toFixed(2);
 
                 if ('function' == typeof callback) {
                     // Trigger callback function on resource found
@@ -54,6 +60,9 @@ class CartChecker {
             });
     }
 
+    /**
+     * Bind the cart content
+     */
     displayCart() {
 
         let cart = Cart.readCart();
@@ -62,6 +71,7 @@ class CartChecker {
         let i = 1;
 
         cart.forEach(element => {
+            // Add an article to the cart
             html = this.makeArticleLine(element, i);
             total += parseFloat(element.price);
 
@@ -69,22 +79,27 @@ class CartChecker {
             i++;
         });
 
-
+        // Add the sub-total to the cart
         html = this.makeSubTotalLine(total);
         this.appendHTML(html);
 
+        // Computes the discount sum
         this.computeDiscount(total, function (discountSum) {
+            
+            // Add the discount sum line to the cart
             html = this.makeDiscountLine(discountSum);
             this.appendHTML(html);
 
             total -= discountSum;
 
+            // Add the total line to the cart
             html = this.makeTotalLine(total);
             this.appendHTML(html);
         });
 
     }
 
+    // Append a line to the cart table
     appendHTML(html) {
         let tableLines = document.querySelector("#table-lines");
 
@@ -95,6 +110,7 @@ class CartChecker {
 
     }
 
+    // Remove all lines of the cart table
     static clearLines() {
         let tableLines = document.querySelector("#table-lines");
         tableLines.innerHTML = "";
@@ -174,6 +190,11 @@ class CartChecker {
 
     }
 
+    /**
+     * Remove an article from the cart by using the Button data sent on click event
+     * 
+     * @param {DOM element} parent 
+     */
     static removeFromCart(parent) {
         if (parent === undefined || parent === null) {
             return;
@@ -189,28 +210,26 @@ class CartChecker {
         let checker = new CartChecker();
 
         checker.displayCart();
-        
-        let handle = setTimeout(function() {
+
+        let handle = setTimeout(function () {
             checker.attachEvents();
             clearTimeout(handle);
-        }, 500);
+        }, 1000);
 
     }
 
-
+    // Bind the click event on every trash icon
     attachEvents() {
         document.querySelectorAll(".remove-from-cart-cta").forEach(item => {
             item.onclick = function (e) {
                 console.log(e.target);
-
                 CartChecker.removeFromCart(e);
             }
         });
     }
-
-
 }
 
+// Start from here
 var checkCart = function () {
     Phink.DOM.ready(function () {
         Cart.printCount();
@@ -218,14 +237,10 @@ var checkCart = function () {
         let checker = new CartChecker();
 
         checker.displayCart();
-        
-        let handle = setTimeout(function() {
+
+        let handle = setTimeout(function () {
             checker.attachEvents();
             clearTimeout(handle);
         }, 500);
-
-
     })
-
-
 }

@@ -6,6 +6,9 @@ class Cart
 
     }
 
+    /**
+     *  Return the number of articles in the cart cookie, otherwise 0
+     */
     static get count() {
         let result = 0;
 
@@ -16,6 +19,9 @@ class Cart
         return result;
     }
 
+    /**
+     * Read the content of the cart cookie and return a ready-make JS object
+     */
     static readCart() {
         let cart = Cookies.read(Cart.CART_ID);
         let json = (cart !== '') ? JSON.parse(cart) : [];
@@ -24,6 +30,11 @@ class Cart
 
     }
 
+    /**
+     * Add an article to the cart cookie by retrieving the data through the Button object
+     * 
+     * @param {DOM ELement} parent 
+     */
     static addToCart(parent) {
         if (parent === undefined || parent === null) 
         {
@@ -46,6 +57,11 @@ class Cart
         Cart.printCount();
     }
 
+    /**
+     * Remove an article from the cart by its position in the cart
+     * 
+     * @param {int} index 
+     */
     static removeFromCart(index) {
         let cart = Cart.readCart();
 
@@ -61,6 +77,9 @@ class Cart
 
     }
 
+    /**
+     * Display the number of articles in the cart on cart button
+     */
     static printCount() {
         let cartSum = document.querySelector("#cartSum");
         if(cartSum !== undefined) {
@@ -69,6 +88,9 @@ class Cart
         }
     }
 
+    /**
+     * Bind click events on every "Add to cart" button on the search page
+     */
     static attachEvents () {
         document.querySelectorAll(".add-to-cart-cta").forEach(item => {
             item.onclick = function(e) {
