@@ -20,7 +20,7 @@ class Cart
     }
 
     /**
-     * Read the content of the cart cookie and return a ready-make JS object
+     * Read the content of the cart cookie and return a ready-made JS object
      */
     static readCart() {
         let cart = Cookies.read(Cart.CART_ID);

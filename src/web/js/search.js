@@ -93,6 +93,7 @@ class Search {
             dataset.isbn = isbn;
             dataset.title = title;
             dataset.price = price;
+            dataset.cover = cover;
 
             let json = encodeURIComponent(JSON.stringify(dataset));
 

@@ -87,7 +87,7 @@ class CartChecker {
 
         // Computes the discount sum
         this.computeDiscount(total, function (discountSum) {
-            
+
             discountSum = parseFloat(discountSum).toFixed(2);
 
             // Add the discount sum line to the cart
@@ -123,14 +123,14 @@ class CartChecker {
 
     makeArticleLine(json, index) {
 
-        let cover = "https://dummyimage.com/50x50/55595c/fff";
+        let cover = json.cover;
         let price = parseFloat(json.price).toFixed(2);
         let title = json.title;
         let isbn = json.isbn;
 
         let html = `
         <tr>
-            <td><img src="${cover}" /> </td>
+            <td><img src="${cover}" width="40" height="60"/> </td>
             <td>${title}</td>
             <td>En stock</td>
             <td><input class="form-control" type="text" value="1" /></td>
