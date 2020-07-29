@@ -101,7 +101,6 @@ body {
 @media (min-width: 576px) {
   .form-inline .form-control {
     display: inline-block;
-    width: 500px;
     vertical-align: middle;
   }
 }
