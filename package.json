@@ -1,15 +1,15 @@
 {
-  "name": "phinkjs",
+  "name": "cpascher",
   "config": {
     "port": "3000",
     "scripts": {
       "start": "node src/web/index.js"
     }
   },
-  "version": "0.2.11",
-  "description": "A client and server side JavaScript framework to be used standalone or in Phink PHP projects",
+  "version": "0.1.0",
+  "description": "E-commerce micro site",
   "main": "src/web/start.js",
-  "repository": "https://github.com/dpjb71/PhinkJS.git",
+  "repository": "https://github.com/david-blanchard/Cpascher.git",
   "author": "David Blanchard <dblanchard1@bbox.fr>",
   "license": "GPL-3.0",
   "dependencies": {
