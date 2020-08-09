@@ -1,8 +1,9 @@
-﻿
+﻿// eslint-disable-next-line
+
 import React, { Component } from 'react'
 import '../css/carousel.css'
 import 'bootstrap/dist/css/bootstrap.css'
-import $ from 'jquery'
+// import $ from 'jquery'
 import { } from 'bootstrap'
 import logo from '../assets/images/logos/Cpascher_logo_small.png'
 
@@ -16,10 +17,10 @@ import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 class Header extends Component {
   render () {
     return (
-      <fragment>
+      <>
         <header>
           <nav className='navbar navbar-expand-md fixed-top navbar-dark bg-white shadow-sm'>
-            <a className='navbar-brand mr-auto mr-lg-0' href='{{ home }}'>
+            <a className='navbar-brand mr-auto mr-lg-0' href='http://localhost:3000'>
               <img src={logo} alt='Cpascher' />
             </a>
 
@@ -72,7 +73,7 @@ class Header extends Component {
             </nav>
           </div>
         </header>
-      </fragment>
+      </>
     )
   }
 }
