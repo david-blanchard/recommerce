@@ -1,13 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Home from './views/Home'
+import App from './components/App/App'
 import * as serviceWorker from './serviceWorker'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementsByTagName('body')[0]
 )
 
 // If you want your app to work offline and load faster, you can change
