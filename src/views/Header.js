@@ -6,21 +6,28 @@ import 'bootstrap/dist/css/bootstrap.css'
 // import $ from 'jquery'
 import { } from 'bootstrap'
 import logo from '../assets/images/logos/Cpascher_logo_small.png'
+import BusinessHttp from '../business/Http'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
-// cookies.js;js/promo.js;js/cart.js
-// js/main.js
-// showCookiesPopin
+import Cart from '../business/Cart'
+
+const home = BusinessHttp.fullyQualifiedName
 
 class Header extends Component {
+  componentDidMount () {
+    setTimeout(function () {
+      Cart.printCount()
+    }, 200)
+  }
+
   render () {
     return (
       <>
         <header>
           <nav className='navbar navbar-expand-md fixed-top navbar-dark bg-white shadow-sm'>
-            <a className='navbar-brand mr-auto mr-lg-0' href='http://localhost:3000'>
+            <a className='navbar-brand mr-auto mr-lg-0' href={home}>
               <img src={logo} alt='Cpascher' />
             </a>
 

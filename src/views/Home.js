@@ -1,8 +1,12 @@
 ﻿
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import '../css/index.css'
 import Header from './Header'
 import Footer from './Footer'
+
+import $ from 'jquery'
+
 import plageTropique from '../assets/images/teasers/voyages.png'
 import salonJardin from '../assets/images/teasers/chaises_jardin.png'
 import librairie from '../assets/images/teasers/librairie.png'
@@ -10,34 +14,20 @@ import article1 from '../assets/images/articles/disque-a-lancer.jpg'
 import article2 from '../assets/images/articles//robot-nettoyeur-wifi.jpg'
 import article3 from '../assets/images/articles/platine-vinyle.jpg'
 
-import Cookies from '../business/Cookies'
-import Promo from '../business/Promo'
-import Cart from '../business/Cart'
+import CookiesPopin from '../views/CookiesPopin'
+import PromoPopin from '../views/PromoPopin'
 
 // cookies.js;js/promo.js;js/cart.js
 // js/main.js
 // showCookiesPopin
 
 class Home extends Component {
-  constructor (props) {
-    super(props)
-
-
-  }
-
   componentDidMount () {
     // Function called on start
     // Display the promo popin after the cookies popin is closed
-    Cookies.onRemovePopin(function () {
-      Promo.showPopin()
+    CookiesPopin.onRemovePopin(() => {
+      ReactDOM.render(<PromoPopin />, document.querySelector('.frame-layout'))
     })
-
-    // Display the cookies popin on start
-    Cookies.showPopin()
-
-    setTimeout(function () {
-      Cart.printCount()
-    }, 200)
   }
 
   render () {
@@ -231,15 +221,15 @@ class Home extends Component {
                   Aspirateur Robot Nettoyeur<span className='text-muted'> avec App Wifi</span>, navigation
             cartographique, aspiration 4KPA, réservoir d’eau électrique, mémoire
                 </h2>
-                <p className='lead'>
-                  <label for='points-forts'>Les points forts :</label>
+                <div className='lead'>
+                  <label htmlFor='points-forts'>Les points forts :</label>
                   <ul id='points-forts'>
                     <li>Collecte des poussières : sans sac</li>
                     <li>Mode de nettoyage : humide et sec</li>
                     <li>Capacité du collecteur : 0.6L</li>
                     <li>Type de filtre : filtre HEPA </li>
                   </ul>
-                </p>
+                </div>
                 <div className='badge-pill'>189 €</div>
 
               </div>
@@ -265,7 +255,7 @@ class Home extends Component {
                   HiFi compacte. Elle peut lire à toutes les vitesses standard.
                 </p>
 
-                <label for='points-forts'>Les points faibles :</label>
+                <label htmlFor='points-forts'>Les points faibles :</label>
                 <ul id='points-forts'>
                   <li>N'est pas compatible avec le disque à lancer</li>
                 </ul>
@@ -339,6 +329,7 @@ class Home extends Component {
           </div>
           {/* <!-- /.container --> */}
         </main>
+        <CookiesPopin />
         <Footer />
       </>
     )

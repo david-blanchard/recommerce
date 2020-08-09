@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import React from 'react'
 
 class Spinner {
   static show () {
@@ -12,17 +8,17 @@ class Spinner {
 
     const frameLayout = document.createElement('div')
     frameLayout.setAttribute('class', 'frame-layout')
-    frameLayout.innerHTML = `
-        <div class="redirectMessage">
-            <div class="spinner">
-                <div class="rect1"></div>
-                <div class="rect2"></div>
-                <div class="rect3"></div>
-                <div class="rect4"></div>
-                <div class="rect5"></div>
-            </div>
+    frameLayout.innerHTML = (
+      <div class='redirectMessage'>
+        <div class='spinner'>
+          <div class='rect1' />
+          <div class='rect2' />
+          <div class='rect3' />
+          <div class='rect4' />
+          <div class='rect5' />
         </div>
-`
+      </div>
+    )
     document.body.appendChild(frameLayout)
   }
 

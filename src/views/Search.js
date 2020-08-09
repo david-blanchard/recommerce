@@ -19,20 +19,20 @@ class Search extends Component {
       <>
         <Header />
 
-        <main role='main' class='flex-shrink-0'>
-          <section class='jumbotron text-center'>
-            <div class='container'>
+        <main role='main' className='flex-shrink-0'>
+          <section className='jumbotron text-center'>
+            <div className='container'>
               <h1>Résultats de votre recherche</h1>
-              <p id='resultState' class='lead text-muted' />
+              <p id='resultState' className='lead text-muted' />
               <p>
-                <a id='resetSearch' href='#' class='btn btn-secondary my-2'>Effacer ma recherche</a>
+                <a id='resetSearch' href='#' className='btn btn-secondary my-2'>Effacer ma recherche</a>
               </p>
             </div>
           </section>
 
-          <div class='album py-5'>
-            <div class='container'>
-              <div id='lostAndFound' class='row' />
+          <div className='album py-5'>
+            <div className='container'>
+              <div id='lostAndFound' className='row' />
             </div>
           </div>
 
