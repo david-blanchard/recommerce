@@ -11,16 +11,16 @@ import BusinessCart from '../business/Cart'
 
 class Cart extends Component {
   componentDidMount () {
-    this.displayCart()
+    Cart.displayCart()
 
-    const the = this
-    const handle = setTimeout(function () {
-      the.attachEvents()
-      clearTimeout(handle)
-    }, 500)
+    // const the = this
+    // const handle = setTimeout(function () {
+    //   the.attachEvents()
+    //   clearTimeout(handle)
+    // }, 500)
   }
 
-  displayCart () {
+  static displayCart () {
     const businessCart = new BusinessCart()
     const cart = BusinessCart.readCart()
     let total = 0
@@ -28,7 +28,7 @@ class Cart extends Component {
 
     cart.forEach((article) => {
       // Add an article to the cart
-      this.appendComponent(<ArticleLine article={article} index={i} />, 'article' + i)
+      Cart.appendComponent(<ArticleLine article={article} index={i} />, 'article' + i)
       total += parseFloat(article.price)
 
       i++
@@ -37,34 +37,34 @@ class Cart extends Component {
     total = total.toFixed(2)
 
     // Add the sub-total to the cart
-    this.appendComponent(<SubTotalLine sum={total} />, 'subtotal')
+    Cart.appendComponent(<SubTotalLine sum={total} />, 'subtotal')
 
     // Computes the discount sum
     businessCart.computeDiscount(total, (discountSum) => {
       discountSum = parseFloat(discountSum).toFixed(2)
 
       // Add the discount sum line to the cart
-      this.appendComponent(<DiscountLine discountSum={discountSum} />, 'discount')
+      Cart.appendComponent(<DiscountLine discountSum={discountSum} />, 'discount')
 
       total -= discountSum
       total = parseFloat(total).toFixed(2)
 
       // Add the total line to the cart
-      this.appendComponent(<TotalLine total={total} />, 'total')
+      Cart.appendComponent(<TotalLine total={total} />, 'total')
     })
   }
 
   // Bind the click event on every trash icon
   attachEvents () {
-    document.querySelectorAll('.remove-from-cart-cta').forEach((item) => {
-      item.onclick = (e) => {
-        console.log(e.target)
-        this.removeFromCart(e)
-      }
-    })
+    // document.querySelectorAll('.remove-from-cart-cta').forEach((item) => {
+    //   item.onclick = (e) => {
+    //     console.log(e.target)
+    //     this.removeFromCart(e)
+    //   }
+    // })
   }
 
-  removeFromCart (parent) {
+  static removeFromCart (parent) {
     if (parent === undefined || parent === null) {
       return
     }
@@ -77,21 +77,21 @@ class Cart extends Component {
     this.clearLines()
     this.displayCart()
 
-    const the = this
-    const handle = setTimeout(function () {
-      the.attachEvents()
-      clearTimeout(handle)
-    }, 1000)
+    // const the = this
+    // const handle = setTimeout(function () {
+    //   the.attachEvents()
+    //   clearTimeout(handle)
+    // }, 1000)
   }
 
   // Remove all lines of the cart table
-  clearLines () {
+  static clearLines () {
     const tableLines = document.querySelector('#table-lines')
-    ReactDOM.render(() => { return (<></>) }, tableLines)
+    ReactDOM.render(() => { return (<>&nbsp;</>) }, tableLines)
   }
 
   // Append a line to the cart table
-  appendComponent (element, id) {
+  static appendComponent (element, id) {
     const tableLines = document.querySelector('#table-lines')
 
     const widget = document.createElement('tr')
@@ -175,10 +175,10 @@ class ArticleLine extends Component {
         <td><input className='form-control' type='text' value='1' /></td>
         <td className='text-right'>{this.price} €</td>
         <td className='text-right'>
-          <a href='#' data-index={this.index} className='remove-from-cart-cta btn btn-sm btn-danger'>
-            <FontAwesomeIcon icon={faTrash} data-index={this.index} />
+          <button onClick={(e) => { Cart.removeFromCart(e) }} data-index={this.index} className='remove-from-cart-cta btn btn-sm btn-danger'>
+            <FontAwesomeIcon style={{ 'pointer-events': 'none' }} icon={faTrash} />
 
-          </a>
+          </button>
         </td>
       </>
     )

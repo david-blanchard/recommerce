@@ -41,10 +41,10 @@ class CookiesPopin extends Component {
   }
 
   static removePopin () {
-    const frameLayout = document.querySelector('.frame-layout')
-    document.body.removeChild(frameLayout)
-    const screenLayout = document.querySelector('#screen-layout')
-    document.body.removeChild(screenLayout)
+    // const frameLayout = document.querySelector('.frame-layout')
+    // const screenLayout = document.querySelector('#screen-layout')
+    // screenLayout.removeChild(frameLayout)
+    // document.querySelector('#root').removeChild(screenLayout)
 
     CookiesPopin.onRemovePopin()
   }
