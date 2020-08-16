@@ -159,10 +159,6 @@ class Search {
       search.clearSearch()
       search.displayResultState(SEARCH_STATE_ZERO)
     }
-
-    setTimeout(function () {
-      Cart.printCount()
-    }, 200)
   }
 }
 

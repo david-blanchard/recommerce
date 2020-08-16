@@ -8,18 +8,13 @@ import { } from 'bootstrap'
 import logo from '../assets/images/logos/Cpascher_logo_small.png'
 import BusinessHttp from '../business/Http'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-
-import Cart from '../business/Cart'
+import CartNavButton from './CartNavButton'
+import SearchNavButton from './SearchNavButton'
 
 const home = BusinessHttp.fullyQualifiedName
 
 class Header extends Component {
   componentDidMount () {
-    setTimeout(function () {
-      Cart.printCount()
-    }, 200)
   }
 
   render () {
@@ -57,14 +52,8 @@ class Header extends Component {
                   id='search' name='q' className='form-control mr-sm-2' type='text'
                   placeholder='Lancez-vous' aria-label='Search'
                 />
-
-                <button id='submitSearchCta' className='btn btn-outline-success my-2 my-sm-0'>
-                  <FontAwesomeIcon icon={faSearch} />
-                </button>
-                <a id='cartCta' className='btn btn-success my-2 my-sm-0 ml-3' href='cart'>
-                  <FontAwesomeIcon icon={faShoppingCart} />
-                  <span id='cartSum' className='badge badge-light ml-3'>0</span>
-                </a>
+                <SearchNavButton />
+                <CartNavButton />
               </form>
             </div>
           </nav>
