@@ -1,25 +1,28 @@
-﻿
+﻿// eslint-disable-next-line
+
 import React, { Component } from 'react'
 import '../css/carousel.css'
 import 'bootstrap/dist/css/bootstrap.css'
-import $ from 'jquery'
+// import $ from 'jquery'
 import { } from 'bootstrap'
 import logo from '../assets/images/logos/Cpascher_logo_small.png'
+import BusinessHttp from '../business/Http'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import CartNavButton from './CartNavButton'
+import SearchNavButton from './SearchNavButton'
 
-// cookies.js;js/promo.js;js/cart.js
-// js/main.js
-// showCookiesPopin
+const home = BusinessHttp.fullyQualifiedName
 
 class Header extends Component {
+  componentDidMount () {
+  }
+
   render () {
     return (
-      <fragment>
+      <>
         <header>
           <nav className='navbar navbar-expand-md fixed-top navbar-dark bg-white shadow-sm'>
-            <a className='navbar-brand mr-auto mr-lg-0' href='{{ home }}'>
+            <a className='navbar-brand mr-auto mr-lg-0' href={home}>
               <img src={logo} alt='Cpascher' />
             </a>
 
@@ -49,14 +52,8 @@ class Header extends Component {
                   id='search' name='q' className='form-control mr-sm-2' type='text'
                   placeholder='Lancez-vous' aria-label='Search'
                 />
-
-                <button id='submitSearchCta' className='btn btn-outline-success my-2 my-sm-0'>
-                  <FontAwesomeIcon icon={faSearch} />
-                </button>
-                <a id='cartCta' className='btn btn-success my-2 my-sm-0 ml-3' href='cart'>
-                  <FontAwesomeIcon icon={faShoppingCart} />
-                  <span id='cartSum' className='badge badge-light ml-3'>0</span>
-                </a>
+                <SearchNavButton />
+                <CartNavButton />
               </form>
             </div>
           </nav>
@@ -72,7 +69,7 @@ class Header extends Component {
             </nav>
           </div>
         </header>
-      </fragment>
+      </>
     )
   }
 }

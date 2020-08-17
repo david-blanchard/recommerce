@@ -1,6 +1,6 @@
 ﻿
 import React, { Component } from 'react'
-import $ from 'jquery'
+// import $ from 'jquery'
 import logo from '../assets/images/logos/Cpascher_logo_smaller.png'
 
 // cookies.js;js/promo.js;js/cart.js
@@ -10,7 +10,7 @@ import logo from '../assets/images/logos/Cpascher_logo_smaller.png'
 class Footer extends Component {
   render () {
     return (
-      <fragment>
+      <>
         <footer className='py-5 border-top mt-auto bg-light'>
           <div className='container bigfooter'>
             <div className='container'>
@@ -52,7 +52,7 @@ class Footer extends Component {
             </div>
           </div>
         </footer>
-      </fragment>
+      </>
     )
   }
 }
