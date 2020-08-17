@@ -30,32 +30,32 @@ class Footer extends Component {
                   <h5>Features</h5>
                   <ul className='list-unstyled text-small'>
                     <li>
-                      <a className='text-muted' href='#'>
+                      <a className='text-muted' href={home}>
                         Cool stuff
                       </a>
                     </li>
                     <li>
-                      <a className='text-muted' href='#'>
+                      <a className='text-muted' href={home}>
                         Random feature
                       </a>
                     </li>
                     <li>
-                      <a className='text-muted' href='#'>
+                      <a className='text-muted' href={home}>
                         Team feature
                       </a>
                     </li>
                     <li>
-                      <a className='text-muted' href='#'>
+                      <a className='text-muted' href={home}>
                         Stuff for developers
                       </a>
                     </li>
                     <li>
-                      <a className='text-muted' href='#'>
+                      <a className='text-muted' href={home}>
                         Another one
                       </a>
                     </li>
                     <li>
-                      <a className='text-muted' href='#'>
+                      <a className='text-muted' href={home}>
                         Last time
                       </a>
                     </li>
@@ -65,22 +65,22 @@ class Footer extends Component {
                   <h5>Resources</h5>
                   <ul className='list-unstyled text-small'>
                     <li>
-                      <a className='text-muted' href='#'>
+                      <a className='text-muted' href={home}>
                         Resource
                       </a>
                     </li>
                     <li>
-                      <a className='text-muted' href='#'>
+                      <a className='text-muted' href={home}>
                         Resource name
                       </a>
                     </li>
                     <li>
-                      <a className='text-muted' href='#'>
+                      <a className='text-muted' href={home}>
                         Another resource
                       </a>
                     </li>
                     <li>
-                      <a className='text-muted' href='#'>
+                      <a className='text-muted' href={home}>
                         Final resource
                       </a>
                     </li>
@@ -90,22 +90,22 @@ class Footer extends Component {
                   <h5>About</h5>
                   <ul className='list-unstyled text-small'>
                     <li>
-                      <a className='text-muted' href='#'>
+                      <a className='text-muted' href={home}>
                         Team
                       </a>
                     </li>
                     <li>
-                      <a className='text-muted' href='#'>
+                      <a className='text-muted' href={home}>
                         Locations
                       </a>
                     </li>
                     <li>
-                      <a className='text-muted' href='#'>
+                      <a className='text-muted' href={home}>
                         Privacy
                       </a>
                     </li>
                     <li>
-                      <a className='text-muted' href='#'>
+                      <a className='text-muted' href={home}>
                         Terms
                       </a>
                     </li>

@@ -36,11 +36,11 @@ class Header extends Component {
                   <a className='nav-link text-dark'>Promos de l'été</a>{' '}
                 </li>
                 <li className='nav-item dropdown'>
-                  <a className='nav-link text-dark dropdown-toggle' href='#' id='dropdown01' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Mon compte</a>
+                  <a className='nav-link text-dark dropdown-toggle' href={home} id='dropdown01' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Mon compte</a>
                   <div className='dropdown-menu' aria-labelledby='dropdown01'>
-                    <button className='dropdown-item' href='#'>Pas encore inscrit ?</button>{' '}
-                    <button className='dropdown-item' href='#'>F.A.Q</button>{' '}
-                    <button className='dropdown-item' href='#'>Mentions légales</button>{' '}
+                    <button className='dropdown-item' href={home}>Pas encore inscrit ?</button>{' '}
+                    <button className='dropdown-item' href={home}>F.A.Q</button>{' '}
+                    <button className='dropdown-item' href={home}>Mentions légales</button>{' '}
                   </div>
                 </li>
               </ul>
@@ -51,12 +51,12 @@ class Header extends Component {
 
           <div className='nav-scroller bg-light shadow-sm'>
             <nav className='nav nav-underline'>
-              <a className='nav-link disabled' href='#'>
+              <a className='nav-link disabled' href={home}>
                 <span className='badge badge-pill bg-light align-text-bottom'>Nos partenaires</span>
               </a>
-              <a className='nav-link' href='#'>Voyages.pascher </a>{' '}
-              <a className='nav-link' href='#'>Locations.pascher</a>{' '}
-              <a className='nav-link' href='#'>Voitures.pascher</a>{' '}
+              <a className='nav-link' href={home}>Voyages.pascher </a>{' '}
+              <a className='nav-link' href={home}>Locations.pascher</a>{' '}
+              <a className='nav-link' href={home}>Voitures.pascher</a>{' '}
             </nav>
           </div>
         </header>

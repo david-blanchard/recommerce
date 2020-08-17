@@ -1,11 +1,8 @@
-﻿
-import React, { Component } from 'react'
+﻿import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import '../css/index.css'
 import Header from './Header'
 import Footer from './Footer'
-
-import $ from 'jquery'
 
 import plageTropique from '../assets/images/teasers/voyages.png'
 import salonJardin from '../assets/images/teasers/chaises_jardin.png'
@@ -16,10 +13,9 @@ import article3 from '../assets/images/articles/platine-vinyle.jpg'
 
 import CookiesPopin from '../views/CookiesPopin'
 import PromoPopin from '../views/PromoPopin'
+import BusinessHttp from '../business/Http'
 
-// cookies.js;js/promo.js;js/cart.js
-// js/main.js
-// showCookiesPopin
+const home = BusinessHttp.fullyQualifiedName()
 
 class Home extends Component {
   componentDidMount () {
@@ -59,7 +55,7 @@ class Home extends Component {
                       Partez en bord de mer grâce aux offres exclusives de notre partenaire Voyages.pascher.
                     </p>
                     <p>
-                      <button className='btn btn-lg btn-primary' href='#'>J'y vais</button>
+                      <button className='btn btn-lg btn-primary' href={home}>J'y vais</button>
                     </p>
                   </div>
                 </div>
@@ -81,7 +77,7 @@ class Home extends Component {
                       dolor id nibh ultricies vehicula ut id elit.
                     </p>
                     <p>
-                      <button className='btn btn-lg btn-primary' href='#'>En savoir plus</button>
+                      <button className='btn btn-lg btn-primary' href={home}>En savoir plus</button>
                     </p>
                   </div>
                 </div>
