@@ -143,17 +143,6 @@ class Cart {
       cartSum.innerHTML = count
     }
   }
-
-  /**
-   * Bind click events on every "Add to cart" button on the search page
-   */
-  static attachEvents () {
-    document.querySelectorAll('.add-to-cart-cta').forEach((item) => {
-      item.onclick = function (e) {
-        Cart.addToCart(e)
-      }
-    })
-  }
 }
 
 export default Cart
