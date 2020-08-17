@@ -9,14 +9,11 @@ import logo from '../assets/images/logos/Cpascher_logo_small.png'
 import BusinessHttp from '../business/Http'
 
 import CartNavButton from './CartNavButton'
-import SearchNavButton from './SearchNavButton'
+import SearchNavBar from './SearchNavBar'
 
-const home = BusinessHttp.fullyQualifiedName
+const home = BusinessHttp.fullyQualifiedName()
 
 class Header extends Component {
-  componentDidMount () {
-  }
-
   render () {
     return (
       <>
@@ -47,14 +44,8 @@ class Header extends Component {
                   </div>
                 </li>
               </ul>
-              <form className='form-inline my-2 my-lg-0' action='search'>
-                <input
-                  id='search' name='q' className='form-control mr-sm-2' type='text'
-                  placeholder='Lancez-vous' aria-label='Search'
-                />
-                <SearchNavButton />
-                <CartNavButton />
-              </form>
+              <SearchNavBar />
+              <CartNavButton />
             </div>
           </nav>
 
