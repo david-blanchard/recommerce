@@ -129,7 +129,7 @@ class Search extends Component {
     const widgets = this._lostAndFound.querySelectorAll('.' + WIDGET_CLASS)
     const the = this
 
-    widgets.forEach(function (item) {
+    widgets.forEach((item) => {
       the._lostAndFound.removeChild(item)
     })
   }
@@ -141,28 +141,26 @@ class Search extends Component {
 
     // Get the criterion value from the query string and launch the search
     search.parseQuery()
-    search.fetchResource(function () {
+    search.fetchResource(() => {
       search.parseResults(criterion)
       search.displayResultState()
       search.displayResult()
-
     })
 
-    document.querySelector('#submitSearchCta').onclick = function () {
+    document.querySelector('#submitSearchCta').onclick = () => {
       search = new Search()
 
       // Get the criterion value from the input text box and launch the search
       search.parseInput()
-      search.fetchResource(function () {
+      search.fetchResource(() => {
         search.clearSearch()
         search.parseResults(criterion)
         search.displayResultState()
         search.displayResult()
-
       })
     }
 
-    document.querySelector('#resetSearch').onclick = function () {
+    document.querySelector('#resetSearch').onclick = () => {
       search = new Search()
       search.clearSearch()
       search.displayResultState(SEARCH_STATE_ZERO)

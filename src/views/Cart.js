@@ -10,19 +10,21 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import BusinessCart from '../business/Cart'
 
 class Cart extends Component {
-  componentDidMount () {
-    Cart.displayCart()
+  constructor (props) {
+    super(props)
 
-    // const the = this
-    // const handle = setTimeout(function () {
-    //   the.attachEvents()
-    //   clearTimeout(handle)
-    // }, 500)
+    this.state = {
+      cart: BusinessCart.readCart()
+    }
   }
 
-  static displayCart () {
+  componentDidMount () {
+    this.displayCart()
+  }
+
+  displayCart () {
     const businessCart = new BusinessCart()
-    const cart = BusinessCart.readCart()
+    const cart = this.state.cart
     let total = 0
     let i = 1
 
@@ -30,7 +32,6 @@ class Cart extends Component {
       // Add an article to the cart
       Cart.appendComponent(<ArticleLine article={article} index={i} />, 'article' + i)
       total += parseFloat(article.price)
-
       i++
     })
 
@@ -54,17 +55,7 @@ class Cart extends Component {
     })
   }
 
-  // Bind the click event on every trash icon
-  attachEvents () {
-    // document.querySelectorAll('.remove-from-cart-cta').forEach((item) => {
-    //   item.onclick = (e) => {
-    //     console.log(e.target)
-    //     this.removeFromCart(e)
-    //   }
-    // })
-  }
-
-  static removeFromCart (parent) {
+  removeFromCart (parent) {
     if (parent === undefined || parent === null) {
       return
     }
@@ -74,21 +65,16 @@ class Cart extends Component {
 
     BusinessCart.removeFromCart(index)
 
-    this.clearLines()
+    this.setState({ cart: BusinessCart.readCart() })
+    // this.clearLines()
     this.displayCart()
-
-    // const the = this
-    // const handle = setTimeout(function () {
-    //   the.attachEvents()
-    //   clearTimeout(handle)
-    // }, 1000)
   }
 
   // Remove all lines of the cart table
-  static clearLines () {
-    const tableLines = document.querySelector('#table-lines')
-    ReactDOM.render(() => { return (<>&nbsp;</>) }, tableLines)
-  }
+  // static clearLines () {
+  //   const tableLines = document.querySelector('#table-lines')
+  //   ReactDOM.render(() => { return (<>&nbsp;</>) }, tableLines)
+  // }
 
   // Append a line to the cart table
   static appendComponent (element, id) {
