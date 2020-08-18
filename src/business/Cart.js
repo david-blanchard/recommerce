@@ -1,4 +1,4 @@
-import Cookies from './Cookies'
+import cookie from 'react-cookies'
 
 const CART_ID = 'cpascher_cart'
 
@@ -84,8 +84,8 @@ class Cart {
    * Read the content of the cart cookie and return a ready-made JS object
    */
   static readCart () {
-    const cart = Cookies.read(CART_ID)
-    const json = cart !== '' ? JSON.parse(cart) : []
+    const cart = cookie.load(CART_ID)
+    const json = cart !== null ? cart : {}
 
     return json
   }
@@ -109,7 +109,7 @@ class Cart {
     articles.push(article)
     json = JSON.stringify(articles)
 
-    Cookies.write(CART_ID, json, 1)
+    cookie.save(CART_ID, json, 1)
 
     Cart.printCount()
   }
@@ -128,7 +128,7 @@ class Cart {
 
     const json = JSON.stringify(cart)
 
-    Cookies.write(CART_ID, json, 1)
+    cookie.save(CART_ID, json, 1)
 
     Cart.printCount()
   }

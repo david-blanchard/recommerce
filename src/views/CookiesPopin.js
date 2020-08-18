@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import BusinessCookies from '../business/Cookies'
+// import BusinessCookies from '../business/Cookies'
+import cookie from 'react-cookies'
 import ScreenModal from './ScreenModal'
+
+const ACCEPT_COOKIES = 'acceptCookies'
 
 class CookiesPopin extends Component {
   constructor (props) {
@@ -12,13 +15,13 @@ class CookiesPopin extends Component {
   componentDidMount () {
     const acceptCta = document.querySelector('#acceptCookiesCta')
     // if (this.state.cookiesAccepted) return
-    if (BusinessCookies.read('acceptCookies') !== '') {
+    if (cookie.load(ACCEPT_COOKIES) !== '') {
       return
     }
 
     acceptCta.onclick = function () {
       CookiesPopin.removePopin()
-      BusinessCookies.write('acceptCookies', '1', 365)
+      cookie.save(ACCEPT_COOKIES, '1', 365)
     }
     const refuseCta = document.querySelector('#refuseCookiesCta')
     refuseCta.onclick = function (e) {
@@ -61,7 +64,7 @@ class CookiesPopin extends Component {
 
   render () {
     if (!this.state.cookiesAccepted) {
-      if (BusinessCookies.read('acceptCookies') !== '') {
+      if (cookie.load(ACCEPT_COOKIES) !== '') {
       // Choice already set, don't ask again
         // this.setState({ cookiesAccepted: true })
         return ''
