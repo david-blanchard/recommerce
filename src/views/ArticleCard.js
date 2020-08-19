@@ -13,7 +13,7 @@ const ArticleCard = ({ row }) => {
   const json = encodeURIComponent(JSON.stringify(dataset))
 
   return (
-    <div class='card mb-4 shadow-sm'>
+    <div className='card mb-4 shadow-sm'>
       <img src={row.cover} alt={row.title} width='288' height='424' preserveAspectRatio='xMidYMid slice' focusable='false' />
       <div className='card-body'>
         <p className='card-text'>
