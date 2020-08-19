@@ -59,10 +59,10 @@ class CartArticleSet extends Component {
 
     BusinessCart.removeFromCart(index)
 
-    this.setState({ cart: BusinessCart.readCart() })
-
     const tableLines = document.querySelector('#table-lines')
-    tableLines.innerHTML = '';
+    tableLines.innerHTML = ''
+
+    this.setState({ cart: BusinessCart.readCart() })
 
     this.displayCart()
   }
@@ -123,7 +123,7 @@ class ArticleLine extends Component {
         <td className='text-right'>{this.price} €</td>
         <td className='text-right'>
           <button onClick={(e) => { this.parent.removeFromCart(e) }} data-index={this.index} className='remove-from-cart-cta btn btn-sm btn-danger'>
-            <FontAwesomeIcon style={{ 'pointer-events': 'none' }} icon={faTrash} />
+            <FontAwesomeIcon pointerEvents='none' icon={faTrash} />
 
           </button>
         </td>
