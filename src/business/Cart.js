@@ -19,7 +19,7 @@ class Cart {
 
     const json = Cart.readCart()
 
-    result = json !== '' ? json.length : 0
+    result = json !== undefined ? json.length : 0
 
     return result
   }
@@ -85,9 +85,8 @@ class Cart {
    */
   static readCart () {
     const cart = cookie.load(CART_ID)
-    const json = cart !== null ? cart : {}
 
-    return json
+    return cart || []
   }
 
   /**
