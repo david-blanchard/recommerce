@@ -118,14 +118,20 @@ class Cart {
    *
    * @param {int} index
    */
-  static removeFromCart (index) {
+  static removeFromCart (isbn) {
+
     const cart = Cart.readCart()
 
-    if (cart.length > index) {
-      cart.splice(index, 1)
-    }
+    let reducedCart = []
+    reducedCart = cart.reduce((reduced, iteratee) => {
+      if (iteratee.isbn !== isbn) {
+        reduced.push(iteratee)
+      }
 
-    const json = JSON.stringify(cart)
+      return reduced
+    }, reducedCart)
+
+    const json = JSON.stringify(reducedCart)
 
     cookie.save(CART_ID, json, 1)
 

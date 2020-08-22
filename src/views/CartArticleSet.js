@@ -19,10 +19,19 @@ class CartArticleSet extends Component {
   }
 
   computeCart () {
-    const businessCart = new BusinessCart()
     const cart = BusinessCart.readCart()
-    businessCart.computeDiscount = businessCart.computeDiscount.bind(this)
+    // businessCart.computeDiscount = businessCart.computeDiscount.bind(this)
+    if (cart.length === 0) {
+      const res = this.setState({
+        cart: cart,
+        lines: []
+      })
+      return res
+    }
+
     let subtotal = 0.0
+
+    const businessCart = new BusinessCart()
 
     const cartLines = cart.map((article, i) => {
       // Add an article to the cart
@@ -54,48 +63,11 @@ class CartArticleSet extends Component {
     })
   }
 
-  removeFromCart (parent) {
-    if (parent === undefined || parent === null) {
-      return
-    }
-
-    const button = parent.target
-    const index = parseInt(button.dataset.index) - 1
-
-    BusinessCart.removeFromCart(index)
-
-    const tableLines = document.querySelector('#table-lines')
-    tableLines.innerHTML = ''
+  handleRemove (isbn) {
+    BusinessCart.removeFromCart(isbn)
 
     this.computeCart()
-  }
-
-  handleRemove (keyid) {
-    // console.log(e.target.attributes)
-    const { text } = this.state
-    let reduced = []
-    let removed = ''
-    reduced = text.reduce((reduced, iteratee) => {
-      if (iteratee.key === keyid) {
-        removed = iteratee
-      }
-      if (iteratee.key !== keyid) {
-        reduced.push(iteratee)
-      }
-
-      return reduced
-    }, reduced)
-
-    console.log({ array: reduced })
-    console.log({ removed: removed.value })
-
-    const res = this.setState({
-      text: reduced
-    })
-
-    this.props.onModify(reduced)
-
-    return res
+    return true
   }
 
   render () {
@@ -155,15 +127,19 @@ class ArticleLine extends Component {
   constructor (props) {
     super(props)
 
-    const json = this.props.article
+    this.handleClick = this.handleClick.bind(this)
+    const article = this.props.article
     this.index = this.props.index
-
-    this.cover = json.cover
-    this.price = parseFloat(json.price).toFixed(2)
-    this.title = json.title
+    this.cover = article.cover
+    this.price = parseFloat(article.price).toFixed(2)
+    this.title = article.title
+    this.isbn = article.isbn
   }
 
-  // const isbn = json.isbn
+  handleClick (e) {
+    this.props.onRemove(this.isbn)
+  }
+
   render () {
     return (
       <tr>
@@ -173,7 +149,7 @@ class ArticleLine extends Component {
         <td><input className='form-control' type='text' value='1' /></td>
         <td className='text-right'>{this.price} €</td>
         <td className='text-right'>
-          <button onClick={(e) => { this.parent.removeFromCart(e) }} data-index={this.index} className='remove-from-cart-cta btn btn-sm btn-danger'>
+          <button onClick={this.handleClick} data-isbn={this.isbn} data-index={this.index} className='remove-from-cart-cta btn btn-sm btn-danger'>
             <FontAwesomeIcon pointerEvents='none' icon={faTrash} />
           </button>
         </td>
