@@ -1,4 +1,5 @@
 import cookie from 'react-cookies'
+import uuid from 'react-uuid'
 
 const CART_ID = 'cpascher_cart'
 
@@ -18,7 +19,6 @@ class Cart {
     let result = 0
 
     const json = Cart.readCart()
-
     result = json !== undefined ? json.length : 0
 
     return result
@@ -31,6 +31,18 @@ class Cart {
    * @param {function} callback
    */
   computeDiscount (total, callback) {
+    // When total equals zero no request must be done
+    // but the behavior has to remain the same
+    // so we do the callback if need be
+    if (total === 0) {
+      if (typeof callback === 'function') {
+        // Trigger callback function on resource found
+        callback.call(this, 0)
+      }
+      return
+    }
+
+    // Actually we have something to compute
     const isbnArray = []
     const cart = Cart.readCart()
 
@@ -92,17 +104,18 @@ class Cart {
   /**
    * Add an article to the cart cookie by retrieving the data through the Button object
    *
-   * @param {DOM ELement} parent
+   * @param {DOM event} event
    */
-  static addToCart (parent) {
-    if (parent === undefined || parent === null) {
+  static addToCart (event) {
+    if (event === undefined || event === null) {
       return
     }
 
-    const button = parent.target
+    const button = event.target
     let json = decodeURIComponent(button.dataset.json)
 
     const article = JSON.parse(json)
+    article.keyid = uuid()
     const articles = Cart.readCart()
 
     articles.push(article)
@@ -118,13 +131,12 @@ class Cart {
    *
    * @param {int} index
    */
-  static removeFromCart (isbn) {
-
+  static removeFromCart (keyid) {
     const cart = Cart.readCart()
 
     let reducedCart = []
     reducedCart = cart.reduce((reduced, iteratee) => {
-      if (iteratee.isbn !== isbn) {
+      if (iteratee.keyid !== keyid) {
         reduced.push(iteratee)
       }
 

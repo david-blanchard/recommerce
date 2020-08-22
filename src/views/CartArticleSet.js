@@ -20,14 +20,6 @@ class CartArticleSet extends Component {
 
   computeCart () {
     const cart = BusinessCart.readCart()
-    // businessCart.computeDiscount = businessCart.computeDiscount.bind(this)
-    if (cart.length === 0) {
-      const res = this.setState({
-        cart: cart,
-        lines: []
-      })
-      return res
-    }
 
     let subtotal = 0.0
 
@@ -40,19 +32,12 @@ class CartArticleSet extends Component {
       return { key: 'article', value: i }
     })
 
-    subtotal = subtotal.toFixed(2)
-
-    cartLines.push({ key: 'subtotal', value: subtotal })
+    cartLines.push({ key: 'subtotal', value: subtotal.toFixed(2) })
 
     // Computes the discount sum
     businessCart.computeDiscount(subtotal, (discountSum) => {
-      discountSum = parseFloat(discountSum).toFixed(2)
-
-      cartLines.push({ key: 'discount', value: discountSum })
-
-      const total = parseFloat(subtotal - discountSum).toFixed(2)
-
-      cartLines.push({ key: 'total', value: total })
+      cartLines.push({ key: 'discount', value: parseFloat(discountSum).toFixed(2) })
+      cartLines.push({ key: 'total', value: parseFloat(subtotal - discountSum).toFixed(2) })
 
       const res = this.setState({
         cart: cart,
@@ -114,6 +99,8 @@ class CartArticleSet extends Component {
                   const total = line.value
                   return (<TotalLine key={uuid()} total={total} />)
                 }
+
+                return true
               })
             }
           </tbody>
@@ -134,22 +121,23 @@ class ArticleLine extends Component {
     this.price = parseFloat(article.price).toFixed(2)
     this.title = article.title
     this.isbn = article.isbn
+    this.keyid = article.keyid
   }
 
   handleClick (e) {
-    this.props.onRemove(this.isbn)
+    this.props.onRemove(this.keyid)
   }
 
   render () {
     return (
       <tr>
-        <td><img src={this.cover} width='40' height='60' /> </td>
+        <td><img src={this.cover} width='40' height='60' alt='Article card' /> </td>
         <td>{this.title}</td>
         <td>En stock</td>
         <td><input className='form-control' type='text' value='1' /></td>
         <td className='text-right'>{this.price} €</td>
         <td className='text-right'>
-          <button onClick={this.handleClick} data-isbn={this.isbn} data-index={this.index} className='remove-from-cart-cta btn btn-sm btn-danger'>
+          <button onClick={this.handleClick} className='remove-from-cart-cta btn btn-sm btn-danger'>
             <FontAwesomeIcon pointerEvents='none' icon={faTrash} />
           </button>
         </td>
