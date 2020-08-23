@@ -11,7 +11,6 @@ class CookiesPopin extends Component {
 
     this._acceptCta = null
     this._refuseCta = null
-    this._onremovepopin = null
     this.props = props
 
     this.handleAcceptClick = this.handleAcceptClick.bind(this)
@@ -23,13 +22,11 @@ class CookiesPopin extends Component {
   }
 
   handleAcceptClick () {
-    this.removePopin()
     cookie.save(ACCEPT_COOKIES, '1', 365)
     this.props.onCallToAction(true)
   }
 
   handleRefuseClick () {
-    this.removePopin()
     cookie.save(ACCEPT_COOKIES, '0', 365)
     this.props.onCallToAction(true)
   }
