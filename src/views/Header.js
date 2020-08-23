@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { } from 'bootstrap'
 import logo from '../assets/images/logos/Cpascher_logo_small.png'
 import BusinessHttp from '../business/Http'
+import BusinessCart from '../business/Cart'
 
 import CartNavButton from './CartNavButton'
 import SearchNavBar from './SearchNavBar'
@@ -19,11 +20,20 @@ class Header extends Component {
     this.props = props
 
     this.handleSubmitSearch = this.handleSubmitSearch.bind(this)
+    this.handleSetCartCtaRef = this.handleSetCartCtaRef.bind(this)
+
+    this.state = { cartCount: BusinessCart.count }
   }
 
   handleSubmitSearch (value) {
     if (this.props.onSubmitSearch !== undefined) {
       this.props.onSubmitSearch(value)
+    }
+  }
+
+  handleSetCartCtaRef (ref) {
+    if (this.props.onSetCartCtaRef !== undefined) {
+      this.props.onSetCartCtaRef(ref)
     }
   }
 
@@ -58,7 +68,7 @@ class Header extends Component {
                 </li>
               </ul>
               <SearchNavBar onSubmitSearch={this.handleSubmitSearch} />
-              <CartNavButton />
+              <CartNavButton onSetCartCtaRef={this.handleSetCartCtaRef} />
             </div>
           </nav>
 

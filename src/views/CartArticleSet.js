@@ -3,11 +3,15 @@ import uuid from 'react-uuid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import BusinessCart from '../business/Cart'
+import CartNavButton from './CartNavButton'
 
 class CartArticleSet extends Component {
   constructor (props) {
     super(props)
     this.handleRemove = this.handleRemove.bind(this)
+    this.cartCtaRef = null
+    this.parent = this.props.parent
+
     this.state = {
       cart: BusinessCart.readCart(),
       lines: []
@@ -15,6 +19,9 @@ class CartArticleSet extends Component {
   }
 
   componentDidMount () {
+    this.cartCtaRef = CartNavButton.cartCtaRef
+    console.log({ cartCtaRef: this.cartCtaRef })
+
     this.computeCart()
   }
 
@@ -48,8 +55,9 @@ class CartArticleSet extends Component {
     })
   }
 
-  handleRemove (isbn) {
-    BusinessCart.removeFromCart(isbn)
+  handleRemove (keyid) {
+    BusinessCart.removeFromCart(keyid)
+    BusinessCart.printCount(this.parent.cartCtaRef)
 
     this.computeCart()
     return true

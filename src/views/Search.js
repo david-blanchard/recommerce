@@ -23,9 +23,12 @@ class Search extends Component {
     this._resourceURL = 'http://henri-potier.xebia.fr/books'
     this._resultStateTextbox = null
     this._resultSearchAnchor = null
+    this._cartCtaRef = null
 
     this.handleResetSearch = this.handleResetSearch.bind(this)
     this.handleSubmitSearch = this.handleSubmitSearch.bind(this)
+    this.handleSetCartCtaRef = this.handleSetCartCtaRef.bind(this)
+    this.fetchResource = this.fetchResource.bind(this)
 
     this.state = { results: [] }
   }
@@ -45,15 +48,21 @@ class Search extends Component {
     return this._results
   }
 
-  handleSubmitSearch(queryString) {
-    const search = new Search()
+  get cartCtaRef () {
+    return this._cartCtaRef
+  }
 
+  handleSetCartCtaRef (ref) {
+    this._cartCtaRef = ref
+  }
+
+  handleSubmitSearch (queryString) {
     // Get the criterion value from the input text box and launch the search
-    search.parseInput(queryString)
-    search.fetchResource(() => {
-      search.clearSearch()
-      search.parseResults(CRITERION)
-      search.displayResultState()
+    this.parseInput(queryString)
+    this.fetchResource(() => {
+      this.clearSearch()
+      this.parseResults(CRITERION)
+      this.displayResultState()
 
       this.setState({ results: this._results })
     })
@@ -150,7 +159,7 @@ class Search extends Component {
   render () {
     return (
       <>
-        <Header onSubmitSearch={this.onSubmitSearch} />
+        <Header onSubmitSearch={this.handleSubmitSearch} onSetCartCtaRef={this.handleSetCartCtaRef} />
 
         <main role='main' className='flex-shrink-0'>
           <section className='jumbotron text-center'>
@@ -171,7 +180,7 @@ class Search extends Component {
                     const keyid = uuid()
                     return (
                       <div key={i} className='col-md-4'>
-                        <ArticleCard key={keyid} keyid={keyid} row={row} />
+                        <ArticleCard key={keyid} keyid={keyid} row={row} parent={this} />
                       </div>
                     )
                   })

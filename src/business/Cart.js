@@ -122,8 +122,6 @@ class Cart {
     json = JSON.stringify(articles)
 
     cookie.save(CART_ID, json, 1)
-
-    Cart.printCount()
   }
 
   /**
@@ -146,18 +144,16 @@ class Cart {
     const json = JSON.stringify(reducedCart)
 
     cookie.save(CART_ID, json, 1)
-
-    Cart.printCount()
   }
 
   /**
    * Display the number of articles in the cart on cart button
    */
-  static printCount () {
+  static printCount (ref) {
     const cartSum = document.querySelector('#cartSum')
     if (cartSum !== undefined) {
       const count = Cart.count
-      cartSum.innerHTML = count
+      ref.innerHTML = count
     }
   }
 }
