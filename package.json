@@ -30,6 +30,7 @@
     "react-scripts": "3.4.1",
     "react-transition-group": "^4.4.1",
     "react-uuid": "^1.0.2",
+    "server": "^1.0.30",
     "typescript": "^3.9.7"
   },
   "scripts": {
