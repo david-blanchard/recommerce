@@ -14,6 +14,19 @@ import SearchNavBar from './SearchNavBar'
 const home = BusinessHttp.fullyQualifiedName()
 
 class Header extends Component {
+  constructor (props) {
+    super(props)
+    this.props = props
+
+    this.handleSubmitSearch = this.handleSubmitSearch.bind(this)
+  }
+
+  handleSubmitSearch (value) {
+    if (this.props.onSubmitSearch !== undefined) {
+      this.props.onSubmitSearch(value)
+    }
+  }
+
   render () {
     return (
       <>
@@ -25,26 +38,26 @@ class Header extends Component {
 
             <a className='navbar-toggler p-0 border-0' type='button' data-toggle='offcanvas' href='javascript:void(0)'>
               <span className='navbar-toggler-icon' />
-            </a>{' '}
+            </a>
 
             <div className='navbar-collapse offcanvas-collapse' id='navbarsExampleDefault'>
               <ul className='navbar-nav navbar-dark mr-auto'>
                 <li className='nav-item active'>
-                  <a className='nav-link text-dark'>Tous nos rayons <span className='sr-only'>(current)</span></a>{' '}
+                  <a className='nav-link text-dark'>Tous nos rayons <span className='sr-only'>(current)</span></a>
                 </li>
                 <li className='nav-item'>
-                  <a className='nav-link text-dark'>Promos de l'été</a>{' '}
+                  <a className='nav-link text-dark'>Promos de l'été</a>
                 </li>
                 <li className='nav-item dropdown'>
                   <a className='nav-link text-dark dropdown-toggle' href={home} id='dropdown01' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Mon compte</a>
                   <div className='dropdown-menu' aria-labelledby='dropdown01'>
-                    <button className='dropdown-item' href={home}>Pas encore inscrit ?</button>{' '}
-                    <button className='dropdown-item' href={home}>F.A.Q</button>{' '}
-                    <button className='dropdown-item' href={home}>Mentions légales</button>{' '}
+                    <button className='dropdown-item' href={home}>Pas encore inscrit ?</button>
+                    <button className='dropdown-item' href={home}>F.A.Q</button>
+                    <button className='dropdown-item' href={home}>Mentions légales</button>
                   </div>
                 </li>
               </ul>
-              <SearchNavBar />
+              <SearchNavBar onSubmitSearch={this.handleSubmitSearch} />
               <CartNavButton />
             </div>
           </nav>
@@ -54,9 +67,9 @@ class Header extends Component {
               <a className='nav-link disabled' href={home}>
                 <span className='badge badge-pill bg-light align-text-bottom'>Nos partenaires</span>
               </a>
-              <a className='nav-link' href={home}>Voyages.pascher </a>{' '}
-              <a className='nav-link' href={home}>Locations.pascher</a>{' '}
-              <a className='nav-link' href={home}>Voitures.pascher</a>{' '}
+              <a className='nav-link' href={home}>Voyages.pascher </a>
+              <a className='nav-link' href={home}>Locations.pascher</a>
+              <a className='nav-link' href={home}>Voitures.pascher</a>
             </nav>
           </div>
         </header>

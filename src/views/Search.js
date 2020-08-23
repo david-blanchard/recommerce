@@ -25,6 +25,7 @@ class Search extends Component {
     this._resultSearchAnchor = null
 
     this.handleResetSearch = this.handleResetSearch.bind(this)
+    this.handleSubmitSearch = this.handleSubmitSearch.bind(this)
 
     this.state = { results: [] }
   }
@@ -44,12 +45,7 @@ class Search extends Component {
     return this._results
   }
 
-  handleResetSearch (e) {
-    this.clearSearch()
-    this.displayResultState(SEARCH_STATE_ZERO)
-  }
-
-  handleSearch (queryString) {
+  handleSubmitSearch(queryString) {
     const search = new Search()
 
     // Get the criterion value from the input text box and launch the search
@@ -61,6 +57,13 @@ class Search extends Component {
 
       this.setState({ results: this._results })
     })
+
+    return false
+  }
+
+  handleResetSearch (e) {
+    this.clearSearch()
+    this.displayResultState(SEARCH_STATE_ZERO)
   }
 
   /**
@@ -147,7 +150,7 @@ class Search extends Component {
   render () {
     return (
       <>
-        <Header />
+        <Header onSubmitSearch={this.onSubmitSearch} />
 
         <main role='main' className='flex-shrink-0'>
           <section className='jumbotron text-center'>
