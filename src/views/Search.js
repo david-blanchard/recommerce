@@ -49,11 +49,11 @@ class Search extends Component {
     this.displayResultState(SEARCH_STATE_ZERO)
   }
 
-  handleSearch () {
+  handleSearch (queryString) {
     const search = new Search()
 
     // Get the criterion value from the input text box and launch the search
-    search.parseInput()
+    search.parseInput(queryString)
     search.fetchResource(() => {
       search.clearSearch()
       search.parseResults(CRITERION)
@@ -90,8 +90,8 @@ class Search extends Component {
     this._query = url.searchParams.get('q')
   }
 
-  parseInput () {
-    this._query = document.querySelector('#searchInput').value
+  parseInput (value) {
+    this._query = value
   }
 
   /**
