@@ -150,8 +150,7 @@ class Cart {
    * Display the number of articles in the cart on cart button
    */
   static printCount (ref) {
-    const cartSum = document.querySelector('#cartSum')
-    if (cartSum !== undefined) {
+    if (ref !== undefined) {
       const count = Cart.count
       ref.innerHTML = count
     }

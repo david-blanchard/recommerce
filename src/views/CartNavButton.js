@@ -10,7 +10,6 @@ const count = BusinessCart.count
 
 class CartNavButton extends Component {
   static constructor (props) {
-    // super()
     this.props = props
     this._cartCta = null
   }
@@ -27,12 +26,9 @@ class CartNavButton extends Component {
 
   render () {
     return (
-      <a
-        id='cartCta' className='btn btn-success my-2 my-sm-0 ml-3' href='cart'
-        ref={(r) => { this._cartCta = r }}
-      >
+      <a id='cartCta' className='btn btn-success my-2 my-sm-0 ml-3' href='cart'>
         <FontAwesomeIcon icon={faShoppingCart} />
-        <span id='cartSum' className='badge badge-light ml-3'>{count}</span>
+        <span id='cartSum' className='badge badge-light ml-3' ref={(r) => { this._cartCta = r }}>{count}</span>
       </a>
     )
   }
