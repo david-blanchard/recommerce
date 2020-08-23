@@ -9,66 +9,65 @@ class CookiesPopin extends Component {
   constructor (props) {
     super(props)
 
+    this._acceptCta = null
+    this._refuseCta = null
+    this._onremovepopin = null
+    this.props = props
+
+    this.handleAcceptClick = this.handleAcceptClick.bind(this)
+    this.handleRefuseClick = this.handleRefuseClick.bind(this)
+    this.handleRefuseMouseOver = this.handleRefuseMouseOver.bind(this)
+    this.handleRefuseMouseOut = this.handleRefuseMouseOut.bind(this)
+
     this.state = { cookiesAccepted: false }
   }
 
-  componentDidMount () {
-    const acceptCta = document.querySelector('#acceptCookiesCta')
-    // if (this.state.cookiesAccepted) return
-    if (cookie.load(ACCEPT_COOKIES) !== '') {
-      return
-    }
+  // componentDidMount () {
+  //   // if (this.state.cookiesAccepted) return
+  //   if (cookie.load(ACCEPT_COOKIES) !== undefined) {
+  //     return false
+  //   }
+  // }
 
-    acceptCta.onclick = function () {
-      CookiesPopin.removePopin()
-      cookie.save(ACCEPT_COOKIES, '1', 365)
-    }
-    const refuseCta = document.querySelector('#refuseCookiesCta')
-    refuseCta.onclick = function (e) {
-      console.log(e)
-      CookiesPopin.removePopin()
-      // Cookies.write('acceptCookies', '0', 365)
-    }
-    refuseCta.onmouseover = function () {
-      acceptCta.className = 'popin-cta cancel'
-      acceptCta.innerHTML = 'Refuser'
-      refuseCta.className = 'popin-cta'
-      refuseCta.innerHTML = 'Accepter'
-    }
-    refuseCta.onmouseout = function () {
-      acceptCta.className = 'popin-cta'
-      acceptCta.innerHTML = 'Accepter'
-      refuseCta.className = 'popin-cta cancel'
-      refuseCta.innerHTML = 'Refuser'
-    }
+  handleAcceptClick () {
+    this.removePopin()
+    cookie.save(ACCEPT_COOKIES, '1', 365)
+    this.props.onCallToAction(true)
   }
 
-  static removePopin () {
+  handleRefuseClick () {
+    this.removePopin()
+    cookie.save(ACCEPT_COOKIES, '0', 365)
+    this.props.onCallToAction(true)
+  }
+
+  handleRefuseMouseOver () {
+    this._acceptCta.className = 'popin-cta cancel'
+    this._acceptCta.innerHTML = 'Refuser'
+    this._refuseCta.className = 'popin-cta'
+    this._refuseCta.innerHTML = 'Accepter'
+  }
+
+  handleRefuseMouseOut () {
+    this._acceptCta.className = 'popin-cta'
+    this._acceptCta.innerHTML = 'Accepter'
+    this._refuseCta.className = 'popin-cta cancel'
+    this._refuseCta.innerHTML = 'Refuser'
+  }
+
+  removePopin () {
     // const frameLayout = document.querySelector('.frame-layout')
     // const screenLayout = document.querySelector('#screen-layout')
     // screenLayout.removeChild(frameLayout)
     // document.querySelector('#root').removeChild(screenLayout)
 
-    CookiesPopin.onRemovePopin()
-  }
-
-  static onRemovePopin (callback) {
-    if (callback !== undefined) {
-      this._onremovepopin = callback
-      return
-    }
-    if (callback === undefined && typeof this._onremovepopin === 'function') {
-      this._onremovepopin.call(null)
-    }
   }
 
   render () {
-    if (!this.state.cookiesAccepted) {
-      if (cookie.load(ACCEPT_COOKIES) !== '') {
+    if (cookie.load(ACCEPT_COOKIES) !== undefined) {
       // Choice already set, don't ask again
-        // this.setState({ cookiesAccepted: true })
-        return ''
-      }
+      // this.setState({ cookiesAccepted: true })
+      return false
     }
 
     return (
@@ -81,8 +80,20 @@ class CookiesPopin extends Component {
             <p>
               Acceptez-vous les cookies ?
             </p>
-            <button id='acceptCookiesCta' className='popin-cta'>Accepter</button>
-            <button id='refuseCookiesCta' className='popin-cta cancel'>Refuser</button>
+            <button
+              id='acceptCookiesCta' className='popin-cta' ref={r => (this._acceptCta = r)}
+              onClick={this.handleAcceptClick}
+            >
+              Accepter
+            </button>
+            <button
+              id='refuseCookiesCta' className='popin-cta cancel' ref={r => (this._refuseCta = r)}
+              onClick={this.handleRefuseClick}
+              onMouseOver={this.handleRefuseMouseOver}
+              onMouseOut={this.handleRefuseMouseOut}
+            >
+              Refuser
+            </button>
           </div>
         </div>
       </ScreenModal>

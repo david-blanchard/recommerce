@@ -1,5 +1,4 @@
 ﻿import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import '../css/index.css'
 import Header from './Header'
 import Footer from './Footer'
@@ -11,21 +10,11 @@ import article1 from '../assets/images/articles/disque-a-lancer.jpg'
 import article2 from '../assets/images/articles//robot-nettoyeur-wifi.jpg'
 import article3 from '../assets/images/articles/platine-vinyle.jpg'
 
-import CookiesPopin from '../views/CookiesPopin'
-import PromoPopin from '../views/PromoPopin'
 import BusinessHttp from '../business/Http'
 
 const home = BusinessHttp.fullyQualifiedName()
 
 class Home extends Component {
-  componentDidMount () {
-    // Function called on start
-    // Display the promo popin after the cookies popin is closed
-    CookiesPopin.onRemovePopin(() => {
-      ReactDOM.render(<PromoPopin />, document.querySelector('.frame-layout'))
-    })
-  }
-
   render () {
     return (
       <>
@@ -325,7 +314,6 @@ class Home extends Component {
           </div>
           {/* <!-- /.container --> */}
         </main>
-        <CookiesPopin />
         <Footer />
       </>
     )

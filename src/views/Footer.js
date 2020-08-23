@@ -1,12 +1,28 @@
 ﻿import React, { Component } from 'react'
-// import $ from 'jquery'
 import logo from '../assets/images/logos/Cpascher_logo_smaller.png'
+
+import CookiesPopin from '../views/CookiesPopin'
+import PromoPopin from '../views/PromoPopin'
 
 import BusinessHttp from '../business/Http'
 
 const home = BusinessHttp.fullyQualifiedName()
 
 class Footer extends Component {
+  constructor (props) {
+    super(props)
+    this.handleCookiesChoice = this.handleCookiesChoice.bind(this)
+    this.state = {
+      cookiesPopinJustClosed: false
+    }
+  }
+
+  handleCookiesChoice (popinJustClosed) {
+    this.setState({
+      cookiesPopinJustClosed: popinJustClosed
+    })
+  }
+
   render () {
     return (
       <>
@@ -115,6 +131,12 @@ class Footer extends Component {
             </div>
           </div>
         </footer>
+        <CookiesPopin onCallToAction={this.handleCookiesChoice} />
+        {
+          (this.state.cookiesPopinJustClosed)
+            ? <PromoPopin isVisible /> : ''
+        }
+
       </>
     )
   }
