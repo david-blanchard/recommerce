@@ -22,13 +22,6 @@ class CookiesPopin extends Component {
     this.state = { cookiesAccepted: false }
   }
 
-  // componentDidMount () {
-  //   // if (this.state.cookiesAccepted) return
-  //   if (cookie.load(ACCEPT_COOKIES) !== undefined) {
-  //     return false
-  //   }
-  // }
-
   handleAcceptClick () {
     this.removePopin()
     cookie.save(ACCEPT_COOKIES, '1', 365)
@@ -53,14 +46,6 @@ class CookiesPopin extends Component {
     this._acceptCta.innerHTML = 'Accepter'
     this._refuseCta.className = 'popin-cta cancel'
     this._refuseCta.innerHTML = 'Refuser'
-  }
-
-  removePopin () {
-    // const frameLayout = document.querySelector('.frame-layout')
-    // const screenLayout = document.querySelector('#screen-layout')
-    // screenLayout.removeChild(frameLayout)
-    // document.querySelector('#root').removeChild(screenLayout)
-
   }
 
   render () {
