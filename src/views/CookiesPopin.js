@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import BusinessCookies from '../business/Cookies'
 import cookie from 'react-cookies'
 import ScreenModal from './ScreenModal'
 

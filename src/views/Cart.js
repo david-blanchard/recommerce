@@ -1,10 +1,10 @@
 
-import React, { Component } from 'react'
-import Header from './Header'
-import Footer from './Footer'
+import React, { Component, createRef } from 'react'
 
 import BusinessHttp from '../business/Http'
 import CartArticleSet from './CartArticleSet'
+// import WithHeaderFooter from '../components/hoc/WithHeaderFooter'
+import HeaderFooter from './HeaderFooter'
 
 const home = BusinessHttp.fullyQualifiedName()
 
@@ -12,24 +12,22 @@ class Cart extends Component {
   constructor (props) {
     super(props)
 
-    this._cartCtaRef = null
-
-    this.handleSetCartCtaRef = this.handleSetCartCtaRef.bind(this)
+    this.props = props
+    this._cartCtaRef = createRef()
   }
 
-  get cartCtaRef () {
-    return this._cartCtaRef
+  componentDidMount () {
+    console.log({ Cart_didMount: this._cartCtaRef })
   }
 
-  handleSetCartCtaRef (ref) {
-    this._cartCtaRef = ref
+  componentWillMount () {
+    console.log({ Cart_willMount: this._cartCtaRef })
   }
 
   render () {
+    console.log({ Cart_render: this._cartCtaRef })
     return (
-      <>
-        <Header onSetCartCtaRef={this.handleSetCartCtaRef} />
-
+      <HeaderFooter cartCtaRef={this._cartCtaRef}>
         <section className='jumbotron text-center'>
           <div className='container'>
             <h1 className='jumbotron-heading'>VOTRE PANIER</h1>
@@ -40,7 +38,7 @@ class Cart extends Component {
           <div className='container mb-4'>
             <div className='row'>
               <div className='col-12'>
-                <CartArticleSet parent={this} />
+                <CartArticleSet cartCtaRef={this._cartCtaRef} />
               </div>
               <div className='col mb-2'>
                 <div className='row'>
@@ -56,9 +54,7 @@ class Cart extends Component {
           </div>
 
         </main>
-
-        <Footer />
-      </>
+      </HeaderFooter>
     )
   }
 }

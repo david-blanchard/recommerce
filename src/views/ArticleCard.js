@@ -7,17 +7,16 @@ class ArticleCard extends Component {
 
     this.props = props
     this.handleAddToCart = this.handleAddToCart.bind(this)
-    this.parent = props.parent
-    this.cartCtaRef = null
+    this._cartCtaRef = props.cartCtaRef
   }
 
   componentDidMount () {
-    this.cartCtaRef = this.parent.cartCtaRef
+    console.log({ ArticleCard_didMount: this._cartCtaRef })
   }
 
   handleAddToCart (e) {
     BusinessCart.addToCart(e)
-    BusinessCart.printCount(this.cartCtaRef)
+    BusinessCart.printCount(this._cartCtaRef.current)
   }
 
   render () {

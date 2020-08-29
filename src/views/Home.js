@@ -1,7 +1,5 @@
 ﻿import React, { Component } from 'react'
 import '../css/index.css'
-import Header from './Header'
-import Footer from './Footer'
 
 import plageTropique from '../assets/images/teasers/voyages.png'
 import salonJardin from '../assets/images/teasers/chaises_jardin.png'
@@ -11,14 +9,15 @@ import article2 from '../assets/images/articles//robot-nettoyeur-wifi.jpg'
 import article3 from '../assets/images/articles/platine-vinyle.jpg'
 
 import BusinessHttp from '../business/Http'
+// import WithHeaderFooter from '../components/hoc/WithHeaderFooter'
+import HeaderFooter from './HeaderFooter'
 
 const home = BusinessHttp.fullyQualifiedName()
 
 class Home extends Component {
   render () {
     return (
-      <>
-        <Header />
+      <HeaderFooter>
         <main role='main'>
           <div id='myCarousel' className='carousel slide' data-ride='carousel'>
             <ol className='carousel-indicators'>
@@ -314,8 +313,7 @@ class Home extends Component {
           </div>
           {/* <!-- /.container --> */}
         </main>
-        <Footer />
-      </>
+      </HeaderFooter>
     )
   }
 }

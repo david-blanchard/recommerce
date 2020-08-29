@@ -3,14 +3,12 @@ import uuid from 'react-uuid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import BusinessCart from '../business/Cart'
-import CartNavButton from './CartNavButton'
 
 class CartArticleSet extends Component {
   constructor (props) {
     super(props)
     this.handleRemove = this.handleRemove.bind(this)
-    this.cartCtaRef = null
-    this.parent = this.props.parent
+    this._cartCtaRef = this.props.cartCtaRef
 
     this.state = {
       cart: BusinessCart.readCart(),
@@ -19,8 +17,7 @@ class CartArticleSet extends Component {
   }
 
   componentDidMount () {
-    this.cartCtaRef = CartNavButton.cartCtaRef
-    console.log({ cartCtaRef: this.cartCtaRef })
+    console.log({ CartArticleSet_didMount: this._cartCtaRef })
 
     this.computeCart()
   }
@@ -57,7 +54,7 @@ class CartArticleSet extends Component {
 
   handleRemove (keyid) {
     BusinessCart.removeFromCart(keyid)
-    BusinessCart.printCount(this.parent.cartCtaRef)
+    BusinessCart.printCount(this._cartCtaRef.current)
 
     this.computeCart()
     return true
@@ -142,7 +139,7 @@ class ArticleLine extends Component {
         <td><img src={this.cover} width='40' height='60' alt='Article card' /> </td>
         <td>{this.title}</td>
         <td>En stock</td>
-        <td><input className='form-control' type='text' value='1' /></td>
+        <td><input className='form-control' type='text' value='1' readOnly /></td>
         <td className='text-right'>{this.price} €</td>
         <td className='text-right'>
           <button onClick={this.handleClick} className='remove-from-cart-cta btn btn-sm btn-danger'>
@@ -168,8 +165,6 @@ const SubTotalLine = ({ sum }) => {
 }
 
 const DiscountLine = ({ discountSum }) => {
-  console.log({ discountSum: discountSum })
-
   return (
     <tr>
       <td />
@@ -183,8 +178,6 @@ const DiscountLine = ({ discountSum }) => {
 }
 
 const TotalLine = ({ total }) => {
-  console.log({ total: total })
-
   return (
     <tr>
       <td />

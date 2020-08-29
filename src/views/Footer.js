@@ -1,14 +1,14 @@
 ﻿import React, { Component } from 'react'
 import logo from '../assets/images/logos/Cpascher_logo_smaller.png'
 
-import CookiesPopin from '../views/CookiesPopin'
-import PromoPopin from '../views/PromoPopin'
+import CookiesPopin from './CookiesPopin'
+import PromoPopin from './PromoPopin'
 
 import BusinessHttp from '../business/Http'
 
 const home = BusinessHttp.fullyQualifiedName()
 
-class Footer extends Component {
+class CpcFooter extends Component {
   constructor (props) {
     super(props)
     this.handleCookiesChoice = this.handleCookiesChoice.bind(this)
@@ -142,4 +142,4 @@ class Footer extends Component {
   }
 }
 
-export default Footer
+export default CpcFooter

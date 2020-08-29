@@ -1,12 +1,9 @@
 
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 import uuid from 'react-uuid'
 
-// import BusinessCart from '../business/Cart'
-
-import Header from './Header'
-import Footer from './Footer'
 import ArticleCard from './ArticleCard'
+import HeaderFooter from './HeaderFooter'
 
 const SEARCH_FAILURE = "Pas de chance, nous n'avons trouvé aucun article avec ces critères !<br />Tentez une nouvelle recherche."
 const SEARCH_SUCCESS = 'Nous avons trouvé %d articles correspondants à vos critères'
@@ -23,11 +20,10 @@ class Search extends Component {
     this._resourceURL = 'http://henri-potier.xebia.fr/books'
     this._resultStateTextbox = null
     this._resultSearchAnchor = null
-    this._cartCtaRef = null
+    this._cartCtaRef = createRef()
 
     this.handleResetSearch = this.handleResetSearch.bind(this)
     this.handleSubmitSearch = this.handleSubmitSearch.bind(this)
-    this.handleSetCartCtaRef = this.handleSetCartCtaRef.bind(this)
     this.fetchResource = this.fetchResource.bind(this)
 
     this.state = { results: [] }
@@ -158,9 +154,7 @@ class Search extends Component {
 
   render () {
     return (
-      <>
-        <Header onSubmitSearch={this.handleSubmitSearch} onSetCartCtaRef={this.handleSetCartCtaRef} />
-
+      <HeaderFooter onSubmitSearch={this.handleSubmitSearch} cartCtaRef={this._cartCtaRef}>
         <main role='main' className='flex-shrink-0'>
           <section className='jumbotron text-center'>
             <div className='container'>
@@ -180,7 +174,7 @@ class Search extends Component {
                     const keyid = uuid()
                     return (
                       <div key={i} className='col-md-4'>
-                        <ArticleCard key={keyid} keyid={keyid} row={row} parent={this} />
+                        <ArticleCard key={keyid} keyid={keyid} row={row} cartCtaRef={this._cartCtaRef} />
                       </div>
                     )
                   })
@@ -190,8 +184,7 @@ class Search extends Component {
           </div>
 
         </main>
-        <Footer />
-      </>
+      </HeaderFooter>
     )
   }
 }
