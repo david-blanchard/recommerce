@@ -1,9 +1,10 @@
 
-import React, { Component, createRef } from 'react'
+import React, { Component } from 'react'
 import uuid from 'react-uuid'
 
 import ArticleCard from './ArticleCard'
-import HeaderFooter from './HeaderFooter'
+// import HeaderFooter from './HeaderFooter'
+import WithHeaderFooter from '../components/hoc/WithHeaderFooter'
 
 const SEARCH_FAILURE = "Pas de chance, nous n'avons trouvé aucun article avec ces critères !<br />Tentez une nouvelle recherche."
 const SEARCH_SUCCESS = 'Nous avons trouvé %d articles correspondants à vos critères'
@@ -20,7 +21,7 @@ class Search extends Component {
     this._resourceURL = 'http://henri-potier.xebia.fr/books'
     this._resultStateTextbox = null
     this._resultSearchAnchor = null
-    this._cartCtaRef = createRef()
+    this._cartCtaRef = this.cartCtaRef
 
     this.handleResetSearch = this.handleResetSearch.bind(this)
     this.handleSubmitSearch = this.handleSubmitSearch.bind(this)
@@ -30,6 +31,8 @@ class Search extends Component {
   }
 
   componentDidMount () {
+    console.log({ Search_didMount: this._cartCtaRef })
+
     // Get the criterion value from the query string and launch the search
     this.parseQuery()
     this.fetchResource(() => {
@@ -42,14 +45,6 @@ class Search extends Component {
 
   get results () {
     return this._results
-  }
-
-  get cartCtaRef () {
-    return this._cartCtaRef
-  }
-
-  handleSetCartCtaRef (ref) {
-    this._cartCtaRef = ref
   }
 
   handleSubmitSearch (queryString) {
@@ -154,39 +149,37 @@ class Search extends Component {
 
   render () {
     return (
-      <HeaderFooter onSubmitSearch={this.handleSubmitSearch} cartCtaRef={this._cartCtaRef}>
-        <main role='main' className='flex-shrink-0'>
-          <section className='jumbotron text-center'>
-            <div className='container'>
-              <h1>Résultats de votre recherche</h1>
-              <p id='resultState' className='lead text-muted' ref={r => (this._resultStateTextbox = r)} />
-              <p>
-                <a id='resetSearch' className='btn btn-secondary my-2' href='#' onClick={this.handleResetSearch} ref={r => (this._resultSearchAnchor = r)}>Effacer ma recherche</a>
-              </p>
-            </div>
-          </section>
+      <main role='main' className='flex-shrink-0'>
+        <section className='jumbotron text-center'>
+          <div className='container'>
+            <h1>Résultats de votre recherche</h1>
+            <p id='resultState' className='lead text-muted' ref={r => (this._resultStateTextbox = r)} />
+            <p>
+              <a id='resetSearch' className='btn btn-secondary my-2' href='#' onClick={this.handleResetSearch} ref={r => (this._resultSearchAnchor = r)}>Effacer ma recherche</a>
+            </p>
+          </div>
+        </section>
 
-          <div className='album py-5'>
-            <div className='container'>
-              <div id='lostAndFound' className='row'>
-                {
-                  this.state.results.map((row, i) => {
-                    const keyid = uuid()
-                    return (
-                      <div key={i} className='col-md-4'>
-                        <ArticleCard key={keyid} keyid={keyid} row={row} cartCtaRef={this._cartCtaRef} />
-                      </div>
-                    )
-                  })
-                }
-              </div>
+        <div className='album py-5'>
+          <div className='container'>
+            <div id='lostAndFound' className='row'>
+              {
+                this.state.results.map((row, i) => {
+                  const keyid = uuid()
+                  return (
+                    <div key={i} className='col-md-4'>
+                      <ArticleCard key={keyid} keyid={keyid} row={row} cartCtaRef={this._cartCtaRef} />
+                    </div>
+                  )
+                })
+              }
             </div>
           </div>
+        </div>
 
-        </main>
-      </HeaderFooter>
+      </main>
     )
   }
 }
 
-export default Search
+export default WithHeaderFooter(Search)

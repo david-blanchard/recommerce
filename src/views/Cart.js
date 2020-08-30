@@ -1,10 +1,10 @@
 
-import React, { Component, createRef } from 'react'
+import React, { Component } from 'react'
 
 import BusinessHttp from '../business/Http'
 import CartArticleSet from './CartArticleSet'
-// import WithHeaderFooter from '../components/hoc/WithHeaderFooter'
-import HeaderFooter from './HeaderFooter'
+import WithHeaderFooter from '../components/hoc/WithHeaderFooter'
+// import HeaderFooter from './HeaderFooter'
 
 const home = BusinessHttp.fullyQualifiedName()
 
@@ -13,21 +13,17 @@ class Cart extends Component {
     super(props)
 
     this.props = props
-    this._cartCtaRef = createRef()
+    this._cartCtaRef = this.cartCtaRef
   }
 
   componentDidMount () {
     console.log({ Cart_didMount: this._cartCtaRef })
   }
 
-  componentWillMount () {
-    console.log({ Cart_willMount: this._cartCtaRef })
-  }
-
   render () {
     console.log({ Cart_render: this._cartCtaRef })
     return (
-      <HeaderFooter cartCtaRef={this._cartCtaRef}>
+      <>
         <section className='jumbotron text-center'>
           <div className='container'>
             <h1 className='jumbotron-heading'>VOTRE PANIER</h1>
@@ -54,9 +50,9 @@ class Cart extends Component {
           </div>
 
         </main>
-      </HeaderFooter>
+      </>
     )
   }
 }
 
-export default Cart
+export default WithHeaderFooter(Cart)
