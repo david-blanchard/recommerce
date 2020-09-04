@@ -35,7 +35,7 @@ class CpcFooter extends Component {
                     <img
                       className='mb-2'
                       src={logo}
-                      alt=''
+                      alt='Cpascher'
                       width='124'
                       height='24'
                     />
