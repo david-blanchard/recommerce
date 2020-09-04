@@ -39,17 +39,22 @@ class CartArticleSet extends Component {
     cartLines.push({ key: 'subtotal', value: subtotal.toFixed(2) })
 
     // Computes the discount sum
-    businessCart.computeDiscount(subtotal, (discountSum) => {
-      cartLines.push({ key: 'discount', value: parseFloat(discountSum).toFixed(2) })
-      cartLines.push({ key: 'total', value: parseFloat(subtotal - discountSum).toFixed(2) })
+    try {
+      businessCart.getOffersFromBulk(subtotal, function (data) {
+        const discount = businessCart.computeDiscount(subtotal, data.offers)
+        cartLines.push({ key: 'discount', value: parseFloat(discount).toFixed(2) })
+        cartLines.push({ key: 'total', value: parseFloat(subtotal - discount).toFixed(2) })
 
-      const res = this.setState({
-        cart: cart,
-        lines: cartLines
-      })
+        const res = this.setState({
+          cart: cart,
+          lines: cartLines
+        })
 
-      return res
-    })
+        return res
+      }.bind(this))
+    } catch (e) {
+      throw new Error(e.message)
+    }
   }
 
   handleRemove (keyid) {

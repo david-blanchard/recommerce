@@ -30,7 +30,7 @@ class Cart {
    * @param {float} total
    * @param {function} callback
    */
-  computeDiscount (total, callback) {
+  async getOffersFromBulk (total, callback) {
     // When total equals zero no request must be done
     // but the behavior has to remain the same
     // so we do the callback if need be
@@ -55,41 +55,48 @@ class Cart {
       isbnArray.join(',') +
       '/commercialOffers'
 
-    fetch(this._resourceURL)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data === undefined || data === '') {
-          return
-        }
+    const response = await fetch(this._resourceURL)
+    const data = await response.json()
+    const result = response.ok ? data : Promise.reject(data)
 
-        let discountSum = 0
+    console.log({ businessCart_data: result })
 
-        let totalPct = total
-        let totalMinus = total
-        let totalSlice = total
+    if (typeof callback === 'function') {
+      // Trigger callback function on resource found
+      callback.call(this, data)
+    }
 
-        data.offers.forEach((offer) => {
-          if (offer.type === 'percentage') {
-            totalPct = total * (1 - offer.value / 100)
-          } else if (offer.type === 'minus') {
-            totalMinus = total - offer.value
-          } else if (offer.type === 'slice') {
-            totalSlice =
-              total > offer.sliceValue
-                ? total - Math.floor(total / offer.sliceValue) * offer.value
-                : total
-          }
-        })
+    return result
+  }
 
-        const minTotal = Math.min(totalPct, totalMinus, totalSlice)
+  computeDiscount (total, offers) {
+    if (total === 0 || offers === undefined) {
+      return 0
+    }
+    let discount = 0
 
-        discountSum = (total - minTotal).toFixed(2)
+    let totalPct = total
+    let totalMinus = total
+    let totalSlice = total
 
-        if (typeof callback === 'function') {
-          // Trigger callback function on resource found
-          callback.call(this, discountSum)
-        }
-      })
+    offers.forEach((offer) => {
+      if (offer.type === 'percentage') {
+        totalPct = total * (1 - offer.value / 100)
+      } else if (offer.type === 'minus') {
+        totalMinus = total - offer.value
+      } else if (offer.type === 'slice') {
+        totalSlice =
+          total > offer.sliceValue
+            ? total - Math.floor(total / offer.sliceValue) * offer.value
+            : total
+      }
+    })
+
+    const minTotal = Math.min(totalPct, totalMinus, totalSlice)
+
+    discount = (total - minTotal).toFixed(2)
+
+    return discount
   }
 
   /**
