@@ -2,43 +2,46 @@ import React, { Component } from 'react'
 import ScreenModal from './ScreenModal'
 
 class PromoPopin extends Component {
-  componentDidMount () {
-    const gotItCta = document.querySelector('#gotItCta')
-    gotItCta.onclick = function () {
-      PromoPopin.removePopin()
-      window.location.href = 'search?q=potier'
-    }
+  constructor (props) {
+    super(props)
+    this._gotItCta = null
+    this._closePopinCta = null
 
-    const closePopinCta = document.querySelector('#closePopinCta')
-    closePopinCta.onclick = function () {
-      PromoPopin.removePopin()
-    }
+    console.log({ isVisible: props.isVisible })
+
+    this.handleGotItClick = this.handleGotItClick.bind(this)
+    this.handleClosePopinClick = this.handleClosePopinClick.bind(this)
+
+    this.state = { isVisible: props.isVisible !== undefined ? props.isVisible : false }
   }
 
-  static removePopin () {
-    // const frameLayout = document.querySelector('.frame-layout')
-    // const screenLayout = document.querySelector('#screen-layout')
-    // screenLayout.removeChild(frameLayout)
-    // document.querySelector('#root').removeChild(screenLayout)
+  handleGotItClick () {
+    this.setState({ isVisible: false })
 
-    PromoPopin.onRemovePopin()
+    window.location.href = 'search?q=potier'
   }
 
-  static onRemovePopin (callback) {
-    if (callback !== undefined) {
-      this._onremovepopin = callback
-      return
-    }
-    if (callback === undefined && typeof this._onremovepopin === 'function') {
-      this._onremovepopin.call(null)
-    }
+  handleClosePopinClick () {
+    this.setState({ isVisible: false })
   }
 
   render () {
+    if (!this.state.isVisible) {
+      return (
+        ''
+      )
+    }
     return (
       <ScreenModal>
         <div className='popin-box'>
-          <div id='close'><a id='closePopinCta' href='#'>X</a></div>
+          <div id='close'>
+            <a
+              id='closePopinCta' href='#'
+              onClick={this.handleClosePopinClick}
+            >
+              X
+            </a>
+          </div>
           <div id='banner-message'>
             <p>
                   Merci d'avoir accepté les cookies !
@@ -47,9 +50,14 @@ class PromoPopin extends Component {
                   Une offre exceptionnelle* vous attends sur la <strong>Collection&nbsp;Henri&nbsp;Potier</strong> !
             </p>
 
-            <button id='gotItCta' className='popin-cta go'>J'en profite</button>
+            <button
+              id='gotItCta' className='popin-cta go'
+              onClick={this.handleGotItClick}
+            >
+              J'en profite
+            </button>
 
-            <p style={{ 'font-size': 'smaller' }}>
+            <p style={{ fontSize: 'smaller' }}>
                   * Offre non cumulable, dans la limite des stocks disponibles.
             </p>
           </div>

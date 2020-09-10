@@ -1,4 +1,5 @@
-import Cookies from './Cookies'
+import cookie from 'react-cookies'
+import uuid from 'react-uuid'
 
 const CART_ID = 'cpascher_cart'
 
@@ -18,8 +19,7 @@ class Cart {
     let result = 0
 
     const json = Cart.readCart()
-
-    result = json !== '' ? json.length : 0
+    result = json !== undefined ? json.length : 0
 
     return result
   }
@@ -30,7 +30,19 @@ class Cart {
    * @param {float} total
    * @param {function} callback
    */
-  computeDiscount (total, callback) {
+  async getOffersFromBulk (total, callback) {
+    // When total equals zero no request must be done
+    // but the behavior has to remain the same
+    // so we do the callback if need be
+    if (total === 0) {
+      if (typeof callback === 'function') {
+        // Trigger callback function on resource found
+        callback.call(this, 0)
+      }
+      return
+    }
+
+    // Actually we have something to compute
     const isbnArray = []
     const cart = Cart.readCart()
 
@@ -43,75 +55,80 @@ class Cart {
       isbnArray.join(',') +
       '/commercialOffers'
 
-    fetch(this._resourceURL)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data === undefined || data === '') {
-          return
-        }
+    const response = await fetch(this._resourceURL)
+    const data = await response.json()
+    const result = response.ok ? data : Promise.reject(data)
 
-        let discountSum = 0
+    console.log({ businessCart_data: result })
 
-        let totalPct = total
-        let totalMinus = total
-        let totalSlice = total
+    if (typeof callback === 'function') {
+      // Trigger callback function on resource found
+      callback.call(this, data)
+    }
 
-        data.offers.forEach((offer) => {
-          if (offer.type === 'percentage') {
-            totalPct = total * (1 - offer.value / 100)
-          } else if (offer.type === 'minus') {
-            totalMinus = total - offer.value
-          } else if (offer.type === 'slice') {
-            totalSlice =
-              total > offer.sliceValue
-                ? total - Math.floor(total / offer.sliceValue) * offer.value
-                : total
-          }
-        })
+    return result
+  }
 
-        const minTotal = Math.min(totalPct, totalMinus, totalSlice)
+  computeDiscount (total, offers) {
+    if (total === 0 || offers === undefined) {
+      return 0
+    }
+    let discount = 0
 
-        discountSum = (total - minTotal).toFixed(2)
+    let totalPct = total
+    let totalMinus = total
+    let totalSlice = total
 
-        if (typeof callback === 'function') {
-          // Trigger callback function on resource found
-          callback.call(this, discountSum)
-        }
-      })
+    offers.forEach((offer) => {
+      if (offer.type === 'percentage') {
+        totalPct = total * (1 - offer.value / 100)
+      } else if (offer.type === 'minus') {
+        totalMinus = total - offer.value
+      } else if (offer.type === 'slice') {
+        totalSlice =
+          total > offer.sliceValue
+            ? total - Math.floor(total / offer.sliceValue) * offer.value
+            : total
+      }
+    })
+
+    const minTotal = Math.min(totalPct, totalMinus, totalSlice)
+
+    discount = (total - minTotal).toFixed(2)
+
+    return discount
   }
 
   /**
    * Read the content of the cart cookie and return a ready-made JS object
    */
   static readCart () {
-    const cart = Cookies.read(CART_ID)
-    const json = cart !== '' ? JSON.parse(cart) : []
+    const cart = cookie.load(CART_ID)
 
-    return json
+    return cart || []
   }
 
   /**
    * Add an article to the cart cookie by retrieving the data through the Button object
    *
-   * @param {DOM ELement} parent
+   * @param {DOM event} event
    */
-  static addToCart (parent) {
-    if (parent === undefined || parent === null) {
+  static addToCart (event) {
+    if (event === undefined || event === null) {
       return
     }
 
-    const button = parent.target
+    const button = event.target
     let json = decodeURIComponent(button.dataset.json)
 
     const article = JSON.parse(json)
+    article.keyid = uuid()
     const articles = Cart.readCart()
 
     articles.push(article)
     json = JSON.stringify(articles)
 
-    Cookies.write(CART_ID, json, 1)
-
-    Cart.printCount()
+    cookie.save(CART_ID, json, 1)
   }
 
   /**
@@ -119,28 +136,30 @@ class Cart {
    *
    * @param {int} index
    */
-  static removeFromCart (index) {
+  static removeFromCart (keyid) {
     const cart = Cart.readCart()
 
-    if (cart.length > index) {
-      cart.splice(index, 1)
-    }
+    let reducedCart = []
+    reducedCart = cart.reduce((reduced, iteratee) => {
+      if (iteratee.keyid !== keyid) {
+        reduced.push(iteratee)
+      }
 
-    const json = JSON.stringify(cart)
+      return reduced
+    }, reducedCart)
 
-    Cookies.write(CART_ID, json, 1)
+    const json = JSON.stringify(reducedCart)
 
-    Cart.printCount()
+    cookie.save(CART_ID, json, 1)
   }
 
   /**
    * Display the number of articles in the cart on cart button
    */
-  static printCount () {
-    const cartSum = document.querySelector('#cartSum')
-    if (cartSum !== undefined) {
+  static printCount (ref) {
+    if (ref !== undefined) {
       const count = Cart.count
-      cartSum.innerHTML = count
+      ref.innerHTML = count
     }
   }
 }
