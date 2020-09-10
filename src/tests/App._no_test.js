@@ -1,7 +1,4 @@
-// const BusinessCart = require('../business/Cart')
-
 import BusinessCart from '../business/Cart'
-
 import fetch from 'node-fetch'
 
 function notest (label, callback) {
@@ -42,6 +39,13 @@ notest('if Cpascher can be found in the home page', async (label) => {
 
 const testSet = {
   tests: [
+    {
+      subtotal: 29,
+      books: [
+        '78ee5f25-b84f-45f7-bf33-6c7b30f1b502'
+      ],
+      offer: { type: 'percentage', expected: 1.16 }
+    },
     {
       subtotal: 64,
       books: [
