@@ -1,33 +1,12 @@
-import React from 'react'
-import { render } from '@testing-library/react'
-// import { configure, shallow, mount, render as abrender } from 'enzyme'
-
-// import Adapter from 'enzyme-adapter-react-16'
-
 import fetch from 'isomorphic-fetch'
 
-import Home from '../views/Home'
 import BusinessCart from '../business/Cart'
-
-// configure({ adapter: new Adapter() })
 
 describe('HenriPotierApiService', () => {
   test('if jest works correctly', () => {
     expect(true).toBe(true)
   })
 
-  // it('should find Cpascher small logo in the page', () => {
-  //   expect(shallow(<Home />).contains(<img src='../assets/images/logos/Cpascher_logo_small.png' alt='Cpascher' />)).toBe(true)
-  // })
-
-  // it('should find Cpascher small logo in the page', () => {
-  //   expect(mount(<Home />).find('Cpascher').length).toBe(1)
-  // })
-
-  // it('should find Cpascher small logo in the page', () => {
-  //   const text = abrender(<Home />).text()
-  //   expect(/Cpascher/i.test(text)).toBe(true)
-  // })
   test('if Cpascher can be found in the home page', async () => {
     try {
       const response = await fetch('http://localhost:3000')
@@ -42,6 +21,13 @@ describe('HenriPotierApiService', () => {
 
   const testSet = {
     tests: [
+      {
+        subtotal: 29,
+        books: [
+          '78ee5f25-b84f-45f7-bf33-6c7b30f1b502'
+        ],
+        offer: { type: 'percentage', expected: 1.16 }
+      },
       {
         subtotal: 64,
         books: [
