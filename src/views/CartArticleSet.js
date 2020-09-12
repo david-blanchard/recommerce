@@ -3,6 +3,7 @@ import uuid from 'react-uuid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import BusinessCart from '../business/Cart'
+import BusinessOffer from '../business/Offer'
 
 class CartArticleSet extends Component {
   constructor (props) {
@@ -27,7 +28,7 @@ class CartArticleSet extends Component {
 
     let subtotal = 0.0
 
-    const businessCart = new BusinessCart()
+    const businessOffer = new BusinessOffer()
 
     const cartLines = cart.map((article, i) => {
       // Add an article to the cart
@@ -40,8 +41,8 @@ class CartArticleSet extends Component {
 
     // Computes the discount sum
     try {
-      businessCart.getOffersFromBulk(subtotal, function (data) {
-        const discount = businessCart.computeDiscount(subtotal, data.offers)
+      businessOffer.getOffersFromBulk(subtotal, function (data) {
+        const discount = businessOffer.computeDiscount(subtotal, data.offers)
         cartLines.push({ key: 'discount', value: parseFloat(discount).toFixed(2) })
         cartLines.push({ key: 'total', value: parseFloat(subtotal - discount).toFixed(2) })
 
