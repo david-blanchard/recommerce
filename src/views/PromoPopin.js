@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import ScreenModal from './ScreenModal'
+import BusinessHttp from '../business/Http'
+
+const home = BusinessHttp.fullyQualifiedName
 
 class PromoPopin extends Component {
   constructor (props) {
@@ -36,7 +39,7 @@ class PromoPopin extends Component {
         <div className='popin-box'>
           <div id='close'>
             <a
-              id='closePopinCta' href='#'
+              id='closePopinCta' href={home}
               onClick={this.handleClosePopinClick}
             >
               X
