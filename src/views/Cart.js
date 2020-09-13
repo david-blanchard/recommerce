@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import BusinessHttp from '../business/Http'
 import CartArticleSet from './CartArticleSet'
 import WithHeaderFooter from '../components/hoc/WithHeaderFooter'
-// import HeaderFooter from './HeaderFooter'
 
 const home = BusinessHttp.fullyQualifiedName()
 
@@ -24,13 +23,12 @@ class Cart extends Component {
     console.log({ Cart_render: this._cartCtaRef })
     return (
       <>
-        <section className='jumbotron text-center'>
-          <div className='container'>
-            <h1 className='jumbotron-heading'>VOTRE PANIER</h1>
-          </div>
-        </section>
-
         <main role='main' className='flex-shrink-0'>
+          <section className='jumbotron text-center'>
+            <div className='container'>
+              <h1 className='jumbotron-heading'>VOTRE PANIER</h1>
+            </div>
+          </section>
           <div className='container mb-4'>
             <div className='row'>
               <div className='col-12'>
