@@ -4,17 +4,17 @@ services:
     build: 
       context: .
       dockerfile: docker/Dockerfile
-    image: node:phink
+    image: node:cpascher
     user: "node"
     working_dir: /Sites/CodePhoenixOrg/SDK/javascript/Cpascher
     environment:
       - NODE_ENV=production
     ports:
      - '3000:3000'
-     - '1234:1234'
+     - '5000:5000'
     volumes:
       - .:/Sites/CodePhoenixOrg/SDK/javascript/Cpascher
       - node_modules:/Sites/CodePhoenixOrg/SDK/javascript/Cpascher/node_modules
-    # command: "node src/web/index.js"
+    command: /bin/sh -c "while sleep 1000; do :; done; yarn start"
 volumes: 
-  node_modules:
+  node_modules: 

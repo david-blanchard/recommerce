@@ -69,7 +69,7 @@ RUN sh -c "$(cat /tmp/zsh-in-docker.sh)" -- \
     -p https://github.com/zsh-users/zsh-history-substring-search \
     -p https://github.com/zsh-users/zsh-syntax-highlighting
 
-EXPOSE 3000 1234
+EXPOSE 3000 5000
 
 COPY docker/zshrc $HOME/.zshrc
 
