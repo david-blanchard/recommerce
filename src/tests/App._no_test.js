@@ -1,4 +1,4 @@
-import BusinessCart from '../business/Cart'
+import BusinessOffer from '../business/Offer'
 import fetch from 'node-fetch'
 
 function notest (label, callback) {
@@ -95,9 +95,9 @@ testSet.tests.map((parameters, i) => {
       const response = await fetch(serverName + query)
       const data = await response.json()
       const result = response.ok ? data : Promise.reject(data)
-      const businessCart = new BusinessCart()
+      const businessOffer = new BusinessOffer()
       if (result !== undefined) {
-        const recieved = businessCart.computeDiscount(parameters.subtotal, result.offers)
+        const recieved = businessOffer.computeDiscount(parameters.subtotal, result.offers)
         console.log(label)
 
         noexpect(recieved).toBe(parameters.offer.expected.toFixed(2))

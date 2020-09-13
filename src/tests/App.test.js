@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch'
 
-import BusinessCart from '../business/Cart'
+import BusinessOffer from '../business/Offer'
 
 describe('HenriPotierApiService', () => {
   test('if jest works correctly', () => {
@@ -77,9 +77,9 @@ describe('HenriPotierApiService', () => {
         const response = await fetch(serverName + query)
         const data = await response.json()
         const result = response.ok ? data : Promise.reject(data)
-        const businessCart = new BusinessCart()
+        const businessOffer = new BusinessOffer()
         if (result !== undefined) {
-          const recieved = businessCart.computeDiscount(parameters.subtotal, result.offers)
+          const recieved = businessOffer.computeDiscount(parameters.subtotal, result.offers)
           expect(recieved).toBe(parameters.offer.expected.toFixed(2))
         }
       } catch (e) {

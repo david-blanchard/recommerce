@@ -50,10 +50,10 @@ class CpcHeader extends Component {
           <div className='navbar-collapse offcanvas-collapse' id='navbarsExampleDefault'>
             <ul className='navbar-nav navbar-dark mr-auto'>
               <li className='nav-item active'>
-                <a className='nav-link text-dark'>Tous nos rayons <span className='sr-only'>(current)</span></a>
+                <a className='nav-link text-dark' href={home}>Tous nos rayons <span className='sr-only'>(current)</span></a>
               </li>
               <li className='nav-item'>
-                <a className='nav-link text-dark'>Promos de l'été</a>
+                <a className='nav-link text-dark' href={home}>Promos de l'été</a>
               </li>
               <li className='nav-item dropdown'>
                 <a className='nav-link text-dark dropdown-toggle' href={home} id='dropdown01' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Mon compte</a>

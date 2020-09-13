@@ -6,11 +6,15 @@ import ArticleCard from './ArticleCard'
 // import HeaderFooter from './HeaderFooter'
 import WithHeaderFooter from '../components/hoc/WithHeaderFooter'
 
+import BusinessHttp from '../business/Http'
+
 const SEARCH_FAILURE = "Pas de chance, nous n'avons trouvé aucun article avec ces critères !<br />Tentez une nouvelle recherche."
 const SEARCH_SUCCESS = 'Nous avons trouvé %d articles correspondants à vos critères'
 const SEARCH_SUCCESS_ONE = 'Nous avons trouvé 1 article correspondant à vos critères'
 const SEARCH_STATE_ZERO = true
 const CRITERION = 'title'
+
+const home = BusinessHttp.fullyQualifiedName()
 
 class Search extends Component {
   constructor (props) {
@@ -64,6 +68,8 @@ class Search extends Component {
   handleResetSearch (e) {
     this.clearSearch()
     this.displayResultState(SEARCH_STATE_ZERO)
+
+    e.preventDefault()
   }
 
   /**
@@ -155,7 +161,7 @@ class Search extends Component {
             <h1>Résultats de votre recherche</h1>
             <p id='resultState' className='lead text-muted' ref={r => (this._resultStateTextbox = r)} />
             <p>
-              <a id='resetSearch' className='btn btn-secondary my-2' href='#' onClick={this.handleResetSearch} ref={r => (this._resultSearchAnchor = r)}>Effacer ma recherche</a>
+              <a id='resetSearch' className='btn btn-secondary my-2' href={home} onClick={this.handleResetSearch} ref={r => (this._resultSearchAnchor = r)}>Effacer ma recherche</a>
             </p>
           </div>
         </section>
