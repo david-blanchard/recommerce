@@ -14,7 +14,7 @@ const SEARCH_SUCCESS_ONE = 'Nous avons trouvé 1 article correspondant à vos cr
 const SEARCH_STATE_ZERO = true
 const CRITERION = 'title'
 
-const home = BusinessHttp.fullyQualifiedName
+const home = BusinessHttp.fullyQualifiedName()
 
 class Search extends Component {
   constructor (props) {
@@ -68,6 +68,8 @@ class Search extends Component {
   handleResetSearch (e) {
     this.clearSearch()
     this.displayResultState(SEARCH_STATE_ZERO)
+
+    e.preventDefault()
   }
 
   /**
