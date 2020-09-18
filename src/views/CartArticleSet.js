@@ -28,8 +28,6 @@ class CartArticleSet extends Component {
 
     let subtotal = 0.0
 
-    const businessOffer = new BusinessOffer()
-
     const cartLines = cart.map((article, i) => {
       // Add an article to the cart
       subtotal += parseFloat(article.price)
@@ -41,7 +39,10 @@ class CartArticleSet extends Component {
 
     // Computes the discount sum
     try {
-      businessOffer.getOffersFromBulk(subtotal, function (data) {
+      const booksBulk = BusinessCart.isbnCodes
+
+      const businessOffer = new BusinessOffer()
+      businessOffer.getOffersFromBulk(subtotal, booksBulk, function (data) {
         const discount = businessOffer.computeDiscount(subtotal, data.offers)
         cartLines.push({ key: 'discount', value: parseFloat(discount).toFixed(2) })
         cartLines.push({ key: 'total', value: parseFloat(subtotal - discount).toFixed(2) })

@@ -1,5 +1,3 @@
-import BusinessCart from './Cart'
-
 class Offer {
   /**
    * Request the best offers based on the total sum of a bunch of articles
@@ -7,11 +5,13 @@ class Offer {
    * @param {float} total
    * @param {function} callback
    */
-  async getOffersFromBulk (total, callback) {
-    // When total equals zero no request must be done
-    // but the behavior has to remain the same
-    // so we do the callback if need be
-    if (total === 0) {
+  async getOffersFromBulk (total, bulk, callback) {
+    if (total === 0 || bulk === undefined || bulk.length === 0) {
+      /**
+       * When total or bulk equals zero no request must be done
+       * but the behavior has to remain the same
+       * so we do the callback if need be
+       */
       if (typeof callback === 'function') {
         // Trigger callback function on resource found
         callback.call(this, 0)
@@ -20,16 +20,10 @@ class Offer {
     }
 
     // Actually we have something to compute
-    const isbnArray = []
-    const cart = BusinessCart.readCart()
-
-    cart.forEach((article) => {
-      isbnArray.push(article.isbn)
-    })
 
     this._resourceURL =
       'http://henri-potier.xebia.fr/books/' +
-      isbnArray.join(',') +
+      bulk.join(',') +
       '/commercialOffers'
 
     const response = await fetch(this._resourceURL)

@@ -25,6 +25,21 @@ class Cart {
   }
 
   /**
+   * Get the ISBN codes from the books set in the cart
+   */
+  static get isbnCodes () {
+    const isbnArray = []
+
+    const cart = Cart.readCart()
+
+    cart.forEach((article) => {
+      isbnArray.push(article.isbn)
+    })
+
+    return isbnArray
+  }
+
+  /**
    * Read the content of the cart cookie and return a ready-made JS object
    */
   static readCart () {
