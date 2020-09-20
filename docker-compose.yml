@@ -15,6 +15,6 @@ services:
     volumes:
       - .:/Sites/CodePhoenixOrg/SDK/javascript/Cpascher
       - node_modules:/Sites/CodePhoenixOrg/SDK/javascript/Cpascher/node_modules
-    command: /bin/sh -c "while sleep 1000; do :; done; yarn start"
+    command: /bin/sh -c "cd /Sites/CodePhoenixOrg/SDK/javascript/Cpascher; sudo yarn; yarn start; while sleep 1000; do :; done;"
 volumes: 
   node_modules: 
