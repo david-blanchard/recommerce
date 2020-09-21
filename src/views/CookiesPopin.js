@@ -32,16 +32,16 @@ class CookiesPopin extends Component {
 
   handleRefuseMouseOver () {
     this._acceptCta.className = 'popin-cta cancel'
-    this._acceptCta.innerHTML = 'Refuser'
+    this._acceptCta.innerHTML = 'Paramétrer'
     this._refuseCta.className = 'popin-cta'
-    this._refuseCta.innerHTML = 'Accepter'
+    this._refuseCta.innerHTML = 'Accepter tout'
   }
 
   handleRefuseMouseOut () {
     this._acceptCta.className = 'popin-cta'
-    this._acceptCta.innerHTML = 'Accepter'
+    this._acceptCta.innerHTML = 'Accepter tout'
     this._refuseCta.className = 'popin-cta cancel'
-    this._refuseCta.innerHTML = 'Refuser'
+    this._refuseCta.innerHTML = 'Paramétrer'
   }
 
   render () {
@@ -56,24 +56,27 @@ class CookiesPopin extends Component {
         <div className='popin-box'>
           <div id='banner-message'>
             <p>
-              Nous souhaiterions avoir un retour de votre expérience sur notre site.
+              Nous utilisons les cookies pour avoir<br /> un retour de votre expérience sur notre site.
             </p>
             <p>
-              Acceptez-vous les cookies ?
+              Acceptez-vous la collecte de vos données personnelles ?
             </p>
             <button
               id='acceptCookiesCta' className='popin-cta' ref={r => (this._acceptCta = r)}
               onClick={this.handleAcceptClick}
             >
-              Accepter
+              Accepter tout
             </button>
+            &nbsp;
+            &nbsp;
+            &nbsp;
             <button
               id='refuseCookiesCta' className='popin-cta cancel' ref={r => (this._refuseCta = r)}
               onClick={this.handleRefuseClick}
               onMouseOver={this.handleRefuseMouseOver}
               onMouseOut={this.handleRefuseMouseOut}
             >
-              Refuser
+              Paramétrer
             </button>
           </div>
         </div>
