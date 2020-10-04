@@ -3,13 +3,9 @@ import cookie from 'react-cookies'
 import ScreenModal from '../modal/ScreenModal'
 
 const ACCEPT_COOKIES = 'acceptCookies'
-  
 
 class CookiesPopin extends Component {
-  
-
   constructor () {
-  
     super()
 
     this.handleAcceptClick = this.handleAcceptClick.bind(this)
