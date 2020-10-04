@@ -61,7 +61,7 @@ ENV SHELL /bin/zsh
 COPY docker/zsh-in-docker.sh /tmp
 
 RUN sh -c "$(cat /tmp/zsh-in-docker.sh)" -- \
-    -t agnoster \
+    -t "powerlevel10k/powerlevel10k" \
     -p git \
     -p ssh-agent \    
     -p https://github.com/zsh-users/zsh-autosuggestions \
