@@ -72,9 +72,9 @@ class Cart {
   }
 
   /**
-   * Remove an article from the cart by its position in the cart
+   * Remove an article from the cart by its keyID
    *
-   * @param {int} index
+   * @param {string} keyid
    */
   static removeFromCart (keyid) {
     const cart = Cart.readCart()
