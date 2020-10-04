@@ -30,8 +30,6 @@ class Offer {
     const data = await response.json()
     const result = response.ok ? data : Promise.reject(data)
 
-    console.log({ ccart_data: result })
-
     if (typeof callback === 'function') {
       // Trigger callback function on resource found
       callback.call(this, data)

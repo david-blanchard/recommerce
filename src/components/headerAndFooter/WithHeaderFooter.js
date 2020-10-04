@@ -4,8 +4,8 @@ import CpcFooter from './Footer'
 
 const WithHeaderFooter = (WrappedComponent) => {
   class HeaderFooter extends WrappedComponent {
-    constructor (props) {
-      super(props)
+    constructor () {
+      super()
       this._cartCtaRef = createRef()
     }
 

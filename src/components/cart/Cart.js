@@ -8,19 +8,7 @@ import WithHeaderFooter from '../headerAndFooter/WithHeaderFooter'
 const home = BusinessHttp.fullyQualifiedName()
 
 class Cart extends Component {
-  constructor (props) {
-    super(props)
-
-    this.props = props
-    this._cartCtaRef = this.cartCtaRef
-  }
-
-  componentDidMount () {
-    console.log({ Cart_didMount: this._cartCtaRef })
-  }
-
   render () {
-    console.log({ Cart_render: this._cartCtaRef })
     return (
       <>
         <main role='main' className='flex-shrink-0'>
@@ -32,7 +20,7 @@ class Cart extends Component {
           <div className='container mb-4'>
             <div className='row'>
               <div className='col-12'>
-                <CartArticleSet cartCtaRef={this._cartCtaRef} />
+                <CartArticleSet cartCtaRef={this.cartCtaRef} />
               </div>
               <div className='col mb-2'>
                 <div className='row'>

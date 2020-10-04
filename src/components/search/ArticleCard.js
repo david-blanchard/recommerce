@@ -2,34 +2,15 @@ import React, { Component } from 'react'
 import BusinessCart from '../../business/Cart'
 
 class ArticleCard extends Component {
-  constructor (props) {
-    super(props)
-
-    this.props = props
-    this.handleAddToCart = this.handleAddToCart.bind(this)
-    this._cartCtaRef = props.cartCtaRef
-  }
-
-  componentDidMount () {
-    console.log({ ArticleCard_didMount: this._cartCtaRef })
-  }
-
-  handleAddToCart (e) {
-    BusinessCart.addToCart(e)
-    BusinessCart.printCount(this._cartCtaRef.current)
+  handleAddToCart () {
+    BusinessCart.addToCart(this.cardData)
+    BusinessCart.printCount(this.props.cartCtaRef.current)
   }
 
   render () {
     const row = this.props.row
-    const dataset = {}
-    dataset.isbn = row.isbn
-    dataset.title = row.title
-    dataset.price = row.price
-    dataset.cover = row.cover
-
     row.synopsis = row.synopsis[0].substring(0, 128) + '...'
-
-    const json = encodeURIComponent(JSON.stringify(dataset))
+    this.cardData = row 
 
     return (
       <div className='card mb-4 shadow-sm'>
@@ -46,7 +27,7 @@ class ArticleCard extends Component {
           <div className='d-flex justify-content-between align-items-center'>
             <div className='btn-group'>
               <button type='button' className='btn btn-sm btn-outline-secondary'>Plus</button>
-              <button type='button' onClick={this.handleAddToCart} data-json={json} className='add-to-cart-cta btn btn-sm btn-primary btn-success'>Ajouter au panier</button>
+              <button type='button' onClick={this.handleAddToCart.bind(this)} className='add-to-cart-cta btn btn-sm btn-primary btn-success'>Ajouter au panier</button>
             </div>
             <h3 className='text-muted'>{row.price} €</h3>
           </div>

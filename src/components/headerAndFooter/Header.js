@@ -15,18 +15,12 @@ import SearchNavBar from '../search/SearchNavBar'
 const home = BusinessHttp.fullyQualifiedName()
 
 class CpcHeader extends Component {
-  constructor (props) {
-    super(props)
-    this.props = props
+  constructor () {
+    super()
 
     this.handleSubmitSearch = this.handleSubmitSearch.bind(this)
 
     this.state = { cartCount: BusinessCart.count }
-    this._cartCtaRef = this.props.cartCtaRef
-  }
-
-  componentDidMount () {
-    console.log({ header_didMount: this._cartCtaRef })
   }
 
   handleSubmitSearch (value) {
@@ -65,7 +59,7 @@ class CpcHeader extends Component {
               </li>
             </ul>
             <SearchNavBar onSubmitSearch={this.handleSubmitSearch} />
-            <CartNavButton ref={this._cartCtaRef} />
+            <CartNavButton ref={this.props.cartCtaRef} />
           </div>
         </nav>
 

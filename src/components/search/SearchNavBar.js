@@ -4,9 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 class SearchNavBar extends Component {
-  constructor (props) {
-    super(props)
-    this.props = props
+  constructor () {
+    super()
 
     this.handleSubmitSearchClick = this.handleSubmitSearchClick.bind(this)
     this._searchInput = null

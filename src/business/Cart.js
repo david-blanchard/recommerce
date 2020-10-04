@@ -53,20 +53,14 @@ class Cart {
    *
    * @param {DOM event} event
    */
-  static addToCart (event) {
-    if (event === undefined || event === null) {
-      return
-    }
+  static addToCart (cardData) {
 
-    const button = event.target
-    let json = decodeURIComponent(button.dataset.json)
-
-    const article = JSON.parse(json)
+    const article = cardData
     article.keyid = uuid()
     const articles = Cart.readCart()
 
     articles.push(article)
-    json = JSON.stringify(articles)
+    const json = JSON.stringify(articles)
 
     cookie.save(CART_ID, json, 1)
   }

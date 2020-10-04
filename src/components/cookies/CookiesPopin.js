@@ -1,22 +1,22 @@
-import React, { Component } from 'react'
+import React, { useState, Component } from 'react'
 import cookie from 'react-cookies'
 import ScreenModal from '../modal/ScreenModal'
 
 const ACCEPT_COOKIES = 'acceptCookies'
+  
 
 class CookiesPopin extends Component {
-  constructor (props) {
-    super(props)
+  
 
-    this._acceptCta = null
-    this._refuseCta = null
-    this.props = props
+  constructor () {
+  
+    super()
 
     this.handleAcceptClick = this.handleAcceptClick.bind(this)
     this.handleRefuseClick = this.handleRefuseClick.bind(this)
     this.handleRefuseMouseOver = this.handleRefuseMouseOver.bind(this)
     this.handleRefuseMouseOut = this.handleRefuseMouseOut.bind(this)
-
+    
     this.state = { cookiesAccepted: false }
   }
 
@@ -45,6 +45,7 @@ class CookiesPopin extends Component {
   }
 
   render () {
+
     if (cookie.load(ACCEPT_COOKIES) !== undefined) {
       // Choice already set, don't ask again
       // this.setState({ cookiesAccepted: true })

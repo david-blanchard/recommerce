@@ -17,8 +17,8 @@ const CRITERION = 'title'
 const home = BusinessHttp.fullyQualifiedName()
 
 class Search extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this._resource = null
     this._results = []
     this._query = ''

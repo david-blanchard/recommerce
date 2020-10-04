@@ -9,9 +9,9 @@ import BusinessCart from '../../business/Cart'
 const count = BusinessCart.count
 
 class CartNavButton extends Component {
-  constructor (props) {
-    super(props)
-    this.props = props
+  constructor () {
+    super()
+
     this._cartCta = null
   }
 
@@ -21,8 +21,6 @@ class CartNavButton extends Component {
 
   componentDidMount () {
     if (this.props.onSetCartCtaRef !== undefined) {
-      console.log({ CartNavButton_didMount: this._cartCta })
-
       this.props.onSetCartCtaRef(this._cartCta)
     }
   }
