@@ -1,10 +1,10 @@
 ﻿import React, { Component } from 'react'
-import logo from '../assets/images/logos/Cpascher_logo_smaller.png'
+import logo from '../../assets/images/logos/Cpascher_logo_smaller.png'
 
-import CookiesPopin from './CookiesPopin'
-import PromoPopin from './PromoPopin'
+import CookiesPopin from '../cookies/CookiesPopin'
+import PromoPopin from '../promo/PromoPopin'
 
-import BusinessHttp from '../business/Http'
+import BusinessHttp from '../../business/Http'
 
 const home = BusinessHttp.fullyQualifiedName()
 

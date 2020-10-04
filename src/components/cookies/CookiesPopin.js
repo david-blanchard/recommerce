@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import cookie from 'react-cookies'
-import ScreenModal from './ScreenModal'
+import ScreenModal from '../modal/ScreenModal'
 
 const ACCEPT_COOKIES = 'acceptCookies'
 

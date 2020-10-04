@@ -1,15 +1,15 @@
 ﻿import React, { Component } from 'react'
-import '../css/index.css'
+import '../../css/index.css'
 
-import plageTropique from '../assets/images/teasers/voyages.png'
-import salonJardin from '../assets/images/teasers/chaises_jardin.png'
-import librairie from '../assets/images/teasers/librairie.png'
-import article1 from '../assets/images/articles/disque-a-lancer.jpg'
-import article2 from '../assets/images/articles//robot-nettoyeur-wifi.jpg'
-import article3 from '../assets/images/articles/platine-vinyle.jpg'
+import plageTropique from '../../assets/images/teasers/voyages.png'
+import salonJardin from '../../assets/images/teasers/chaises_jardin.png'
+import librairie from '../../assets/images/teasers/librairie.png'
+import article1 from '../../assets/images/articles/disque-a-lancer.jpg'
+import article2 from '../../assets/images/articles//robot-nettoyeur-wifi.jpg'
+import article3 from '../../assets/images/articles/platine-vinyle.jpg'
 
-import BusinessHttp from '../business/Http'
-import WithHeaderFooter from '../components/hoc/WithHeaderFooter'
+import BusinessHttp from '../../business/Http'
+import WithHeaderFooter from '../headerAndFooter/WithHeaderFooter'
 // import HeaderFooter from './HeaderFooter'
 
 const home = BusinessHttp.fullyQualifiedName()

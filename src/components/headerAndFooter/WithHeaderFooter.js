@@ -1,6 +1,6 @@
 import React, { createRef } from 'react'
-import CpcHeader from '../../views/Header'
-import CpcFooter from '../../views/Footer'
+import CpcHeader from './Header'
+import CpcFooter from './Footer'
 
 const WithHeaderFooter = (WrappedComponent) => {
   class HeaderFooter extends WrappedComponent {

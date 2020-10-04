@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import ScreenModal from './ScreenModal'
-import BusinessHttp from '../business/Http'
+import ScreenModal from '../modal/ScreenModal'
+import BusinessHttp from '../../business/Http'
 
 const home = BusinessHttp.fullyQualifiedName
 

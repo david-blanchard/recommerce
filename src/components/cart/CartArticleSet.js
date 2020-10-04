@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import uuid from 'react-uuid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import BusinessCart from '../business/Cart'
-import BusinessOffer from '../business/Offer'
+import BusinessCart from '../../business/Cart'
+import BusinessOffer from '../../business/Offer'
 
 class CartArticleSet extends Component {
   constructor (props) {
@@ -18,8 +18,6 @@ class CartArticleSet extends Component {
   }
 
   componentDidMount () {
-    console.log({ CartArticleSet_didMount: this._cartCtaRef })
-
     this.computeCart()
   }
 

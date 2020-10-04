@@ -4,9 +4,9 @@ import uuid from 'react-uuid'
 
 import ArticleCard from './ArticleCard'
 // import HeaderFooter from './HeaderFooter'
-import WithHeaderFooter from '../components/hoc/WithHeaderFooter'
+import WithHeaderFooter from '../headerAndFooter/WithHeaderFooter'
 
-import BusinessHttp from '../business/Http'
+import BusinessHttp from '../../business/Http'
 
 const SEARCH_FAILURE = "Pas de chance, nous n'avons trouvé aucun article avec ces critères !<br />Tentez une nouvelle recherche."
 const SEARCH_SUCCESS = 'Nous avons trouvé %d articles correspondants à vos critères'

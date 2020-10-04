@@ -1,9 +1,9 @@
 
 import React, { Component } from 'react'
 
-import BusinessHttp from '../business/Http'
+import BusinessHttp from '../../business/Http'
 import CartArticleSet from './CartArticleSet'
-import WithHeaderFooter from '../components/hoc/WithHeaderFooter'
+import WithHeaderFooter from '../headerAndFooter/WithHeaderFooter'
 
 const home = BusinessHttp.fullyQualifiedName()
 

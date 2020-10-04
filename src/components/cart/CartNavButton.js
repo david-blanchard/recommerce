@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
-import BusinessCart from '../business/Cart'
+import BusinessCart from '../../business/Cart'
 
 const count = BusinessCart.count
 
