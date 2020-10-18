@@ -1,44 +1,32 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import ScreenModal from '../modal/ScreenModal'
 import BusinessHttp from '../../business/Http'
 
 const home = BusinessHttp.fullyQualifiedName
 
-class PromoPopin extends Component {
-  constructor () {
-    super()
+const PromoPopin = props => {
+  const [state, setState] = useState({ isVisible: false })
 
-    this.handleGotItClick = this.handleGotItClick.bind(this)
-    this.handleClosePopinClick = this.handleClosePopinClick.bind(this)
-
-    this.state = { isVisible: false }
-  }
-
-  handleGotItClick () {
-    this.setState({ isVisible: false })
+  const handleGotItClick = () => {
+    setState({ isVisible: false })
 
     window.location.href = 'search?q=potier'
   }
 
-  handleClosePopinClick () {
-    this.setState({ isVisible: false })
+  const handleClosePopinClick = () => {
+    setState({ isVisible: false })
   }
 
-  render () {
-    const isVisible =  this.props.isVisible !== undefined ? this.props.isVisible : false 
+  const isVisible = state.isVisible !== undefined ? state.isVisible : false
 
-    if (!isVisible) {
-      return (
-        ''
-      )
-    }
-    return (
+  return (
+    (isVisible) &&
       <ScreenModal>
         <div className='popin-box'>
           <div id='close'>
             <a
               id='closePopinCta' href={home}
-              onClick={this.handleClosePopinClick}
+              onClick={handleClosePopinClick}
             >
               X
             </a>
@@ -53,7 +41,7 @@ class PromoPopin extends Component {
 
             <button
               id='gotItCta' className='popin-cta go'
-              onClick={this.handleGotItClick}
+              onClick={handleGotItClick}
             >
               J'en profite
             </button>
@@ -65,8 +53,7 @@ class PromoPopin extends Component {
 
         </div>
       </ScreenModal>
-    )
-  }
+  )
 }
 
 export default PromoPopin

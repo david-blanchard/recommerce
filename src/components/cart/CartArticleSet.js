@@ -1,32 +1,29 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import uuid from 'react-uuid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import BusinessCart from '../../business/Cart'
 import BusinessOffer from '../../business/Offer'
 
-class CartArticleSet extends Component {
-  constructor (props) {
-    super(props)
-    this.handleRemove = this.handleRemove.bind(this)
-    this._cartCtaRef = this.props.cartCtaRef
+const CartArticleSet = props => {
+  const cart = BusinessCart.readCart()
+  let cartLines = []
 
-    this.state = {
-      cart: BusinessCart.readCart(),
-      lines: []
-    }
-  }
+  const [state, setState] = useState({
+    cart: {},
+    lines: []
+  })
 
-  componentDidMount () {
-    this.computeCart()
-  }
+  useEffect(() => {
+    computeCart()
+  }, [])
 
-  computeCart () {
-    const cart = BusinessCart.readCart()
+  console.log({ state: state })
 
+  const computeCart = () => {
     let subtotal = 0.0
 
-    const cartLines = cart.map((article, i) => {
+    cartLines = cart.map((article, i) => {
       // Add an article to the cart
       subtotal += parseFloat(article.price)
 
@@ -45,109 +42,99 @@ class CartArticleSet extends Component {
         cartLines.push({ key: 'discount', value: parseFloat(discount).toFixed(2) })
         cartLines.push({ key: 'total', value: parseFloat(subtotal - discount).toFixed(2) })
 
-        const res = this.setState({
+        const res = setState({
           cart: cart,
           lines: cartLines
         })
 
         return res
-      }.bind(this))
+      })
     } catch (e) {
       throw new Error(e.message)
     }
   }
 
-  handleRemove (keyid) {
+  const handleRemove = keyid => {
     BusinessCart.removeFromCart(keyid)
-    BusinessCart.printCount(this._cartCtaRef.current)
+    BusinessCart.printCount(props.cartCtaRef.current)
 
-    this.computeCart()
+    computeCart()
+
     return true
   }
 
-  render () {
-    return (
-      <div className='table-responsive'>
-        <table className='table table-striped'>
-          <thead>
-            <tr>
-              <th scope='col'> </th>
-              <th scope='col'>Article</th>
-              <th scope='col'>Disponibilité</th>
-              <th scope='col' className='text-center'>Quantité</th>
-              <th scope='col' className='text-right'>Prix</th>
-              <th> </th>
-            </tr>
-          </thead>
-          <tbody id='table-lines'>
-            {
-              this.state.lines.map((line, i) => {
-                // Add an article to the cart
+  return (
+    <div className='table-responsive'>
+      <table className='table table-striped'>
+        <thead>
+          <tr>
+            <th scope='col'> </th>
+            <th scope='col'>Article</th>
+            <th scope='col'>Disponibilité</th>
+            <th scope='col' className='text-center'>Quantité</th>
+            <th scope='col' className='text-right'>Prix</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody id='table-lines'>
+          {
+            state.lines.map((line, i) => {
+              // Add an article to the cart
 
-                const keyid = uuid()
-                /* Add an article line to the table */
-                if (line.key === 'article') {
-                  const id = line.value
-                  const article = this.state.cart[id]
-                  // console.log({ id: id, article: article, cart: this.state.cart })
+              /* Add an article line to the table */
+              if (line.key === 'article') {
+                const id = line.value
+                const article = state.cart[id]
+                // console.log({ id: id, article: article, cart: state.cart })
 
-                  return (<ArticleLine key={keyid} article={article} index={i} onRemove={this.handleRemove} />)
-                }
+                return (<ArticleLine key={uuid()} article={article} index={i} onRemove={handleRemove} />)
+              }
 
-                /* Add the sub-total line to the table */
-                if (line.key === 'subtotal') {
-                  const subtotal = line.value
-                  return (<SubTotalLine key={uuid()} sum={subtotal} />)
-                }
-                /* Add the discount line to the table */
-                if (line.key === 'discount') {
-                  const discount = line.value
-                  return (<DiscountLine key={uuid()} discountSum={discount} />)
-                }
-                /* Add the total line to the table */
-                if (line.key === 'total') {
-                  const total = line.value
-                  return (<TotalLine key={uuid()} total={total} />)
-                }
+              /* Add the sub-total line to the table */
+              if (line.key === 'subtotal') {
+                const subtotal = line.value
+                return (<SubTotalLine key={uuid()} sum={subtotal} />)
+              }
+              /* Add the discount line to the table */
+              if (line.key === 'discount') {
+                const discount = line.value
+                return (<DiscountLine key={uuid()} discountSum={discount} />)
+              }
+              /* Add the total line to the table */
+              if (line.key === 'total') {
+                const total = line.value
+                return (<TotalLine key={uuid()} total={total} />)
+              }
 
-                return true
-              })
-            }
-          </tbody>
-        </table>
-      </div>
-    )
-  }
+              return true
+            })
+          }
+        </tbody>
+      </table>
+    </div>
+  )
 }
 
-class ArticleLine extends Component {
+const ArticleLine = props => {
+  const article = props.article
+  const cover = article.cover
+  const price = parseFloat(article.price).toFixed(2)
+  const title = article.title
 
-  handleClick () {
-    this.props.onRemove(this.keyid)
-  }
-
-  render () {
-    const article = this.props.article
-    const cover = article.cover
-    const price = parseFloat(article.price).toFixed(2)
-    const title = article.title
-    this.keyid = article.keyid
-
-    return (
-      <tr>
-        <td><img src={cover} width='40' height='60' alt='Article card' /> </td>
-        <td>{title}</td>
-        <td>En stock</td>
-        <td><input className='form-control' type='text' value='1' readOnly /></td>
-        <td className='text-right'>{price} €</td>
-        <td className='text-right'>
-          <button onClick={this.handleClick.bind(this)} className='remove-from-cart-cta btn btn-sm btn-danger'>
-            <FontAwesomeIcon pointerEvents='none' icon={faTrash} />
-          </button>
-        </td>
-      </tr>
-    )
-  }
+  return (
+    <tr>
+      <td><img src={cover} width='40' height='60' alt='Article card' /> </td>
+      <td>{title}</td>
+      <td>En stock</td>
+      <td><input className='form-control' type='text' value='1' readOnly /></td>
+      <td className='text-right'>{price} €</td>
+      <td className='text-right'>
+        <button onClick={() => { props.onRemove(article.keyid) }} className='remove-from-cart-cta btn btn-sm btn-danger'>
+          <FontAwesomeIcon pointerEvents='none' icon={faTrash} />
+        </button>
+      </td>
+    </tr>
+  )
 }
 
 const SubTotalLine = ({ sum }) => {

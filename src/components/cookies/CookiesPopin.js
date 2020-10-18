@@ -1,85 +1,77 @@
-import React, { useState, Component } from 'react'
+import React, { useState } from 'react'
 import cookie from 'react-cookies'
 import ScreenModal from '../modal/ScreenModal'
 
 const ACCEPT_COOKIES = 'acceptCookies'
 
-class CookiesPopin extends Component {
-  constructor () {
-    super()
+const CookiesPopin = props => {
+  const [state, setState] = useState({ cookiesAccepted: false })
 
-    this.handleAcceptClick = this.handleAcceptClick.bind(this)
-    this.handleRefuseClick = this.handleRefuseClick.bind(this)
-    this.handleRefuseMouseOver = this.handleRefuseMouseOver.bind(this)
-    this.handleRefuseMouseOut = this.handleRefuseMouseOut.bind(this)
-    
-    this.state = { cookiesAccepted: false }
-  }
+  let acceptCta = null
+  let refuseCta = null
 
-  handleAcceptClick () {
+  const handleAcceptClick = () => {
     cookie.save(ACCEPT_COOKIES, '1', 365)
-    this.props.onCallToAction(true)
+    props.onCallToAction(true)
   }
 
-  handleRefuseClick () {
+  const handleRefuseClick = () => {
     cookie.save(ACCEPT_COOKIES, '0', 365)
-    this.props.onCallToAction(true)
+    props.onCallToAction(true)
   }
 
-  handleRefuseMouseOver () {
-    this._acceptCta.className = 'popin-cta cancel'
-    this._acceptCta.innerHTML = 'Paramétrer'
-    this._refuseCta.className = 'popin-cta'
-    this._refuseCta.innerHTML = 'Accepter tout'
+  const handleRefuseMouseOver = () => {
+    acceptCta.className = 'popin-cta cancel'
+    acceptCta.innerHTML = 'Paramétrer'
+    refuseCta.className = 'popin-cta'
+    refuseCta.innerHTML = 'Accepter tout'
   }
 
-  handleRefuseMouseOut () {
-    this._acceptCta.className = 'popin-cta'
-    this._acceptCta.innerHTML = 'Accepter tout'
-    this._refuseCta.className = 'popin-cta cancel'
-    this._refuseCta.innerHTML = 'Paramétrer'
+  const handleRefuseMouseOut = () => {
+    acceptCta.className = 'popin-cta'
+    acceptCta.innerHTML = 'Accepter tout'
+    refuseCta.className = 'popin-cta cancel'
+    refuseCta.innerHTML = 'Paramétrer'
   }
 
-  render () {
+  if (cookie.load(ACCEPT_COOKIES) !== undefined) {
+    // Choice already set, don't ask again
 
-    if (cookie.load(ACCEPT_COOKIES) !== undefined) {
-      // Choice already set, don't ask again
-      // this.setState({ cookiesAccepted: true })
-      return false
-    }
+    return false
+  }
 
-    return (
-      <ScreenModal>
-        <div className='popin-box'>
-          <div id='banner-message'>
-            <p>
+  return (
+  // Choice already set, don't ask again
+    <ScreenModal>
+      <div className='popin-box'>
+        <div id='banner-message'>
+          <p>
               Nous utilisons les cookies pour avoir<br /> un retour de votre expérience sur notre site.
-            </p>
-            <p>
+          </p>
+          <p>
               Acceptez-vous la collecte de vos données personnelles ?
-            </p>
-            <button
-              id='acceptCookiesCta' className='popin-cta' ref={r => (this._acceptCta = r)}
-              onClick={this.handleAcceptClick}
-            >
+          </p>
+          <button
+            id='acceptCookiesCta' className='popin-cta' ref={r => (acceptCta = r)}
+            onClick={handleAcceptClick}
+          >
               Accepter tout
-            </button>
+          </button>
             &nbsp;
             &nbsp;
             &nbsp;
-            <button
-              id='refuseCookiesCta' className='popin-cta cancel' ref={r => (this._refuseCta = r)}
-              onClick={this.handleRefuseClick}
-              onMouseOver={this.handleRefuseMouseOver}
-              onMouseOut={this.handleRefuseMouseOut}
-            >
+          <button
+            id='refuseCookiesCta' className='popin-cta cancel' ref={r => (refuseCta = r)}
+            onClick={handleRefuseClick}
+            onMouseOver={handleRefuseMouseOver}
+            onMouseOut={handleRefuseMouseOut}
+          >
               Paramétrer
-            </button>
-          </div>
+          </button>
         </div>
-      </ScreenModal>
-    )
-  }
+      </div>
+    </ScreenModal>
+  )
 }
 
 export default CookiesPopin

@@ -4,17 +4,17 @@ services:
     build: 
       context: .
       dockerfile: docker/Dockerfile
-    image: node:cpascher
+    image: node:recommerce
     user: "node"
-    working_dir: /Sites/CodePhoenixOrg/SDK/javascript/Cpascher
+    working_dir: /site
     environment:
       - NODE_ENV=production
     ports:
      - '3000:3000'
      - '5000:5000'
     volumes:
-      - .:/Sites/CodePhoenixOrg/SDK/javascript/Cpascher
-      - node_modules:/Sites/CodePhoenixOrg/SDK/javascript/Cpascher/node_modules
-    command: /bin/sh -c "cd /Sites/CodePhoenixOrg/SDK/javascript/Cpascher; sudo yarn; yarn start; while sleep 1000; do :; done;"
+      - .:/site
+      - node_modules:/site/node_modules
+    command: /bin/sh -c "cd /site; sudo yarn; yarn start; while sleep 1000; do :; done;"
 volumes: 
-  node_modules: 
+  node_modules:                                                                                                                                                                                                 

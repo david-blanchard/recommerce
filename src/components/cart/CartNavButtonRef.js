@@ -8,11 +8,11 @@ import BusinessCart from '../../business/Cart'
 
 const count = BusinessCart.count
 
-const CartNavButtonRef = (props, ref) => {
+const CartNavButtonRef = props => {
   return (
     <a id='cartCta' className='btn btn-success my-2 my-sm-0 ml-3' href='cart'>
       <FontAwesomeIcon icon={faShoppingCart} />
-      <span id='cartSum' className='badge badge-light ml-3' ref={ref}>{count}</span>
+      <span id='cartSum' className='badge badge-light ml-3' ref={props.cartCtaRef}>{count}</span>
     </a>
   )
 }
