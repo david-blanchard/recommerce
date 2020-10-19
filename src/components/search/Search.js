@@ -4,7 +4,7 @@ import uuid from 'react-uuid'
 
 import ArticleCard from './ArticleCard'
 // import HeaderFooter from './HeaderFooter'
-import WithHeaderFooter from '../headerAndFooter/WithHeaderFooter'
+import HeaderAndFooter from '../headerAndFooter/HeaderAndFooter'
 
 import BusinessHttp from '../../business/Http'
 
@@ -141,36 +141,38 @@ const Search = props => {
   }
 
   return (
-    <main role='main' className='flex-shrink-0'>
-      <section className='jumbotron text-center'>
-        <div className='container'>
-          <h1>Résultats de votre recherche</h1>
-          <p id='resultState' className='lead text-muted' ref={resultStateTextboxRef} />
-          <p>
-            <a id='resetSearch' className='btn btn-secondary my-2' href={home} onClick={handleResetSearch} ref={resultSearchAnchorRef}>Effacer ma recherche</a>
-          </p>
-        </div>
-      </section>
+    <HeaderAndFooter>
+      <main role='main' className='flex-shrink-0'>
+        <section className='jumbotron text-center'>
+          <div className='container'>
+            <h1>Résultats de votre recherche</h1>
+            <p id='resultState' className='lead text-muted' ref={resultStateTextboxRef} />
+            <p>
+              <a id='resetSearch' className='btn btn-secondary my-2' href={home} onClick={handleResetSearch} ref={resultSearchAnchorRef}>Effacer ma recherche</a>
+            </p>
+          </div>
+        </section>
 
-      <div className='album py-5'>
-        <div className='container'>
-          <div id='lostAndFound' className='row'>
-            {
-              (state !== undefined) && state.results.map((row, i) => {
-                const keyid = uuid()
-                return (
-                  <div key={i} className='col-md-4'>
-                    <ArticleCard key={keyid} keyid={keyid} row={row} cartCtaRef={cartCtaRef} />
-                  </div>
-                )
-              })
-            }
+        <div className='album py-5'>
+          <div className='container'>
+            <div id='lostAndFound' className='row'>
+              {
+                (state !== undefined) && state.results.map((row, i) => {
+                  const keyid = uuid()
+                  return (
+                    <div key={i} className='col-md-4'>
+                      <ArticleCard key={keyid} keyid={keyid} row={row} cartCtaRef={cartCtaRef} />
+                    </div>
+                  )
+                })
+              }
+            </div>
           </div>
         </div>
-      </div>
 
-    </main>
+      </main>
+    </HeaderAndFooter>
   )
 }
 
-export default WithHeaderFooter(Search)
+export default Search

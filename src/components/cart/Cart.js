@@ -1,15 +1,15 @@
 
-import React, { Component } from 'react'
+import React from 'react'
 
 import BusinessHttp from '../../business/Http'
 import CartArticleSet from './CartArticleSet'
-import WithHeaderFooter from '../headerAndFooter/WithHeaderFooter'
+import HeaderAndFooter from '../headerAndFooter/HeaderAndFooter'
 
 const home = BusinessHttp.fullyQualifiedName()
 
 const Cart = props => {
   return (
-    <>
+    <HeaderAndFooter>
       <main role='main' className='flex-shrink-0'>
         <section className='jumbotron text-center'>
           <div className='container'>
@@ -35,8 +35,8 @@ const Cart = props => {
         </div>
 
       </main>
-    </>
+    </HeaderAndFooter>
   )
 }
 
-export default WithHeaderFooter(Cart)
+export default Cart
