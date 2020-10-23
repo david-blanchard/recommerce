@@ -4,7 +4,8 @@ import uuid from 'react-uuid'
 
 import ArticleCard from './ArticleCard'
 // import HeaderFooter from './HeaderFooter'
-import HeaderAndFooter from '../headerAndFooter/HeaderAndFooter'
+// import HeaderAndFooter from '../headerAndFooter/HeaderAndFooter'
+import WithHeaderFooter from '../headerAndFooter/WithHeaderFooter'
 
 import BusinessHttp from '../../business/Http'
 
@@ -141,7 +142,7 @@ const Search = props => {
   }
 
   return (
-    <HeaderAndFooter>
+    <>
       <main role='main' className='flex-shrink-0'>
         <section className='jumbotron text-center'>
           <div className='container'>
@@ -171,8 +172,8 @@ const Search = props => {
         </div>
 
       </main>
-    </HeaderAndFooter>
+    </>
   )
 }
 
-export default Search
+export default WithHeaderFooter(Search)
