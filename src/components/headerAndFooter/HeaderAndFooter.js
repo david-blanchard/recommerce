@@ -1,18 +1,17 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import CpcHeader from './Header'
 import CpcFooter from './Footer'
+import CartNavButtonContext from '../cart/CartNavButtonContext'
 
 const HeaderAndFooter = ({ children }) => {
-  const cartCtaRef = useRef()
-
   // const newProps = { [cartCtaRef]: cartCtaRef }
 
   return (
-    <>
-      <CpcHeader cartCtaRef={cartCtaRef} />
+    <CartNavButtonContext>
+      <CpcHeader />
       {children}
       <CpcFooter />
-    </>
+    </CartNavButtonContext>
   )
 }
 

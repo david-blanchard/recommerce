@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import BusinessCart from '../../business/Cart'
+import { CartNavButtonContext } from '../cart/CartNavButtonContext'
 
 const ArticleCard = props => {
+  const { CartNavButtonRef } = useContext(CartNavButtonContext)
+
   const handleAddToCart = () => {
     BusinessCart.addToCart(props.row)
-    BusinessCart.printCount(props.cartCtaRef.current)
+    BusinessCart.printCount(CartNavButtonRef.current)
   }
 
   const row = props.row

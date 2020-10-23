@@ -1,17 +1,15 @@
-import React, { createRef } from 'react'
+import React from 'react'
 import CpcHeader from './Header'
 import CpcFooter from './Footer'
+import CartNavButtonContext from '../cart/CartNavButtonContext'
 
 const WithHeaderFooter = (WrappedComponent) => props => {
-  const cartCtaRef = createRef()
-  const newProps = { ...props, [cartCtaRef]: cartCtaRef }
-
   return (
-    <>
-      <CpcHeader cartCtaRef={cartCtaRef} />
-      <WrappedComponent {...newProps} />
+    <CartNavButtonContext>
+      <CpcHeader />
+      <WrappedComponent {...props} />
       <CpcFooter />
-    </>
+    </CartNavButtonContext>
   )
 }
 

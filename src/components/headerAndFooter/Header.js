@@ -9,7 +9,7 @@ import logo from '../../assets/images/logos/Cpascher_logo_small.png'
 import BusinessHttp from '../../business/Http'
 import BusinessCart from '../../business/Cart'
 
-import CartNavButton from '../cart/CartNavButtonRef'
+import CartNavButton from '../cart/CartNavButton'
 import SearchNavBar from '../search/SearchNavBar'
 
 const home = BusinessHttp.fullyQualifiedName()
@@ -52,7 +52,7 @@ const CpcHeader = props => {
             </li>
           </ul>
           <SearchNavBar onSubmitSearch={handleSubmitSearch} />
-          <CartNavButton cartCtaRef={props.cartCtaRef} />
+          <CartNavButton />
         </div>
       </nav>
 
