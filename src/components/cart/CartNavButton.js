@@ -10,7 +10,6 @@ import { CartNavButtonContext } from './CartNavButtonContext'
 const count = BusinessCart.count
 
 const CartNavButton = props => {
-
   const { CartNavButtonRef } = useContext(CartNavButtonContext)
 
   return (

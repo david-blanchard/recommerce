@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import cookie from 'react-cookies'
 import ScreenModal from '../modal/ScreenModal'
 
 const ACCEPT_COOKIES = 'acceptCookies'
 
 const CookiesPopin = props => {
-  const [state, setState] = useState({ cookiesAccepted: false })
-
   let acceptCta = null
   let refuseCta = null
 
@@ -34,43 +32,38 @@ const CookiesPopin = props => {
     refuseCta.innerHTML = 'Paramétrer'
   }
 
-  if (cookie.load(ACCEPT_COOKIES) !== undefined) {
-    // Choice already set, don't ask again
-
-    return false
-  }
-
   return (
-  // Choice already set, don't ask again
-    <ScreenModal>
-      <div className='popin-box'>
-        <div id='banner-message'>
-          <p>
+  // If choice is already set, don't ask again
+    (cookie.load(ACCEPT_COOKIES) === undefined) &&
+      <ScreenModal>
+        <div className='popin-box'>
+          <div id='banner-message'>
+            <p>
               Nous utilisons les cookies pour avoir<br /> un retour de votre expérience sur notre site.
-          </p>
-          <p>
+            </p>
+            <p>
               Acceptez-vous la collecte de vos données personnelles ?
-          </p>
-          <button
-            id='acceptCookiesCta' className='popin-cta' ref={r => (acceptCta = r)}
-            onClick={handleAcceptClick}
-          >
+            </p>
+            <button
+              id='acceptCookiesCta' className='popin-cta' ref={r => (acceptCta = r)}
+              onClick={handleAcceptClick}
+            >
               Accepter tout
-          </button>
+            </button>
             &nbsp;
             &nbsp;
             &nbsp;
-          <button
-            id='refuseCookiesCta' className='popin-cta cancel' ref={r => (refuseCta = r)}
-            onClick={handleRefuseClick}
-            onMouseOver={handleRefuseMouseOver}
-            onMouseOut={handleRefuseMouseOut}
-          >
+            <button
+              id='refuseCookiesCta' className='popin-cta cancel' ref={r => (refuseCta = r)}
+              onClick={handleRefuseClick}
+              onMouseOver={handleRefuseMouseOver}
+              onMouseOut={handleRefuseMouseOut}
+            >
               Paramétrer
-          </button>
+            </button>
+          </div>
         </div>
-      </div>
-    </ScreenModal>
+      </ScreenModal>
   )
 }
 

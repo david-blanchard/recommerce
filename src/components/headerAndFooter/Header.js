@@ -1,13 +1,12 @@
 ﻿// eslint-disable-next-line
 
-import React, { useState } from 'react'
+import React from 'react'
 import '../../css/carousel.css'
 import 'bootstrap/dist/css/bootstrap.css'
 // import $ from 'jquery'
 import { } from 'bootstrap'
 import logo from '../../assets/images/logos/Cpascher_logo_small.png'
 import BusinessHttp from '../../business/Http'
-import BusinessCart from '../../business/Cart'
 
 import CartNavButton from '../cart/CartNavButton'
 import SearchNavBar from '../search/SearchNavBar'
@@ -15,8 +14,6 @@ import SearchNavBar from '../search/SearchNavBar'
 const home = BusinessHttp.fullyQualifiedName()
 
 const CpcHeader = props => {
-  const [state, setState] = useState({ cartCount: BusinessCart.count })
-
   const handleSubmitSearch = (value) => {
     if (props.onSubmitSearch !== undefined) {
       props.onSubmitSearch(value)

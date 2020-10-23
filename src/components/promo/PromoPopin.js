@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import ScreenModal from '../modal/ScreenModal'
 import BusinessHttp from '../../business/Http'
 
-const home = BusinessHttp.fullyQualifiedName
+const home = BusinessHttp.fullyQualifiedName()
 
 const PromoPopin = props => {
-  const [state, setState] = useState({ isVisible: false })
+  const [state, setState] = useState({ isVisible: props.isVisible !== undefined ? props.isVisible : false })
 
   const handleGotItClick = () => {
     setState({ isVisible: false })
@@ -17,10 +17,8 @@ const PromoPopin = props => {
     setState({ isVisible: false })
   }
 
-  const isVisible = state.isVisible !== undefined ? state.isVisible : false
-
   return (
-    (isVisible) &&
+    (state.isVisible !== undefined ? state.isVisible : false) &&
       <ScreenModal>
         <div className='popin-box'>
           <div id='close'>
