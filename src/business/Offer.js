@@ -1,11 +1,48 @@
+import { useCallback } from 'react'
+
 class Offer {
   /**
    * Request the best offers based on the total sum of a bunch of articles
-   *
+   * with callback
    * @param {float} total
    * @param {function} callback
    */
-  async getOffersFromBulk (total, bulk, callback) {
+  async getOffersFromBulk (total, bulk) {
+    if (total === 0 || bulk === undefined || bulk.length === 0) {
+      /**
+       * When total or bulk equals zero no request must be done
+       */
+
+      return
+    }
+
+    // Actually we have something to compute
+
+    this._resourceURL =
+      'http://henri-potier.xebia.fr/books/' +
+      bulk.join(',') +
+      '/commercialOffers'
+
+    const response = await fetch(this._resourceURL)
+    const data = await response.json()
+    const result = response.ok ? data.offers : Promise.reject(data)
+
+    return { offers: result, offersStatus: response.ok }
+  }
+
+  useOffersFromBulk (total, bulk) {
+    return useCallback(
+      this.getOffersFromBulk(total, bulk)
+      , [total, bulk])
+  }
+
+  /**
+   * Request the best offers based on the total sum of a bunch of articles
+   * with callback
+   * @param {float} total
+   * @param {function} callback
+   */
+  async getOffersFromBulkCallback (total, bulk, callback) {
     if (total === 0 || bulk === undefined || bulk.length === 0) {
       /**
        * When total or bulk equals zero no request must be done
