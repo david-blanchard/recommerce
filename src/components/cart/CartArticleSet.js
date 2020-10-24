@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import uuid from 'react-uuid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -9,77 +9,64 @@ import { CartNavButtonContext } from './CartNavButtonContext'
 const CartArticleSet = props => {
   const { CartNavButtonRef } = useContext(CartNavButtonContext)
 
-  let data = null
-  const cart = BusinessCart.readCart()
   const booksBulk = BusinessCart.isbnCodes
   const businessOffer = new BusinessOffer()
 
-  let cartLines = []
+  let currentCart = []
+  let currentCartLines = []
+
   let subtotal = 0.0
 
-  let cartLinesCount = 0
-
   const [state, setState] = useState({
-    lines: cartLines
+    cart: currentCart,
+    lines: currentCartLines,
+    dirty: false
   })
 
-  const concatCartLines = () => {
-    cartLines = cart.map((article, i) => {
+  const computeCart = () => {
+    currentCart = BusinessCart.readCart()
+
+    const { cart } = state
+    const { dirty } = state
+
+    if ((currentCart.length === cart.length) && dirty) {
+      console.log({ return: true })
+      return
+    }
+
+    const cartLines = currentCart.map((article, i) => {
       // Add an article to the cart
       subtotal += parseFloat(article.price)
 
       return { key: 'article', value: i }
     })
 
-    cartLinesCount = cartLines.length
-  }
-
-  const computeCart = (currentcartLines, currentcartLinesCount) => {
-    concatCartLines()
-
     cartLines.push({ key: 'subtotal', value: subtotal.toFixed(2) })
-
     // Computes the discount sum
-    try {
-      //const data = businessOffer.getOffersFromBulk(subtotal, booksBulk)
+    businessOffer.getOffersFromBulkCallback(subtotal, booksBulk, (data) => {
       const offers = data.offers
-      const offersStatus = data.offersStatus
-
-      console.log({ offers: offers, offersStatus: offersStatus })
-      console.log({ data: data })
-      if (!offersStatus) {
-        throw new Error('Something went wrong while fetching the offers')
-      }
 
       const discount = businessOffer.computeDiscount(subtotal, offers)
       cartLines.push({ key: 'discount', value: parseFloat(discount).toFixed(2) })
       cartLines.push({ key: 'total', value: parseFloat(subtotal - discount).toFixed(2) })
 
-      if (currentcartLinesCount !== cartLinesCount) {
+      currentCartLines = cartLines
 
-      }
-    } catch (e) {
-      console.error(e.message)
-    }
+      setState({
+        cart: currentCart,
+        lines: currentCartLines,
+        dirty: true
+      })
+    })
   }
 
-  useCallback(
-    data = businessOffer.getOffersFromBulk(subtotal, booksBulk)
-    , [subtotal, booksBulk]
-  )
-
-  useEffect(() => {
-  // [computeCart, cartLines, cartLinesCount]
-    setState({
-      lines: cartLines
-    })
-  }, [cartLines])
+  useCallback(computeCart())
 
   const handleRemove = keyid => {
     BusinessCart.removeFromCart(keyid)
     BusinessCart.printCount(CartNavButtonRef.current)
 
-    computeCart(cartLines, cartLinesCount)
+    computeCart()
 
     return true
   }

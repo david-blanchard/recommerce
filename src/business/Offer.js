@@ -1,9 +1,9 @@
+import Axios from 'axios'
 import { useCallback } from 'react'
 
 class Offer {
   /**
    * Request the best offers based on the total sum of a bunch of articles
-   * with callback
    * @param {float} total
    * @param {function} callback
    */
@@ -23,11 +23,13 @@ class Offer {
       bulk.join(',') +
       '/commercialOffers'
 
-    const response = await fetch(this._resourceURL)
-    const data = await response.json()
-    const result = response.ok ? data.offers : Promise.reject(data)
+    // const response = await fetch(this._resourceURL)
+    // const data = await response.json()
+    // const result = response.ok ? data.offers : Promise.reject(data)
 
-    return { offers: result, offersStatus: response.ok }
+    const result = await Axios(this._resourceURL)
+
+    return { offers: result, offersStatus: result !== undefined }
   }
 
   useOffersFromBulk (total, bulk) {
