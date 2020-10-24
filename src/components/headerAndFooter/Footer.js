@@ -4,9 +4,9 @@ import logo from '../../assets/images/logos/Cpascher_logo_smaller.png'
 import CookiesPopin from '../cookies/CookiesPopin'
 import PromoPopin from '../promo/PromoPopin'
 
-import BusinessHttp from '../../business/Http'
+import HttpHelper from '../../helpers/HttpHelper'
 
-const home = BusinessHttp.fullyQualifiedName()
+const home = HttpHelper.fullyQualifiedName()
 
 const CpcFooter = props => {
   const [state, setState] = useState({
@@ -128,8 +128,7 @@ const CpcFooter = props => {
       </footer>
       <CookiesPopin onCallToAction={handleCookiesChoice} />
       {
-        (state.cookiesPopinJustClosed)
-          ? <PromoPopin isVisible /> : ''
+        (state.cookiesPopinJustClosed) && <PromoPopin isVisible />
       }
 
     </>

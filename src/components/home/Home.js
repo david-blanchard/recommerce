@@ -8,11 +8,11 @@ import article1 from '../../assets/images/articles/disque-a-lancer.jpg'
 import article2 from '../../assets/images/articles//robot-nettoyeur-wifi.jpg'
 import article3 from '../../assets/images/articles/platine-vinyle.jpg'
 
-import BusinessHttp from '../../business/Http'
+import HttpHelper from '../../helpers/HttpHelper'
 import HeaderAndFooter from '../headerAndFooter/HeaderAndFooter'
 // import HeaderFooter from './HeaderFooter'
 
-const home = BusinessHttp.fullyQualifiedName()
+const home = HttpHelper.fullyQualifiedName()
 
 const Home = props => {
   return (

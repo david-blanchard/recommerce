@@ -1,4 +1,4 @@
-export default class Http {
+export default class HttpHelper {
   static fullyQualifiedName () {
     const url = new URL(window.location.href)
 

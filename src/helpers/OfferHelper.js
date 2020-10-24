@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import { useCallback } from 'react'
 
-class Offer {
+class OfferHelper {
   /**
    * Request the best offers based on the total sum of a bunch of articles
    * @param {float} total
@@ -114,4 +114,4 @@ class Offer {
   }
 }
 
-export default Offer
+export default OfferHelper

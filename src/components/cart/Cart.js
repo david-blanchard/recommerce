@@ -1,11 +1,11 @@
 
 import React from 'react'
 
-import BusinessHttp from '../../business/Http'
+import HttpHelper from '../../helpers/HttpHelper'
 import CartArticleSet from './CartArticleSet'
 import HeaderAndFooter from '../headerAndFooter/HeaderAndFooter'
 
-const home = BusinessHttp.fullyQualifiedName()
+const home = HttpHelper.fullyQualifiedName()
 
 const Cart = props => {
   return (
@@ -19,7 +19,7 @@ const Cart = props => {
         <div className='container mb-4'>
           <div className='row'>
             <div className='col-12'>
-              <CartArticleSet cartCtaRef={props.cartCtaRef} />
+              <CartArticleSet />
             </div>
             <div className='col mb-2'>
               <div className='row'>

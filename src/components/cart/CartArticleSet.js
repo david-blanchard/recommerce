@@ -1,16 +1,16 @@
-import React, { useCallback, useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import uuid from 'react-uuid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import BusinessCart from '../../business/Cart'
-import BusinessOffer from '../../business/Offer'
+import CartHelper from '../../helpers/CartHelper'
+import OfferHelper from '../../helpers/OfferHelper'
 import { CartNavButtonContext } from './CartNavButtonContext'
 
 const CartArticleSet = props => {
   const { CartNavButtonRef } = useContext(CartNavButtonContext)
 
-  const booksBulk = BusinessCart.isbnCodes
-  const businessOffer = new BusinessOffer()
+  const booksBulk = CartHelper.isbnCodes
+  const offerHelper = new OfferHelper()
 
   let currentCart = []
   let currentCartLines = []
@@ -23,8 +23,8 @@ const CartArticleSet = props => {
     dirty: false
   })
 
-  const computeCart = () => {
-    currentCart = BusinessCart.readCart()
+  const effect = () => {
+    currentCart = CartHelper.readCart()
 
     const { cart } = state
     const { dirty } = state
@@ -43,10 +43,10 @@ const CartArticleSet = props => {
 
     cartLines.push({ key: 'subtotal', value: subtotal.toFixed(2) })
     // Computes the discount sum
-    businessOffer.getOffersFromBulkCallback(subtotal, booksBulk, (data) => {
+    offerHelper.getOffersFromBulkCallback(subtotal, booksBulk, (data) => {
       const offers = data.offers
 
-      const discount = businessOffer.computeDiscount(subtotal, offers)
+      const discount = offerHelper.computeDiscount(subtotal, offers)
       cartLines.push({ key: 'discount', value: parseFloat(discount).toFixed(2) })
       cartLines.push({ key: 'total', value: parseFloat(subtotal - discount).toFixed(2) })
 
@@ -60,13 +60,15 @@ const CartArticleSet = props => {
     })
   }
 
-  useCallback(computeCart())
+  useEffect(() => {
+    effect()
+  })
 
   const handleRemove = keyid => {
-    BusinessCart.removeFromCart(keyid)
-    BusinessCart.printCount(CartNavButtonRef.current)
+    CartHelper.removeFromCart(keyid)
+    CartHelper.printCount(CartNavButtonRef.current)
 
-    computeCart()
+    effect()
 
     return true
   }

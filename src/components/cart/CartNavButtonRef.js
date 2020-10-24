@@ -4,9 +4,9 @@ import React, { forwardRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
-import BusinessCart from '../../business/Cart'
+import CartHelper from '../../helpers/CartHelper'
 
-const count = BusinessCart.count
+const count = CartHelper.count
 
 const CartNavButtonRef = props => {
   return (

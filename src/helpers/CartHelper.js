@@ -3,7 +3,7 @@ import uuid from 'react-uuid'
 
 const CART_ID = 'cpascher_cart'
 
-class Cart {
+class CartHelper {
   constructor () {
     this._resourceURL = ''
   }
@@ -18,7 +18,7 @@ class Cart {
   static get count () {
     let result = 0
 
-    const json = Cart.readCart()
+    const json = CartHelper.readCart()
     result = json !== undefined ? json.length : 0
 
     return result
@@ -30,7 +30,7 @@ class Cart {
   static get isbnCodes () {
     const isbnArray = []
 
-    const cart = Cart.readCart()
+    const cart = CartHelper.readCart()
 
     cart.forEach((article) => {
       isbnArray.push(article.isbn)
@@ -57,7 +57,7 @@ class Cart {
 
     const article = cardData
     article.keyid = uuid()
-    const articles = Cart.readCart()
+    const articles = CartHelper.readCart()
 
     articles.push(article)
     const json = JSON.stringify(articles)
@@ -71,7 +71,7 @@ class Cart {
    * @param {string} keyid
    */
   static removeFromCart (keyid) {
-    const cart = Cart.readCart()
+    const cart = CartHelper.readCart()
 
     let reducedCart = []
     reducedCart = cart.reduce((reduced, iteratee) => {
@@ -92,10 +92,10 @@ class Cart {
    */
   static printCount (ref) {
     if (ref !== undefined) {
-      const count = Cart.count
+      const count = CartHelper.count
       ref.innerHTML = count
     }
   }
 }
 
-export default Cart
+export default CartHelper

@@ -6,12 +6,12 @@ import 'bootstrap/dist/css/bootstrap.css'
 // import $ from 'jquery'
 import { } from 'bootstrap'
 import logo from '../../assets/images/logos/Cpascher_logo_small.png'
-import BusinessHttp from '../../business/Http'
+import HttpHelper from '../../helpers/HttpHelper'
 
 import CartNavButton from '../cart/CartNavButton'
 import SearchNavBar from '../search/SearchNavBar'
 
-const home = BusinessHttp.fullyQualifiedName()
+const home = HttpHelper.fullyQualifiedName()
 
 const CpcHeader = props => {
   const handleSubmitSearch = (value) => {

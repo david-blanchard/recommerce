@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import ScreenModal from '../modal/ScreenModal'
-import BusinessHttp from '../../business/Http'
+import HttpHelper from '../../helpers/HttpHelper'
 
-const home = BusinessHttp.fullyQualifiedName()
+const home = HttpHelper.fullyQualifiedName()
 
 const PromoPopin = props => {
   const [state, setState] = useState({ isVisible: props.isVisible !== undefined ? props.isVisible : false })

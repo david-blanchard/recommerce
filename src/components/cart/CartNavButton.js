@@ -4,10 +4,10 @@ import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
-import BusinessCart from '../../business/Cart'
+import CartHelper from '../../helpers/CartHelper'
 import { CartNavButtonContext } from './CartNavButtonContext'
 
-const count = BusinessCart.count
+const count = CartHelper.count
 
 const CartNavButton = props => {
   const { CartNavButtonRef } = useContext(CartNavButtonContext)
