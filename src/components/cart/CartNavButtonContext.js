@@ -1,10 +1,9 @@
 import React, { createContext, useRef } from 'react'
 
 export const CartNavButtonContext = createContext(null)
-export let CartNavButtonRef = null
 
-const CartNavButtonWrapper = props => {
-  CartNavButtonRef = useRef()
+const CartNavButtonProvider = props => {
+  const CartNavButtonRef = useRef()
 
   // const newProps = { [cartCtaRef]: cartCtaRef }
 
@@ -15,4 +14,4 @@ const CartNavButtonWrapper = props => {
   )
 }
 
-export default CartNavButtonWrapper
+export default CartNavButtonProvider

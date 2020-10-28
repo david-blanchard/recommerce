@@ -1,10 +1,11 @@
-import React, { useRef } from 'react'
+import React, { useContext } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { SearchNavBarContext } from './SearchNavBarContext'
 
 const SearchNavBar = props => {
-  const searchInputRef = useRef()
+  const { searchInputRef } = useContext(SearchNavBarContext)
 
   const handleSubmitSearchClick = (e) => {
     const value = e.target.value

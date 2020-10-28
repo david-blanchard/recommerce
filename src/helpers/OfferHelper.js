@@ -1,4 +1,3 @@
-import Axios from 'axios'
 import { useCallback } from 'react'
 
 class OfferHelper {
@@ -23,11 +22,9 @@ class OfferHelper {
       bulk.join(',') +
       '/commercialOffers'
 
-    // const response = await fetch(this._resourceURL)
-    // const data = await response.json()
-    // const result = response.ok ? data.offers : Promise.reject(data)
-
-    const result = await Axios(this._resourceURL)
+    const response = await fetch(this._resourceURL)
+    const data = await response.json()
+    const result = response.ok ? data.offers : Promise.reject(data)
 
     return { offers: result, offersStatus: result !== undefined }
   }

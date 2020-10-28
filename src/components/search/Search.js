@@ -1,44 +1,29 @@
 
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import uuid from 'react-uuid'
+import React, { useContext, useEffect, useRef } from 'react'
 
-import SearchHelper from '../../helpers/SearchHelper'
-import ArticleCard from './ArticleCard'
-// import HeaderFooter from './HeaderFooter'
 // import HeaderAndFooter from '../headerAndFooter/HeaderAndFooter'
 import WithHeaderFooter from '../headerAndFooter/WithHeaderFooter'
 
 import HttpHelper from '../../helpers/HttpHelper'
+import ArticleCardSet from './ArticleCardSet'
+import SearchProvider, { SearchContext } from './SearchContext'
 
 const SEARCH_FAILURE = "Pas de chance, nous n'avons trouvé aucun article avec ces critères !<br />Tentez une nouvelle recherche."
 const SEARCH_SUCCESS = 'Nous avons trouvé %d articles correspondants à vos critères'
 const SEARCH_SUCCESS_ONE = 'Nous avons trouvé 1 article correspondant à vos critères'
 const SEARCH_STATE_ZERO = true
-const CRITERION = 'title'
 
 const home = HttpHelper.fullyQualifiedName()
 
 const Search = props => {
-  let resource = null
-  let results = []
-  let query = ''
-  const resourceURL = 'http://henri-potier.xebia.fr/books'
-  const resultStateTextboxRef = useRef()
-  const resultSearchAnchorRef = useRef()
+  const searchStateTextboxRef = useRef()
+  const searchStateAnchorRef = useRef()
 
-  const [state, setState] = useState({ results: [] })
+  const { SearchState, setSearchState } = useContext(SearchContext)
 
   const effect = () => {
-    // Get the criterion value from the query string and launch the search
-    query = SearchHelper.parseQuery()
-    SearchHelper.fetchResource(resourceURL, (data) => {
-      resource = data
-      results = SearchHelper.parseResults(query, resource, CRITERION)
-
-      setState({ results: results })
-
-      displayResultState()
-    })
+    const { results } = SearchState
+    handleDisplayResultState(results)
   }
 
   useEffect(() => {
@@ -65,65 +50,56 @@ const Search = props => {
 
   const handleResetSearch = (e) => {
     clearSearch()
-    displayResultState(SEARCH_STATE_ZERO)
+    const { results, dirty } = SearchState
+
+    console.log({ results: results })
+    handleDisplayResultState(results, SEARCH_STATE_ZERO)
 
     e.preventDefault()
   }
 
-  const displayResultState = (forceZero = false) => {
-    const num = results.length
+  const handleDisplayResultState = (data, forceZero = false) => {
+    const num = data.length
 
     if (num === 0 || forceZero) {
-      resultStateTextboxRef.current.innerHTML = SEARCH_FAILURE
-      resultSearchAnchorRef.current.style.display = 'none'
+      searchStateTextboxRef.current.innerHTML = SEARCH_FAILURE
+      searchStateAnchorRef.current.style.display = 'none'
       return
     }
 
-    let html = SEARCH_SUCCESS_ONE
-    if (num > 1) {
-      html = `${SEARCH_SUCCESS}`.replace('%d', num)
-    }
-    resultStateTextboxRef.current.innerHTML = html
-    resultSearchAnchorRef.current.style.display = 'inline-block'
+    const html = (num > 1) ? `${SEARCH_SUCCESS}`.replace('%d', num) : SEARCH_SUCCESS_ONE
+    searchStateTextboxRef.current.innerHTML = html
+    searchStateAnchorRef.current.style.display = 'inline-block'
   }
 
   /**
    * Clear the search results
    */
   const clearSearch = () => {
-    setState({ results: [] })
+    setSearchState({ results: [], dirty: true })
   }
 
   return (
-    <main role='main' className='flex-shrink-0'>
-      <section className='jumbotron text-center'>
-        <div className='container'>
-          <h1>Résultats de votre recherche</h1>
-          <p id='resultState' className='lead text-muted' ref={resultStateTextboxRef} />
-          <p>
-            <a id='resetSearch' className='btn btn-secondary my-2' href={home} onClick={handleResetSearch} ref={resultSearchAnchorRef}>Effacer ma recherche</a>
-          </p>
-        </div>
-      </section>
+    <SearchProvider>
+      <main role='main' className='flex-shrink-0'>
+        <section className='jumbotron text-center'>
+          <div className='container'>
+            <h1>Résultats de votre recherche</h1>
+            <p id='resultState' className='lead text-muted' ref={searchStateTextboxRef} />
+            <p>
+              <a id='resetSearch' className='btn btn-secondary my-2' href={home} onClick={handleResetSearch} ref={searchStateAnchorRef}>Effacer ma recherche</a>
+            </p>
+          </div>
+        </section>
 
-      <div className='album py-5'>
-        <div className='container'>
-          <div id='lostAndFound' className='row'>
-            {
-              (state.results !== undefined && state.results.length > 0) && state.results.map((row, i) => {
-                const keyid = uuid()
-                return (
-                  <div key={i} className='col-md-4'>
-                    <ArticleCard key={keyid} keyid={keyid} row={row} />
-                  </div>
-                )
-              })
-            }
+        <div className='album py-5'>
+          <div className='container'>
+            <ArticleCardSet onDisplayResultState={handleDisplayResultState} />
           </div>
         </div>
-      </div>
 
-    </main>
+      </main>
+    </SearchProvider>
   )
 }
 

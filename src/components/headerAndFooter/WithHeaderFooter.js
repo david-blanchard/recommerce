@@ -1,15 +1,21 @@
 import React from 'react'
 import CpcHeader from './Header'
 import CpcFooter from './Footer'
-import CartNavButtonContext from '../cart/CartNavButtonContext'
+import CartNavButtonProvider from '../cart/CartNavButtonContext'
+import SearchProvider from '../search/SearchContext'
+import SearchNavBarProvider from '../search/SearchNavBarContext'
 
 const WithHeaderFooter = (WrappedComponent) => props => {
   return (
-    <CartNavButtonContext>
-      <CpcHeader />
-      <WrappedComponent {...props} />
-      <CpcFooter />
-    </CartNavButtonContext>
+    <SearchNavBarProvider>
+      <SearchProvider>
+        <CartNavButtonProvider>
+          <CpcHeader />
+          <WrappedComponent {...props} />
+          <CpcFooter />
+        </CartNavButtonProvider>
+      </SearchProvider>
+    </SearchNavBarProvider>
   )
 }
 

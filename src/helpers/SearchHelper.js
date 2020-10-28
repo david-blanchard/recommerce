@@ -22,6 +22,8 @@ class SearchHelper {
           // Trigger callback function on resource found
           callback.call(this, data)
         }
+      }).catch(error => {
+        console.error(error)
       })
   }
 

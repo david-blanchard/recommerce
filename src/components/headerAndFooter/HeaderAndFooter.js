@@ -1,17 +1,24 @@
 import React from 'react'
 import CpcHeader from './Header'
 import CpcFooter from './Footer'
-import CartNavButtonContext from '../cart/CartNavButtonContext'
+import SearchNavBarProvider from '../search/SearchNavBarContext'
+import SearchProvider from '../search/SearchContext'
+import CartNavButtonProvider from '../cart/CartNavButtonContext'
 
 const HeaderAndFooter = ({ children }) => {
   // const newProps = { [cartCtaRef]: cartCtaRef }
 
   return (
-    <CartNavButtonContext>
-      <CpcHeader />
-      {children}
-      <CpcFooter />
-    </CartNavButtonContext>
+    <SearchNavBarProvider>
+      <SearchProvider>
+        <CartNavButtonProvider>
+          <CpcHeader />
+          {children}
+          <CpcFooter />
+        </CartNavButtonProvider>
+      </SearchProvider>
+    </SearchNavBarProvider>
+
   )
 }
 
