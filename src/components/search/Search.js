@@ -6,7 +6,8 @@ import WithHeaderFooter from '../headerAndFooter/WithHeaderFooter'
 
 import HttpHelper from '../../helpers/HttpHelper'
 import ArticleCardSet from './ArticleCardSet'
-import SearchProvider, { SearchContext } from './SearchContext'
+import { SearchContext } from './SearchContext'
+import { SearchNavBarContext } from './SearchNavBarContext'
 
 const SEARCH_FAILURE = "Pas de chance, nous n'avons trouvé aucun article avec ces critères !<br />Tentez une nouvelle recherche."
 const SEARCH_SUCCESS = 'Nous avons trouvé %d articles correspondants à vos critères'
@@ -20,9 +21,11 @@ const Search = props => {
   const searchStateAnchorRef = useRef()
 
   const { SearchState, setSearchState } = useContext(SearchContext)
+  // const { SearchNavBarRef } = useContext(SearchNavBarContext)
 
   const effect = () => {
-    const { results } = SearchState
+    const { query, results, dirty } = SearchState
+
     handleDisplayResultState(results)
   }
 
@@ -50,9 +53,9 @@ const Search = props => {
 
   const handleResetSearch = (e) => {
     clearSearch()
-    const { results, dirty } = SearchState
+    const { query, results, dirty } = SearchState
 
-    console.log({ results: results })
+    console.log({ query: query, results: results, dirty: dirty })
     handleDisplayResultState(results, SEARCH_STATE_ZERO)
 
     e.preventDefault()
@@ -80,26 +83,24 @@ const Search = props => {
   }
 
   return (
-    <SearchProvider>
-      <main role='main' className='flex-shrink-0'>
-        <section className='jumbotron text-center'>
-          <div className='container'>
-            <h1>Résultats de votre recherche</h1>
-            <p id='resultState' className='lead text-muted' ref={searchStateTextboxRef} />
-            <p>
-              <a id='resetSearch' className='btn btn-secondary my-2' href={home} onClick={handleResetSearch} ref={searchStateAnchorRef}>Effacer ma recherche</a>
-            </p>
-          </div>
-        </section>
-
-        <div className='album py-5'>
-          <div className='container'>
-            <ArticleCardSet onDisplayResultState={handleDisplayResultState} />
-          </div>
+    <main role='main' className='flex-shrink-0'>
+      <section className='jumbotron text-center'>
+        <div className='container'>
+          <h1>Résultats de votre recherche</h1>
+          <p id='resultState' className='lead text-muted' ref={searchStateTextboxRef} />
+          <p>
+            <a id='resetSearch' className='btn btn-secondary my-2' href={home} onClick={handleResetSearch} ref={searchStateAnchorRef}>Effacer ma recherche</a>
+          </p>
         </div>
+      </section>
 
-      </main>
-    </SearchProvider>
+      <div className='album py-5'>
+        <div className='container'>
+          <ArticleCardSet onDisplayResultState={handleDisplayResultState} />
+        </div>
+      </div>
+
+    </main>
   )
 }
 

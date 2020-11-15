@@ -27,7 +27,7 @@ const ArticleCardSet = props => {
         dirty: true
       })
 
-      props.onDisplaySearchState(resultSet)
+      props.onDisplayResultState(resultSet)
     })
   }
 
