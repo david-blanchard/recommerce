@@ -51,7 +51,7 @@ class CartHelper {
   /**
    * Add an article to the cart cookie by retrieving the data through the Button object
    *
-   * @param {DOM event} event
+   * @param cardData
    */
   static addToCart (cardData) {
 
@@ -92,8 +92,7 @@ class CartHelper {
    */
   static printCount (ref) {
     if (ref !== undefined) {
-      const count = CartHelper.count
-      ref.innerHTML = count
+      ref.innerHTML = CartHelper.count
     }
   }
 }

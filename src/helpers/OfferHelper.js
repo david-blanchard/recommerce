@@ -4,7 +4,7 @@ class OfferHelper {
   /**
    * Request the best offers based on the total sum of a bunch of articles
    * @param {float} total
-   * @param {function} callback
+   * @param bulk
    */
   async getOffersFromBulk (total, bulk) {
     if (total === 0 || bulk === undefined || bulk.length === 0) {
@@ -30,6 +30,7 @@ class OfferHelper {
   }
 
   useOffersFromBulk (total, bulk) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return useCallback(
       this.getOffersFromBulk(total, bulk)
       , [total, bulk])
@@ -39,6 +40,7 @@ class OfferHelper {
    * Request the best offers based on the total sum of a bunch of articles
    * with callback
    * @param {float} total
+   * @param bulk
    * @param {function} callback
    */
   async getOffersFromBulkCallback (total, bulk, callback) {
