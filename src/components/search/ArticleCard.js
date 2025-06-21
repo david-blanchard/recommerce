@@ -1,13 +1,14 @@
 import React, { useContext } from 'react'
-import CartHelper from '../../helpers/CartHelper'
 import { CartNavButtonContext } from '../cart/CartNavButtonContext'
+import useCartService from "../../services/CartService";
 
 const ArticleCard = props => {
   const { CartNavButtonRef } = useContext(CartNavButtonContext)
+  const cartService = useCartService()
 
   const handleAddToCart = () => {
-    CartHelper.addToCart(props.row)
-    CartHelper.printCount(CartNavButtonRef.current)
+    cartService.addToCart(props.row)
+    cartService.printCount(CartNavButtonRef.current)
   }
 
   const row = props.row

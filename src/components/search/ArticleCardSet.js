@@ -2,25 +2,26 @@
 import React, { useContext, useEffect } from 'react'
 import uuid from 'react-uuid'
 
-import SearchHelper from '../../helpers/SearchHelper'
 import ArticleCard from './ArticleCard'
 import { SearchContext } from './SearchContext'
+import useSearchService from "../../services/SearchService";
 
 const CRITERION = 'title'
 
 const ArticleCardSet = props => {
   const { SearchState, setSearchState } = useContext(SearchContext)
 
+  const searchService = useSearchService()
   const resourceURL = 'http://henri-potier.xebia.fr/books'
 
   const effect = () => {
     const { query, results, dirty } = SearchState
 
-    const q = (results.length === 0 && !dirty) ? SearchHelper.parseQuery() : query
+    const q = (results.length === 0 && !dirty) ? searchService.parseQuery() : query
 
     // Get the criterion value from the query string and launch the search
-    SearchHelper.fetchResource(resourceURL, (data) => {
-      const resultSet = SearchHelper.parseResults(q, data, CRITERION)
+    searchService.fetchResource(resourceURL, (data) => {
+      const resultSet = searchService.parseResults(q, data, CRITERION)
 
       setSearchState({
         results: resultSet,

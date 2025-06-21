@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 
-class OfferHelper {
+class OfferService
+{
   /**
    * Request the best offers based on the total sum of a bunch of articles
    * @param {float} total
@@ -113,4 +114,6 @@ class OfferHelper {
   }
 }
 
-export default OfferHelper
+export default function useOfferService () {
+  return new OfferService()
+}

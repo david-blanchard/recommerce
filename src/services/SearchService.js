@@ -1,9 +1,9 @@
 
-class SearchHelper {
+class SearchService {
   /**
  * Retrieve the q field value of the query string
  */
-  static parseQuery () {
+  parseQuery () {
     const url = new URL(window.location.href)
 
     return url.searchParams.get('q')
@@ -14,7 +14,7 @@ class SearchHelper {
      *
      * @param {function} callback
      */
-  static fetchResource (resourceURL, callback) {
+  fetchResource (resourceURL, callback) {
     fetch(resourceURL)
       .then(response => response.json())
       .then(data => {
@@ -35,7 +35,7 @@ class SearchHelper {
      *
      * @param {string} field
      */
-  static parseResults (needle, haystack, field) {
+  parseResults (needle, haystack, field) {
     const results = []
 
     if (haystack === null || haystack === undefined || needle === '') {
@@ -56,4 +56,6 @@ class SearchHelper {
   }
 }
 
-export default SearchHelper
+export default function useSearchService() {
+  return new SearchService()
+}

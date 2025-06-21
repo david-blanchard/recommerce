@@ -3,7 +3,7 @@ import uuid from 'react-uuid'
 
 const CART_ID = 'cpascher_cart'
 
-class CartHelper {
+class CartService {
   constructor () {
     this._resourceURL = ''
   }
@@ -15,10 +15,10 @@ class CartHelper {
   /**
    *  Return the number of articles in the cart cookie, otherwise 0
    */
-  static get count () {
+  get count () {
     let result = 0
 
-    const json = CartHelper.readCart()
+    const json = this.readCart()
     result = json !== undefined ? json.length : 0
 
     return result
@@ -27,10 +27,10 @@ class CartHelper {
   /**
    * Get the ISBN codes from the books set in the cart
    */
-  static get isbnCodes () {
+  get isbnCodes () {
     const isbnArray = []
 
-    const cart = CartHelper.readCart()
+    const cart = this.readCart()
 
     cart.forEach((article) => {
       isbnArray.push(article.isbn)
@@ -42,7 +42,7 @@ class CartHelper {
   /**
    * Read the content of the cart cookie and return a ready-made JS object
    */
-  static readCart () {
+  readCart () {
     const cart = cookie.load(CART_ID)
 
     return cart || []
@@ -53,11 +53,11 @@ class CartHelper {
    *
    * @param cardData
    */
-  static addToCart (cardData) {
+  addToCart (cardData) {
 
     const article = cardData
     article.keyid = uuid()
-    const articles = CartHelper.readCart()
+    const articles = this.readCart()
 
     articles.push(article)
     const json = JSON.stringify(articles)
@@ -70,8 +70,8 @@ class CartHelper {
    *
    * @param {string} keyid
    */
-  static removeFromCart (keyid) {
-    const cart = CartHelper.readCart()
+  removeFromCart (keyid) {
+    const cart = this.readCart()
 
     let reducedCart = []
     reducedCart = cart.reduce((reduced, iteratee) => {
@@ -90,11 +90,13 @@ class CartHelper {
   /**
    * Display the number of articles in the cart on cart button
    */
-  static printCount (ref) {
+  printCount (ref) {
     if (ref !== undefined) {
-      ref.innerHTML = CartHelper.count
+      ref.innerHTML = this.count
     }
   }
 }
 
-export default CartHelper
+export default function useCartService () {
+  return new CartService()
+}
