@@ -1,13 +1,8 @@
-
-import React, { useContext, useEffect, useRef } from 'react'
-
-// import HeaderAndFooter from '../headerAndFooter/HeaderAndFooter'
+import React, {useContext, useEffect, useRef} from 'react'
 import WithHeaderFooter from '../headerAndFooter/WithHeaderFooter'
-
 import HttpHelper from '../../helpers/HttpHelper'
 import ArticleCardSet from './ArticleCardSet'
-import { SearchContext } from './SearchContext'
-import { SearchNavBarContext } from './SearchNavBarContext'
+import {SearchContext} from './SearchContext'
 
 const SEARCH_FAILURE = "Pas de chance, nous n'avons trouvé aucun article avec ces critères !<br />Tentez une nouvelle recherche."
 const SEARCH_SUCCESS = 'Nous avons trouvé %d articles correspondants à vos critères'
@@ -21,35 +16,15 @@ const Search = props => {
   const searchStateAnchorRef = useRef()
 
   const { SearchState, setSearchState } = useContext(SearchContext)
-  // const { SearchNavBarRef } = useContext(SearchNavBarContext)
 
   const effect = () => {
-    const { query, results, dirty } = SearchState
-
+    const { results } = SearchState
     handleDisplayResultState(results)
   }
 
   useEffect(() => {
     effect()
   }, [])
-
-  // const handleSubmitSearch = (queryString) => {
-  //   // Get the criterion value from the input text box and launch the search
-  //   parseInput(queryString)
-  //   fetchResource(() => {
-  //     clearSearch()
-  //     parseResults(CRITERION)
-  //     displayResultState()
-
-  //     setState({ results: results })
-  //   })
-
-  //   return false
-  // }
-
-  // const parseInput = (value) => {
-  //   query = value
-  // }
 
   const handleResetSearch = (e) => {
     clearSearch()
@@ -70,36 +45,43 @@ const Search = props => {
       return
     }
 
-    const html = (num > 1) ? `${SEARCH_SUCCESS}`.replace('%d', num) : SEARCH_SUCCESS_ONE
-    searchStateTextboxRef.current.innerHTML = html
+    searchStateTextboxRef.current.innerHTML = (num > 1) ? `${SEARCH_SUCCESS}`.replace('%d', num) : SEARCH_SUCCESS_ONE
     searchStateAnchorRef.current.style.display = 'inline-block'
   }
 
-  /**
-   * Clear the search results
-   */
   const clearSearch = () => {
     setSearchState({ results: [], dirty: true })
   }
 
   return (
-    <main role='main' className='flex-shrink-0'>
-      <section className='jumbotron text-center'>
+    <main className='flex-shrink-0'>
+      <div className='py-5 text-center bg-light mb-4'>
         <div className='container'>
-          <h1>Résultats de votre recherche</h1>
-          <p id='resultState' className='lead text-muted' ref={searchStateTextboxRef} />
+          <h1 className='display-5 fw-bold'>Résultats de votre recherche</h1>
+          <p 
+            id='resultState' 
+            className='lead text-secondary'
+            ref={searchStateTextboxRef}
+          />
           <p>
-            <a id='resetSearch' className='btn btn-secondary my-2' href={home} onClick={handleResetSearch} ref={searchStateAnchorRef}>Effacer ma recherche</a>
+            <a
+              id='resetSearch'
+              className='btn btn-secondary'
+              href={home}
+              onClick={handleResetSearch}
+              ref={searchStateAnchorRef}
+            >
+              Effacer ma recherche
+            </a>
           </p>
         </div>
-      </section>
+      </div>
 
-      <div className='album py-5'>
+      <div className='py-5 bg-body'>
         <div className='container'>
           <ArticleCardSet onDisplayResultState={handleDisplayResultState} />
         </div>
       </div>
-
     </main>
   )
 }

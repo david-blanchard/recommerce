@@ -82,35 +82,27 @@ const CartArticleSet = props => {
             <th scope='col'>Article</th>
             <th scope='col'>Disponibilité</th>
             <th scope='col' className='text-center'>Quantité</th>
-            <th scope='col' className='text-right'>Prix</th>
+            <th scope='col' className='text-end'>Prix</th>
             <th> </th>
           </tr>
         </thead>
         <tbody id='table-lines'>
           {
             state.lines.map((line, i) => {
-              // Add an article to the cart
-
-              /* Add an article line to the table */
               if (line.key === 'article') {
                 const id = line.value
                 const article = state.cart[id]
-                // console.log({ id: id, article: article, cart: state.cart })
-
                 return (<ArticleLine key={uuid()} article={article} index={i} onRemove={handleRemove} />)
               }
 
-              /* Add the sub-total line to the table */
               if (line.key === 'subtotal') {
                 const subtotal = line.value
                 return (<SubTotalLine key={uuid()} sum={subtotal} />)
               }
-              /* Add the discount line to the table */
               if (line.key === 'discount') {
                 const discount = line.value
                 return (<DiscountLine key={uuid()} discountSum={discount} />)
               }
-              /* Add the total line to the table */
               if (line.key === 'total') {
                 const total = line.value
                 return (<TotalLine key={uuid()} total={total} />)
@@ -137,8 +129,8 @@ const ArticleLine = props => {
       <td>{title}</td>
       <td>En stock</td>
       <td><input className='form-control' type='text' value='1' readOnly /></td>
-      <td className='text-right'>{price} €</td>
-      <td className='text-right'>
+      <td className='text-end'>{price} €</td>
+      <td className='text-end'>
         <button onClick={() => { props.onRemove(article.keyid) }} className='remove-from-cart-cta btn btn-sm btn-danger'>
           <FontAwesomeIcon pointerEvents='none' icon={faTrash} />
         </button>
@@ -154,7 +146,7 @@ const SubTotalLine = ({ sum }) => {
       <td />
       <td />
       <td>Sous-total</td>
-      <td className='text-right'>{sum} €</td>
+      <td className='text-end'>{sum} €</td>
       <td />
     </tr>
   )
@@ -167,7 +159,7 @@ const DiscountLine = ({ discountSum }) => {
       <td />
       <td />
       <td>Meilleure remise</td>
-      <td className='text-right'>{discountSum} €</td>
+      <td className='text-end'>{discountSum} €</td>
       <td />
     </tr>
   )
@@ -180,9 +172,10 @@ const TotalLine = ({ total }) => {
       <td />
       <td />
       <td><strong>Total TTC</strong></td>
-      <td className='text-right'><strong>{total} €</strong></td>
+      <td className='text-end'><strong>{total} €</strong></td>
       <td />
     </tr>
   )
 }
+
 export default CartArticleSet

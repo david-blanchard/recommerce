@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { SearchNavBarContext } from './SearchNavBarContext'
@@ -13,15 +12,19 @@ const SearchNavBar = props => {
   }
 
   return (
-    <form className='form-inline my-2 my-lg-0' action='search'>
+    <form className='form-inline d-flex' action='search'>
       <input
-        id='search' name='q' className='form-control mr-sm-2' type='text'
-        placeholder='Lancez-vous' aria-label='Search'
+        id='search'
+        name='q'
+        className='form-control me-2'
+        type='text'
+        placeholder='Lancez-vous'
+        aria-label='Search'
         ref={searchInputRef}
       />
       <button
         id='submitSearchCta'
-        className='btn btn-outline-success my-2 my-sm-0'
+        className='btn btn-outline-success'
         onClick={handleSubmitSearchClick}
       >
         <FontAwesomeIcon icon={faSearch} />
